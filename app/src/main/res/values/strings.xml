@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Irp</string>
+    <string name="tvtitleacceso">Ingresar</string>
+    <string name="txt_cedula">Cedula</string>
+    <string name="content_cedula_end_icon">CI</string>
+    <string name="content_password_end_icon">Contraseña</string>
+    <string name="btn_login">Login</string>
+    <string name="crear_cuenta">Registrar nuevo Usuario</string>
+    <string name="title_activity_ejercicio">EjercicioActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="action_add_ejercicio">Nuevo ejercicio</string>
+    <string name="txthint_ruc">Ruc</string>
+    <string name="txthint_nombrecontribu">Nombre y Apellido</string>
+    <string name="volver_login">Si ya está registrado ingrese aquí.</string>
+    <string name="btn_registrar">Registrame</string>
+    <string name="tituloRegistro">::Registro de Contribuyente::</string>
+    <string name="title_menu_principal_drawer">Menú Principal</string>
+    <string name="drawer_open">open</string>
+    <string name="drawer_close">close</string>
+
+</resources>
