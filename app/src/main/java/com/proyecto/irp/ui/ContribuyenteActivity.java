@@ -3,27 +3,36 @@ package com.proyecto.irp.ui;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Canvas;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.proyecto.irp.R;
 import com.proyecto.irp.db.entity.Contribuyente;
 import com.proyecto.irp.ui.adapter.ContribuyenteAdapter;
 import com.proyecto.irp.viewmodel.ContribuyenteViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
 public class ContribuyenteActivity extends AppCompatActivity {
 
@@ -31,6 +40,11 @@ public class ContribuyenteActivity extends AppCompatActivity {
     public static final int EDIT_CONTRIBUYENTE_REQUEST = 2;
 
     private ContribuyenteViewModel contribuyenteViewModel;
+
+    RecyclerView recyclerView;
+    ContribuyenteAdapter adapter = new ContribuyenteAdapter();
+
+    private List<Contribuyente> vcontribuyentes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,12 +63,12 @@ public class ContribuyenteActivity extends AppCompatActivity {
         //AppDatabase db = AppDatabase.getDatabase(getApplicationContext());
 
         //INSTANCIAR EL RECYCLER VIEW
-        RecyclerView recyclerView = findViewById(R.id.recycler_usuario);
+        recyclerView = findViewById(R.id.recycler_usuario);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
 
         //INSTANCIAR EL ADAPTER
-        final ContribuyenteAdapter adapter = new ContribuyenteAdapter();
+        adapter = new ContribuyenteAdapter();
         recyclerView.setAdapter(adapter);
 
         //INSTANCIAR EL VIEW MODEL
@@ -64,12 +78,17 @@ public class ContribuyenteActivity extends AppCompatActivity {
             public void onChanged(List<Contribuyente> contribuyentes) {
                 //update RecyclerView
                 //Toast.makeText(UsuarioActivity.this,"onChange", Toast.LENGTH_LONG).show();
-                adapter.submitList(contribuyentes);
+                //adapter.submitList(contribuyentes);
+                adapter.setContribuyentes(contribuyentes);
             }
         });
 
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
+        itemTouchHelper.attachToRecyclerView(recyclerView);
 
-        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
+
+
+        /*new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
                 ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
                 final int fromPos = viewHolder.getAdapterPosition();
@@ -82,7 +101,9 @@ public class ContribuyenteActivity extends AppCompatActivity {
                   contribuyenteViewModel.delete(adapter.getContribuyenteAt(viewHolder.getAdapterPosition()));
                   Toast.makeText(ContribuyenteActivity.this,"Contribuyente Eliminado",Toast.LENGTH_SHORT).show();
             }
-        }).attachToRecyclerView(recyclerView);
+        }).attachToRecyclerView(recyclerView);*/
+
+
 
         adapter.setOnItemClickListener(new ContribuyenteAdapter.OnItemClickListener() {
             @Override
@@ -111,6 +132,94 @@ public class ContribuyenteActivity extends AppCompatActivity {
                 Toast.makeText(UsuarioActivity.this,"Contribuyente Eliminado",Toast.LENGTH_SHORT).show();
             }
         }).attachToRecyclerView(recyclerView);*/
+    }
+
+    Contribuyente deteteItem = null;
+    List<Contribuyente> archiveItem = new ArrayList<Contribuyente>();
+
+    //PARA LA ELIMINACION DE LOS ITEM DESLIZANDO
+    ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT |
+            ItemTouchHelper.RIGHT) {
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+            final int position = viewHolder.getAdapterPosition();
+            //Contribuyente position = adapter.getContribuyenteAt(viewHolder.getAdapterPosition());
+
+            //switch (direction){
+                //case ItemTouchHelper.LEFT:
+
+                    deteteItem = adapter.getContribuyenteAt(position);
+                    adapter.removeItem(position);
+
+                    eliminar(position);
+
+                   /* Snackbar.make(recyclerView,deteteItem.getNombres(),Snackbar.LENGTH_LONG)
+                            .setAction("Deshacer", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    adapter.addItem(position,deteteItem);
+                                    contribuyenteViewModel.delete(deteteItem);
+                                    Toast.makeText(ContribuyenteActivity.this,"Contribuyente Eliminado",Toast.LENGTH_SHORT).show();
+                                }
+                            }).show();*/
+                    //AQUI ELIMINA SI NO LE DA DESHACER
+                   // break;
+                /*case ItemTouchHelper.RIGHT:
+                    deteteItem = adapter.getContribuyenteAt(position);
+                    archiveItem.add(deteteItem);
+                    adapter.notifyItemRemoved(position);
+
+                    Snackbar.make(recyclerView,deteteItem.getNombres()+ "Archivar..",Snackbar.LENGTH_LONG)
+                            .setAction("Deshacer", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    archiveItem.remove(archiveItem.lastIndexOf(deteteItem));
+                                    adapter.addItem(position,deteteItem);
+                                }
+                            }).show();
+                    break;*/
+            //}
+        }
+        //AGREGAR IMAGEN ELIMINAR mientras se mueve
+
+        @Override
+        public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+            new RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+                    .addSwipeLeftBackgroundColor(ContextCompat.getColor(ContribuyenteActivity.this,R.color.colorShipe))
+                    .addSwipeLeftActionIcon(R.drawable.ic_delete)
+                    .addSwipeRightBackgroundColor(ContextCompat.getColor(ContribuyenteActivity.this,R.color.colorShipe))
+                    .addSwipeRightActionIcon(R.drawable.ic_delete)
+                    .create()
+                    .decorate();
+            super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+        }
+    };
+
+    private void eliminar(final int posicioneliminar){
+        new MaterialAlertDialogBuilder(this,R.style.ThemeOverlay_App_MaterialAlertDialog)
+                .setTitle("Eliminar")
+                .setMessage("¿Desea Eliminar Item?")
+                .setIcon(R.drawable.ic_exit_to_app)
+                .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        contribuyenteViewModel.delete(deteteItem);
+                        Toast.makeText(ContribuyenteActivity.this,"Contribuyente Eliminado",Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        adapter.addItem(posicioneliminar,deteteItem);
+                        dialog.dismiss();
+                    }
+                })
+                .show();
     }
 
     @Override

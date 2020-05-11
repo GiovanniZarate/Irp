@@ -2,10 +2,12 @@ package com.proyecto.irp.ui.adapter;
 
 
 import android.annotation.SuppressLint;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
@@ -18,15 +20,16 @@ import com.proyecto.irp.db.entity.Contribuyente;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ContribuyenteAdapter extends ListAdapter<Contribuyente,ContribuyenteAdapter.ContribuyenteHolder> {
-    //private List<Contribuyente> contribuyentes = new ArrayList<>();
+//public class ContribuyenteAdapter extends ListAdapter<Contribuyente,ContribuyenteAdapter.ContribuyenteHolder> {
+public class ContribuyenteAdapter extends RecyclerView.Adapter<ContribuyenteAdapter.ContribuyenteHolder> {
+    private List<Contribuyente> contribuyentes = new ArrayList<>();
     private OnItemClickListener listener;
 
-    public ContribuyenteAdapter() {
+    /*public ContribuyenteAdapter() {
         super(DIFF_CALLBACK);
-    }
+    }*/
 
-    public static final DiffUtil.ItemCallback<Contribuyente> DIFF_CALLBACK = new DiffUtil.ItemCallback<Contribuyente>() {
+   /* public static final DiffUtil.ItemCallback<Contribuyente> DIFF_CALLBACK = new DiffUtil.ItemCallback<Contribuyente>() {
         @Override
         public boolean areItemsTheSame(@NonNull Contribuyente oldItem, @NonNull Contribuyente newItem) {
             return oldItem.getIdcontribuyente() == newItem.getIdcontribuyente();
@@ -40,7 +43,7 @@ public class ContribuyenteAdapter extends ListAdapter<Contribuyente,Contribuyent
                     && oldItem.getNombres().equals(newItem.getNombres())
                     && oldItem.getContrasena().equals(newItem.getContrasena());
         }
-    };
+    };*/
 
     @NonNull
     @Override
@@ -53,11 +56,17 @@ public class ContribuyenteAdapter extends ListAdapter<Contribuyente,Contribuyent
     @Override
     public void onBindViewHolder(@NonNull ContribuyenteHolder holder, int position) {
         //Contribuyente currentContribuyente = contribuyentes.get(position);
-        Contribuyente currentContribuyente = getItem(position);
+       // Contribuyente currentContribuyente = getItem(position);
+        Contribuyente currentContribuyente = contribuyentes.get(position);
         holder.tvIdcontribuyente.setText("Id: "+String.valueOf(currentContribuyente.getIdcontribuyente()));
         holder.tvCedula.setText("Ci: "+currentContribuyente.getDocumento());
         holder.tvRuc.setText("Ruc: "+currentContribuyente.getRuc());
         holder.tvNombreApellido.setText("Nombres: "+currentContribuyente.getNombres());
+    }
+
+    @Override
+    public int getItemCount() {
+        return contribuyentes.size();
     }
 
   /*  @Override
@@ -65,16 +74,36 @@ public class ContribuyenteAdapter extends ListAdapter<Contribuyente,Contribuyent
         return contribuyentes.size();
     }*/
 
-   /* //metodo para actualizar el ADAPTER
+    //metodo para actualizar el ADAPTER
     public void setContribuyentes(List<Contribuyente> contribuyentes){
         this.contribuyentes = contribuyentes;
         notifyDataSetChanged();
-    }*/
+    }
 
     public Contribuyente getContribuyenteAt(int position){
         //return contribuyentes.get(position);
-        return getItem(position);
+        return contribuyentes.get(position);
     }
+
+    /*public List<Contribuyente> getContribuyenteAtList(int position){
+        //return contribuyentes.get(position);
+        return (List<Contribuyente>) contribuyentes.get(position);
+    }*/
+
+
+
+    //REMOVER ITEM de la lista
+    public void removeItem(int position){
+        contribuyentes.remove(position);
+        notifyItemRemoved(position);
+    }
+
+    //ADD ITEM de la lista
+    public void addItem(int position,Contribuyente delete){
+        contribuyentes.add(position,delete);
+        notifyItemInserted(position);
+    }
+
 
     //Clase ViewHolder
     class ContribuyenteHolder extends RecyclerView.ViewHolder{
@@ -96,7 +125,7 @@ public class ContribuyenteAdapter extends ListAdapter<Contribuyente,Contribuyent
                     int position = getAdapterPosition();
                     if (listener != null && position != RecyclerView.NO_POSITION){
                         //listener.onItemClick(contribuyentes.get(position));
-                        listener.onItemClick(getItem(position));
+                        listener.onItemClick(contribuyentes.get(position));
                     }
 
                 }
