@@ -79,11 +79,6 @@ public class MenuDrawerActivity extends AppCompatActivity implements NavigationV
         return false;
     }
 
-
-
-
-
-
     private void cerrarSesion(){
         new MaterialAlertDialogBuilder(this,R.style.ThemeOverlay_App_MaterialAlertDialog)
                 .setTitle("Salir")

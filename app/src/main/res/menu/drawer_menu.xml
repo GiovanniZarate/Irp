@@ -1,35 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="Principal">
+    <item android:title="Comprobantes">
         <menu>
             <item
-                android:id="@+id/home"
+                android:id="@+id/Inicio"
                 android:icon="@drawable/ic_home"
-                android:title="home">
+                android:title="Inicio">
             </item>
             <item
-                android:id="@+id/personas"
-                android:icon="@drawable/ic_group"
-                android:title="personas">
+                android:id="@+id/libroventa"
+                android:icon="@drawable/ic_venta"
+                android:title="Libro de Ventas">
+            </item>
+            <item
+                android:id="@+id/librocompra"
+                android:icon="@drawable/ic_compra"
+                android:title="Libro de Compras">
             </item>
         </menu>
     </item>
-    <item android:title="Secundario">
+    <item android:title="Referencias">
         <menu>
             <item
-                android:id="@+id/home2"
-                android:icon="@drawable/ic_home"
-                android:title="home">
+                android:id="@+id/referenciaVenta"
+                android:icon="@drawable/ic_references"
+                android:title="Referencias Ventas">
             </item>
             <item
-                android:id="@+id/personas2"
-                android:icon="@drawable/ic_group"
-                android:title="personas">
+                android:id="@+id/referenciaCompra"
+                android:icon="@drawable/ic_references"
+                android:title="Referencias Compras">
             </item>
         </menu>
     </item>
-    <item android:title="¿Cerrar Sesión?">
+
+    <item android:title="Datos Usuario">
         <menu>
+            <item
+                android:id="@+id/perfilUsuario"
+                android:icon="@drawable/ic_group"
+                android:title="Perfil">
+            </item>
             <item
                 android:id="@+id/cerrar_sesion"
                 android:icon="@drawable/ic_exit_to_app"
