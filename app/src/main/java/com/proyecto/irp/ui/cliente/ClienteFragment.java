@@ -1,4 +1,4 @@
-package com.proyecto.irp.ui.home;
+package com.proyecto.irp.ui.cliente;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.proyecto.irp.R;
 
-public class HomeFragment extends Fragment {
+public class ClienteFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
+    private ClienteViewModel clienteViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                ViewModelProviders.of(this).get(HomeViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
+        clienteViewModel =
+                ViewModelProviders.of(this).get(ClienteViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_cliente, container, false);
         final TextView textView = root.findViewById(R.id.text_home);
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        clienteViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

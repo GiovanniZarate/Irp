@@ -3,33 +3,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_cliente">
+
+    <fragment
+        android:id="@+id/navigation_cliente"
+        android:name="com.proyecto.irp.ui.cliente.ClienteFragment"
+        android:label="@string/title_navigation_cliente"
+        tools:layout="@layout/fragment_cliente" />
+
     <!--
+       <fragment
+           android:id="@+id/navigation_home"
+           android:name="com.proyecto.irp.ui.EjercicioFragment"
+           android:label="@string/title_notifications"
+           tools:layout="@layout/fragment_ejercicio" />
+   -->
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.proyecto.irp.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
-        -->
+        android:id="@+id/navigation_clasingreso"
+        android:name="com.proyecto.irp.ui.clasingreso.ClasIngresoFragment"
+        android:label="@string/title_navigation_clasingreso"
+        tools:layout="@layout/fragment_clasingreso" />
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.proyecto.irp.ui.EjercicioFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_ejercicio" />
-
-    <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.proyecto.irp.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
-
-    <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.proyecto.irp.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
-
+        android:id="@+id/navigation_tipocomprobante"
+        android:name="com.proyecto.irp.ui.tipocomprobante.TipoComprobanteFragment"
+        android:label="@string/title_navigation_tipocomprobante"
+        tools:layout="@layout/fragment_tipo_comprobante" />
 
 
 </navigation>

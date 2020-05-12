@@ -24,7 +24,7 @@
             android:screenOrientation="portrait" />
         <activity android:name=".ui.CrearcuentaActivity" />
         <activity
-            android:name=".ui.EjercicioActivity"
+            android:name=".ui.MenuRefVentaActivity"
             android:label="@string/title_activity_ejercicio" />
         <activity
             android:name=".ui.MainActivity"

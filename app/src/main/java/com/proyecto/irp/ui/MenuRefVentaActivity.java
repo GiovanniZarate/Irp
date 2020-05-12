@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.proyecto.irp.R;
-import com.proyecto.irp.db.entity.Ejercicio;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -12,12 +11,12 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-public class EjercicioActivity extends AppCompatActivity {
+public class MenuRefVentaActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ejercicio);
+        setContentView(R.layout.activity_menuref_venta);
 
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
@@ -29,7 +28,7 @@ public class EjercicioActivity extends AppCompatActivity {
                 .build();*/
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
+                R.id.navigation_cliente, R.id.navigation_clasingreso,R.id.navigation_tipocomprobante)
                 .build();
 
 
