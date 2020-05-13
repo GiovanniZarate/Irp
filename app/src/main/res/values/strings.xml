@@ -29,5 +29,8 @@
     <string name="title_navigation_cliente">Clientes</string>
     <string name="title_navigation_clasingreso">Clasificación de Ingreso</string>
     <string name="title_nav_clasingeso">Clasif. Ingreso</string>
+    <string name="tituloRegistroCliente">Registro de Clientes</string>
+    <string name="txthint_DivCliente">Dv</string>
+    <string name="btn_registrarcliente">Grabar</string>
 
 </resources>

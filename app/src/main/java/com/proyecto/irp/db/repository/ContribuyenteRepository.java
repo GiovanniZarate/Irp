@@ -43,8 +43,6 @@ public class ContribuyenteRepository {
         new DeleteAllContribuyentesAsyncTask(contribuyenteDao).execute();
     }
 
-
-
     public LiveData<List<Contribuyente>> getAllContribuyentes() {
         return allContribuyentes;
     }

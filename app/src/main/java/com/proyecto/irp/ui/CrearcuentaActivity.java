@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.proyecto.irp.R;
+import com.proyecto.irp.Utilitario.CalculaDivisor;
 import com.proyecto.irp.db.entity.Contribuyente;
 import com.proyecto.irp.viewmodel.ContribuyenteViewModel;
 
@@ -28,6 +29,10 @@ public class CrearcuentaActivity extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_crearcuenta);
         //QUITAR EL ACTION BAR
         getSupportActionBar().hide();
+
+        //INSTANCIAR CLASE PARA CAPTURAR EL DIVIDOR DEL RUC
+        final CalculaDivisor calculaDivisor = new CalculaDivisor();
+
         //INSTANCIAR EL VIEW MODEL
         contribuyenteViewModel = ViewModelProviders.of(this).get(ContribuyenteViewModel.class);
        /* contribuyenteViewModel.getAllContribuyentes().observe(this, new Observer<List<Contribuyente>>() {
@@ -41,6 +46,15 @@ public class CrearcuentaActivity extends AppCompatActivity implements View.OnCli
         inicializacion();
         eventos();
 
+        //PARA QUE CALCULE EL CODIGO VERIFICADRO DEL RUC
+        vcedula.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus){
+                    String cicargado = vcedula.getText().toString().trim();
+                    vruc.setText(cicargado+"-"+String.valueOf(calculaDivisor.Calcular_divisor(cicargado,11)));
+                }
+            }
+        });
     }
 
     private void inicializacion() {

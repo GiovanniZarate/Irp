@@ -8,11 +8,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.proyecto.irp.R;
+import com.proyecto.irp.Utilitario.CalculaDivisor;
 
 public class ContribuyenteAddActivity extends AppCompatActivity {
     public static final String EXTRA_ID = "com.proyecto.irp.ui.EXTRA_ID";
@@ -29,7 +32,11 @@ public class ContribuyenteAddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contribuyente_add);
         inicializacion();
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_24dp);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_volver);
+
+        //INSTANCIAR CLASE PARA CAPTURAR EL DIVIDOR DEL RUC
+        final CalculaDivisor calculaDivisor = new CalculaDivisor();
+
         //para poner titulo si es agregar o modificar
         Intent intent = getIntent();
         if (intent.hasExtra(EXTRA_ID)){
@@ -41,6 +48,24 @@ public class ContribuyenteAddActivity extends AppCompatActivity {
         }else {
             setTitle("Agregar Contribuyente");
         }
+
+
+
+       /* vcedula.OnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+
+            }
+        });  */
+        //PARA QUE CALCULE EL CODIGO VERIFICADRO DEL RUC
+        vcedula.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus){
+                    String cicargado = vcedula.getText().toString().trim();
+                   vruc.setText(cicargado+"-"+String.valueOf(calculaDivisor.Calcular_divisor(cicargado,11)));
+                }
+            }
+        });
     }
 
     private void inicializacion() {
@@ -49,6 +74,8 @@ public class ContribuyenteAddActivity extends AppCompatActivity {
         vnombre = findViewById(R.id.txtNombreContribuyente);
         vcontrasena = findViewById(R.id.txtContrasena);
     }
+
+
 
     //METODO PARA GRABAR CONTRIBUYENTE
     private void saveContribuyente() {
@@ -80,9 +107,6 @@ public class ContribuyenteAddActivity extends AppCompatActivity {
             setResult(RESULT_OK,data);
             finish();
         }
-
-
-
     }
 
     @Override

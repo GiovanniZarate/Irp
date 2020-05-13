@@ -9,11 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.MenuDrawerActivity"
-            android:theme="@style/AppTheme.NoActionBar"
+        <activity android:name=".ui.cliente.ClienteAddActivity"
+            android:parentActivityName=".ui.MenuRefVentaActivity"
             android:screenOrientation="portrait"
             >
         </activity>
+        <activity
+            android:name=".ui.MenuDrawerActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".ui.ContribuyenteAddActivity"
             android:parentActivityName=".ui.ContribuyenteActivity"
@@ -25,7 +29,10 @@
         <activity android:name=".ui.CrearcuentaActivity" />
         <activity
             android:name=".ui.MenuRefVentaActivity"
-            android:label="@string/title_activity_ejercicio" />
+            android:label="@string/title_activity_ejercicio"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTop"
+            />
         <activity
             android:name=".ui.MainActivity"
             android:screenOrientation="portrait">

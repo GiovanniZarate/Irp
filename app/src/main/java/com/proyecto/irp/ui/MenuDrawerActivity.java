@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -70,6 +71,10 @@ public class MenuDrawerActivity extends AppCompatActivity implements NavigationV
                 fragmentManager.beginTransaction().replace(R.id.contenedor_drawer,new IniFragment()).commit();
                 break;
             case R.id.libroventa:
+               // Intent i = new Intent(MenuDrawerActivity.this, MenuRefVentaActivity.class);
+                //startActivity(i);
+                break;
+            case R.id.referenciaVenta:
                 Intent i = new Intent(MenuDrawerActivity.this, MenuRefVentaActivity.class);
                 startActivity(i);
                 break;
@@ -79,6 +84,17 @@ public class MenuDrawerActivity extends AppCompatActivity implements NavigationV
 
         }
         return false;
+    }
+
+    //PARA VALIDAR LA SALIDA DEL SISTEMA MUESTRE UN MENSAJE
+    //Controla la pulsación del botón Atrás
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode==event.KEYCODE_BACK){
+            salirApp();
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     private void cerrarSesion(){
@@ -107,6 +123,29 @@ public class MenuDrawerActivity extends AppCompatActivity implements NavigationV
               .show();
         }
 
+    private void salirApp(){
+        new MaterialAlertDialogBuilder(this,R.style.ThemeOverlay_App_MaterialAlertDialog)
+                .setTitle("Salir")
+                .setMessage("¿Desea Salir de IRP?")
+                .setIcon(R.drawable.ic_exit_to_app)
+                .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(Intent.ACTION_MAIN);
+                        intent.addCategory(Intent.CATEGORY_HOME);
+                        intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                       // dialog.dismiss();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
+    }
         /* private void cerrarSesion(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage("¿Desea Cerrar Sesión?")
