@@ -32,5 +32,7 @@
     <string name="tituloRegistroCliente">Registro de Clientes</string>
     <string name="txthint_DivCliente">Dv</string>
     <string name="btn_registrarcliente">Grabar</string>
+    <string name="tituloRegistroClasIngreso">Registro Clasificación de Ingreso</string>
+    <string name="txthint_descricpionClasIngreso">Descripción</string>
 
 </resources>

@@ -10,21 +10,24 @@ import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.proyecto.irp.Config.Constantes;
+import com.proyecto.irp.db.dao.ClasificacionIngresoDao;
 import com.proyecto.irp.db.dao.ClienteDao;
 import com.proyecto.irp.db.dao.ContribuyenteDao;
 import com.proyecto.irp.db.dao.EjercicioDao;
+import com.proyecto.irp.db.entity.ClasificacionIngreso;
 import com.proyecto.irp.db.entity.Cliente;
 import com.proyecto.irp.db.entity.Contribuyente;
 import com.proyecto.irp.db.entity.Ejercicio;
 
 
 //paso 1 - LOS PERMISOS PARA ACCEDER A LAS ENTIDADES
-@Database(entities = {Ejercicio.class, Contribuyente.class, Cliente.class}, version = 5)
+@Database(entities = {Ejercicio.class, Contribuyente.class, Cliente.class, ClasificacionIngreso.class}, version = 6)
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract EjercicioDao getEjercicioDao();
     public abstract ContribuyenteDao contribuyenteDao();
     public abstract ClienteDao clienteDao();
+    public abstract ClasificacionIngresoDao clasificacionIngresoDao();
 
     //Para crear instancia de la base de datos
     //Verificar si no existe crear de caso contrario

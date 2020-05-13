@@ -133,13 +133,9 @@ public class ClienteFragment extends Fragment {
     }
 
     //PARA RETOMAR EL RESULTADO DEL ACTIVITY DE CARGA PARA GRABAR
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-
-
         if (requestCode == ADD_CLIENTE_REQUEST && resultCode == RESULT_OK) {
             int rucveri =Integer.parseInt(data.getStringExtra(ClienteAddActivity.EXTRA_RUCVERI));
             int rucdiv = Integer.parseInt(data.getStringExtra(ClienteAddActivity.EXTRA_RUCDIV));
