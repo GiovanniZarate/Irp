@@ -9,14 +9,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.clasingreso.ClasIngresoAddActivity"
+        <activity
+            android:name=".ui.tipocomprobante.TipoComprobanteAddActivity"
             android:parentActivityName=".ui.MenuRefVentaActivity"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"
+            ></activity>
+        <activity
+            android:name=".ui.clasingreso.ClasIngresoAddActivity"
+            android:parentActivityName=".ui.MenuRefVentaActivity"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".ui.cliente.ClienteAddActivity"
             android:parentActivityName=".ui.MenuRefVentaActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.MenuDrawerActivity"
             android:screenOrientation="portrait"

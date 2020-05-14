@@ -1,9 +1,13 @@
 package com.proyecto.irp.ui.cliente;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -132,6 +136,24 @@ public class ClienteAddActivity extends AppCompatActivity implements View.OnClic
             case R.id.btnGrabaCliente:
                 save();
                 break;
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_add_contribuyente,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.save_contribuyente:
+                save();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 }

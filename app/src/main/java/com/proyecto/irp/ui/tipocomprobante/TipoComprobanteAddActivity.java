@@ -1,4 +1,4 @@
-package com.proyecto.irp.ui.clasingreso;
+package com.proyecto.irp.ui.tipocomprobante;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,19 +14,17 @@ import android.widget.EditText;
 
 import com.proyecto.irp.R;
 
-public class ClasIngresoAddActivity extends AppCompatActivity implements View.OnClickListener{
-
+public class TipoComprobanteAddActivity extends AppCompatActivity implements View.OnClickListener{
     //PARAMETRO EXTRA PARA PASAR AL OTRO ACTIVIY
-    public static final String EXTRA_IDCLASINGRESO = "com.proyecto.irp.ui.clasingreso.EXTRA_IDCLIENTE";
-    public static final String EXTRA_DESCRICLASINGRESO = "com.proyecto.irp.ui.clasingreso.EXTRA_RUCVERI";
+    public static final String EXTRA_IDTIPOCOMPROBANTE = "com.proyecto.irp.ui.tipocomprobante.EXTRA_IDTIPOCOMPROBANTE";
+    public static final String EXTRA_DESCRITIPOCOMPROBANTE = "com.proyecto.irp.ui.tipocomprobante.EXTRA_DESCRITIPOCOMPROBANTE";
 
     EditText vdescripcion;
     Button btnRegistrar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_clas_ingreso_add);
+        setContentView(R.layout.activity_tipo_comprobante_add);
 
         inicializacion();
         eventos();
@@ -36,17 +34,17 @@ public class ClasIngresoAddActivity extends AppCompatActivity implements View.On
 
         //para poner titulo si es agregar o modificar
         Intent intent = getIntent();
-        if (intent.hasExtra(EXTRA_IDCLASINGRESO)){
-            setTitle("Editar Clasif. de Ingreso");
-            vdescripcion.setText(intent.getStringExtra(EXTRA_DESCRICLASINGRESO));
+        if (intent.hasExtra(EXTRA_IDTIPOCOMPROBANTE)){
+            setTitle("Editar Tipo Comprobante");
+            vdescripcion.setText(intent.getStringExtra(EXTRA_DESCRITIPOCOMPROBANTE));
         }else {
-            setTitle("Agregar Clasif. de Ingreso");
+            setTitle("Agregar Tipo Comprobante");
         }
     }
 
     private void inicializacion() {
-        vdescripcion = findViewById(R.id.txtDescripcionClasIngreso);
-        btnRegistrar = findViewById(R.id.btnGrabaClasIngreso);
+        vdescripcion = findViewById(R.id.txtDescripcionTipoComprobante);
+        btnRegistrar = findViewById(R.id.btnGrabaTipoComprobante);
     }
 
     private void eventos() {
@@ -63,13 +61,13 @@ public class ClasIngresoAddActivity extends AppCompatActivity implements View.On
             vdescripcion.setError("Debes ingresar descripción");
         }else{
             Intent data = new Intent();
-            data.putExtra(EXTRA_DESCRICLASINGRESO,descripcion);
+            data.putExtra(EXTRA_DESCRITIPOCOMPROBANTE,descripcion);
 
 
             //VERIFICAR SI ES MODIFICAR O NUEVO
-            int id = getIntent().getIntExtra(EXTRA_IDCLASINGRESO,-1);
+            int id = getIntent().getIntExtra(EXTRA_IDTIPOCOMPROBANTE,-1);
             if (id != -1){
-                data.putExtra(EXTRA_IDCLASINGRESO,id);
+                data.putExtra(EXTRA_IDTIPOCOMPROBANTE,id);
             }
             setResult(RESULT_OK,data);
             finish();
@@ -80,7 +78,7 @@ public class ClasIngresoAddActivity extends AppCompatActivity implements View.On
     public void onClick(View v) {
         int id = v.getId();
         switch (id){
-            case R.id.btnGrabaClasIngreso:
+            case R.id.btnGrabaTipoComprobante:
                 save();
                 break;
         }

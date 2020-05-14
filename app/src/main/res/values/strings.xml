@@ -34,5 +34,8 @@
     <string name="btn_registrarcliente">Grabar</string>
     <string name="tituloRegistroClasIngreso">Registro Clasificación de Ingreso</string>
     <string name="txthint_descricpionClasIngreso">Descripción</string>
+    <string name="btn_registrartipocomprobante">Grabar</string>
+    <string name="txthint_descricpionTipoComprobante">Descripción</string>
+    <string name="tituloRegistroTipoComprobante">Registro Tipo de Comprobante</string>
 
 </resources>

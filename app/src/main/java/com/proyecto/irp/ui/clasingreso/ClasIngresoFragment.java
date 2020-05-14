@@ -60,13 +60,9 @@ public class ClasIngresoFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
 
-
         //INSTANCIAR EL ADAPTER
         adapter = new ClasificacionIngresoAdapter();
         recyclerView.setAdapter(adapter);
-
-
-
 
         //INSTANCIAR EL VIEW MODEL
         clasIngresoViewModel = ViewModelProviders.of(this).get(ClasIngresoViewModel.class);
