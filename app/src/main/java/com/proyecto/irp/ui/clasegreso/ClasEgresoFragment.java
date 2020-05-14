@@ -1,4 +1,4 @@
-package com.proyecto.irp.ui.cliente;
+package com.proyecto.irp.ui.clasegreso;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,8 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -25,8 +23,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.proyecto.irp.R;
-import com.proyecto.irp.db.entity.Cliente;
-import com.proyecto.irp.ui.adapter.ClienteAdapter;
+import com.proyecto.irp.db.entity.ClasificacionEgreso;
+import com.proyecto.irp.ui.adapter.ClasificacionEgresoAdapter;
 
 import java.util.List;
 
@@ -34,75 +32,65 @@ import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 
 import static android.app.Activity.RESULT_OK;
 
-public class ClienteFragment extends Fragment {
 
-    public static final int ADD_CLIENTE_REQUEST = 1;
-    public static final int EDIT_CLIENTE_REQUEST = 2;
+public class ClasEgresoFragment extends Fragment {
+    public static final int ADD_CLASEGRESO_REQUEST = 1;
+    public static final int EDIT_CLASEGRESO_REQUEST = 2;
 
-    //INCIALIZAR ESTOAS
-    private ClienteViewModel clienteViewModel;
+    private ClasEgresoViewModel clasEgresoViewModel;
     RecyclerView recyclerView;
-    ClienteAdapter adapter = new ClienteAdapter();
+    ClasificacionEgresoAdapter adapter = new ClasificacionEgresoAdapter();
 
-    String msgtoast = "Cliente";
-
+    String msgtoast = "Clasificación de Egreso";
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_clasegreso, container, false);
 
-        final View view = inflater.inflate(R.layout.fragment_cliente, container, false);
-
-       FloatingActionButton btnAgregarContribuyente = view.findViewById(R.id.btn_AddCliente);
-        btnAgregarContribuyente.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton btnAgregar = view.findViewById(R.id.btn_AddClasegreso);
+        btnAgregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getActivity(),ClienteAddActivity.class);
-                startActivityForResult(i,ADD_CLIENTE_REQUEST);
+                Intent i = new Intent(getActivity(),ClasEgresoAddActivity.class);
+                startActivityForResult(i,ADD_CLASEGRESO_REQUEST);
+
             }
         });
 
-
         //INSTANCIAR EL RECYCLER VIEW
-        recyclerView = view.findViewById(R.id.recycler_cliente);
+        recyclerView = view.findViewById(R.id.recycler_clasificacionegreso);
         //recyclerView.setLayoutManager(new LinearLayoutManager(this)); ya no se usa this xq no es un activiy
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
 
-
         //INSTANCIAR EL ADAPTER
-        adapter = new ClienteAdapter();
+        adapter = new ClasificacionEgresoAdapter();
         recyclerView.setAdapter(adapter);
 
-
         //INSTANCIAR EL VIEW MODEL
-       clienteViewModel = ViewModelProviders.of(this).get(ClienteViewModel.class);
-       clienteViewModel.getAllClientes().observe(getActivity(), new Observer<List<Cliente>>() {
+        clasEgresoViewModel = ViewModelProviders.of(this).get(ClasEgresoViewModel.class);
+        clasEgresoViewModel.getAllClasficacionEgreso().observe(getActivity(), new Observer<List<ClasificacionEgreso>>() {
             @Override
-            public void onChanged(List<Cliente> clientes) {
-                //update RecyclerView
-                //Toast.makeText(UsuarioActivity.this,"onChange", Toast.LENGTH_LONG).show();
-                //adapter.submitList(contribuyentes);
-                adapter.setClientes(clientes);
+            public void onChanged(List<ClasificacionEgreso> lista) {
+                adapter.setClasficacionEgreso(lista);
             }
         });
+
+        //PARA PASAR LOS DATOS  EN LOS TEXTOS PARA EDITAR (para ello se crea en al adpater un listener)
+        adapter.setOnItemClickListener(new ClasificacionEgresoAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(ClasificacionEgreso entity) {
+                Intent intent = new Intent(getActivity(),ClasEgresoAddActivity.class);
+                intent.putExtra(ClasEgresoAddActivity.EXTRA_IDCLASEGRESO,entity.getIdclasificacionegreso());
+                intent.putExtra(ClasEgresoAddActivity.EXTRA_DESCRICLASEGRESO,entity.getDescripcion());
+
+                startActivityForResult(intent, EDIT_CLASEGRESO_REQUEST);
+            }
+        });
+
+        //PARA QUE PUEDA ESTIRAR A LA DERECHA O IZQUIERDA Y ELIMINAR EL ENTE
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
         itemTouchHelper.attachToRecyclerView(recyclerView);
 
-       /// clienteViewModel.insert(new Cliente("Giovanni Zarate","4203593-7",1,4203593,7));
-
-        //PARA PASAR LOS DATOS  EN LOS TEXTOS PARA EDITAR (para ello se crea en al adpater un listener)
-        adapter.setOnItemClickListener(new ClienteAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(Cliente cliente) {
-                Intent intent = new Intent(getActivity(),ClienteAddActivity.class);
-                intent.putExtra(ClienteAddActivity.EXTRA_IDCLIENTE,cliente.getIdcliente());
-                intent.putExtra(ClienteAddActivity.EXTRA_RUCVERI,String.valueOf(cliente.getRucveri()));
-                intent.putExtra(ClienteAddActivity.EXTRA_RUCDIV,String.valueOf(cliente.getDiv()));
-                intent.putExtra(ClienteAddActivity.EXTRA_NOMBRECLIENTE,cliente.getNombre());
-                intent.putExtra(ClienteAddActivity.EXTRA_TIPOCLIENTE,String.valueOf(cliente.getTipo()));
-
-                startActivityForResult(intent, EDIT_CLIENTE_REQUEST);
-            }
-        });
 
         return view;
     }
@@ -111,52 +99,28 @@ public class ClienteFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == ADD_CLIENTE_REQUEST && resultCode == RESULT_OK) {
-            int rucveri =Integer.parseInt(data.getStringExtra(ClienteAddActivity.EXTRA_RUCVERI));
-            int rucdiv = Integer.parseInt(data.getStringExtra(ClienteAddActivity.EXTRA_RUCDIV));
-            String nombres = data.getStringExtra(ClienteAddActivity.EXTRA_NOMBRECLIENTE);
-            String tipo = data.getStringExtra(ClienteAddActivity.EXTRA_TIPOCLIENTE);
-            String ruc = String.valueOf(rucveri).trim().concat("-").concat(String.valueOf(rucdiv).trim());
-            int tipocliente;
-            if (tipo.trim().equals("0")){
-                tipocliente=0;
-            }else {
-                tipocliente=1;
-            }
-            //Contribuyente contribuyente = new Contribuyente(cedula,ruc,nombres,contrasena);
-            Cliente cliente = new Cliente(nombres,ruc,tipocliente,rucveri,rucdiv);
-            if (clienteViewModel.verificaCedula(String.valueOf(cliente.getRucveri())) == 0){
+        if (requestCode == ADD_CLASEGRESO_REQUEST && resultCode == RESULT_OK) {
+            String descripcion = data.getStringExtra(ClasEgresoAddActivity.EXTRA_DESCRICLASEGRESO);
+            int tipoegreso = Integer.parseInt(data.getStringExtra(ClasEgresoAddActivity.EXTRA_TIPOEGRESO));
 
-                clienteViewModel.insert(cliente);
-                Toast.makeText(getActivity(),msgtoast+" Registrado con exito", Toast.LENGTH_SHORT).show();
-            }else {
-                Toast.makeText(getActivity(),msgtoast+" Ya está registrado", Toast.LENGTH_SHORT).show();
-            }
 
-        }else if  (requestCode == EDIT_CLIENTE_REQUEST && resultCode == RESULT_OK) {
-            int rucveri =Integer.parseInt(data.getStringExtra(ClienteAddActivity.EXTRA_RUCVERI));
-            int rucdiv = Integer.parseInt(data.getStringExtra(ClienteAddActivity.EXTRA_RUCDIV));
-            String nombres = data.getStringExtra(ClienteAddActivity.EXTRA_NOMBRECLIENTE);
-            String tipo = data.getStringExtra(ClienteAddActivity.EXTRA_TIPOCLIENTE);
-            String ruc = String.valueOf(rucveri).trim().concat("-").concat(String.valueOf(rucdiv).trim());
-            int tipocliente;
-            if (tipo.trim().equals("0")){
-                tipocliente=0;
-            }else {
-                tipocliente=1;
-            }
-            int id = data.getIntExtra(ClienteAddActivity.EXTRA_IDCLIENTE,-1);
+            ClasificacionEgreso entity = new ClasificacionEgreso(descripcion,tipoegreso);
+            clasEgresoViewModel.insert(entity);
+            Toast.makeText(getActivity(),msgtoast+" Registrado con exito", Toast.LENGTH_SHORT).show();
+
+        }else if  (requestCode == EDIT_CLASEGRESO_REQUEST && resultCode == RESULT_OK) {
+            String descripcion = data.getStringExtra(ClasEgresoAddActivity.EXTRA_DESCRICLASEGRESO);
+            int tipoegreso = Integer.parseInt(data.getStringExtra(ClasEgresoAddActivity.EXTRA_TIPOEGRESO));
+            int id = data.getIntExtra(ClasEgresoAddActivity.EXTRA_IDCLASEGRESO,-1);
             if (id == -1){
                 Toast.makeText(getActivity(),msgtoast+" no fue Modificado", Toast.LENGTH_SHORT).show();
                 return;
             }
             //Contribuyente contribuyente = new Contribuyente(cedula,ruc,nombres,contrasena);
-            Cliente cliente = new Cliente(nombres,ruc,tipocliente,rucveri,rucdiv);
-            cliente.setIdcliente(id);
-            clienteViewModel.update(cliente);
+            ClasificacionEgreso entity = new ClasificacionEgreso(descripcion,tipoegreso);
+            entity.setIdclasificacionegreso(id);
+            clasEgresoViewModel.update(entity);
             Toast.makeText(getActivity(),msgtoast+"  modificado", Toast.LENGTH_SHORT).show();
-
-
         }else{
             Toast.makeText(getActivity(),msgtoast+" no Registrado", Toast.LENGTH_SHORT).show();
         }
@@ -164,7 +128,7 @@ public class ClienteFragment extends Fragment {
 
 
 
-    Cliente deteteItem = null;
+    ClasificacionEgreso deteteItem = null;
     //PARA LA ELIMINACION DE LOS ITEM DESLIZANDO
     ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT |
             ItemTouchHelper.RIGHT) {
@@ -176,7 +140,7 @@ public class ClienteFragment extends Fragment {
         @Override
         public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
             final int position = viewHolder.getAdapterPosition();
-            deteteItem = adapter.getClienteAt(position);
+            deteteItem = adapter.getClasificacionEgresoAt(position);
             adapter.removeItem(position);
 
             eliminar(position);
@@ -205,7 +169,7 @@ public class ClienteFragment extends Fragment {
                 .setPositiveButton("Si", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        clienteViewModel.delete(deteteItem);
+                        clasEgresoViewModel.delete(deteteItem);
                         Toast.makeText(getActivity(),msgtoast+" Eliminado",Toast.LENGTH_SHORT).show();
                     }
                 })

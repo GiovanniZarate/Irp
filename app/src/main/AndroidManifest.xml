@@ -9,15 +9,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.clasegreso.ClasEgresoAddActivity"
+            android:parentActivityName=".ui.MenuRefCompraActivity"
+            android:screenOrientation="portrait"
+            ></activity>
+        <activity android:name=".ui.tipoegreso.TipoEgresoAddActivity"
+            android:parentActivityName=".ui.MenuRefCompraActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.proveedor.ProveedorAddActivity"
+            android:parentActivityName=".ui.MenuRefCompraActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.MenuRefCompraActivity"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".ui.MenuDrawerActivity"
+            />
         <activity
             android:name=".ui.tipocomprobante.TipoComprobanteAddActivity"
             android:parentActivityName=".ui.MenuRefVentaActivity"
-            android:screenOrientation="portrait"
-            ></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.clasingreso.ClasIngresoAddActivity"
             android:parentActivityName=".ui.MenuRefVentaActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.cliente.ClienteAddActivity"
             android:parentActivityName=".ui.MenuRefVentaActivity"
@@ -37,8 +51,7 @@
         <activity android:name=".ui.CrearcuentaActivity" />
         <activity
             android:name=".ui.MenuRefVentaActivity"
-            android:label="@string/title_activity_ejercicio"
-            android:launchMode="singleTop"
+            android:parentActivityName=".ui.MenuDrawerActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.MainActivity"

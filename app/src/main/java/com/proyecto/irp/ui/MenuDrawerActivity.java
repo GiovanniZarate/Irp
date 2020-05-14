@@ -75,8 +75,12 @@ public class MenuDrawerActivity extends AppCompatActivity implements NavigationV
                 //startActivity(i);
                 break;
             case R.id.referenciaVenta:
-                Intent i = new Intent(MenuDrawerActivity.this, MenuRefVentaActivity.class);
-                startActivity(i);
+                Intent rv = new Intent(MenuDrawerActivity.this, MenuRefVentaActivity.class);
+                startActivity(rv);
+                break;
+            case R.id.referenciaCompra:
+                Intent rc = new Intent(MenuDrawerActivity.this, MenuRefCompraActivity.class);
+                startActivity(rc);
                 break;
             case R.id.cerrar_sesion:
                  cerrarSesion();

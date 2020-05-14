@@ -24,7 +24,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_nav_tipocomprobante">Tipo Comprobante</string>
     <string name="title_navigation_tipocomprobante">Tipo de Comprobante</string>
-    <string name="title_nav_proveedor">Cliente</string>
     <string name="title_nav_cliente">Cliente</string>
     <string name="title_navigation_cliente">Clientes</string>
     <string name="title_navigation_clasingreso">Clasificación de Ingreso</string>
@@ -37,5 +36,14 @@
     <string name="btn_registrartipocomprobante">Grabar</string>
     <string name="txthint_descricpionTipoComprobante">Descripción</string>
     <string name="tituloRegistroTipoComprobante">Registro Tipo de Comprobante</string>
+    <string name="title_activity_menu_ref_compra">MenuRefCompraActivity</string>
+    <string name="title_nav_proveedor">Proveedor</string>
+    <string name="title_navigation_proveedor">Proveedor</string>
+    <string name="title_navigation_tipoegreso">Tipo Egreso</string>
+    <string name="title_navigation_clasegreso">Clasif. Egreso</string>
+    <string name="tituloRegistroProveedor">Registro de Proveedor</string>
+    <string name="tituloRegistroTipoEgreso">Registro Tipo de Egreso</string>
+    <string name="tituloRegistroClasEgreso">Registro Clasificación de Egreso</string>
+    <string name="txthint_TipoEgreso">Seleccione Tipo Egreso</string>
 
 </resources>

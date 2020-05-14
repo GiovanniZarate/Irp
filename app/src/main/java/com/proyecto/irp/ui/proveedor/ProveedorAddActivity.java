@@ -1,4 +1,4 @@
-package com.proyecto.irp.ui.cliente;
+package com.proyecto.irp.ui.proveedor;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,24 +17,25 @@ import android.widget.RadioGroup;
 import com.proyecto.irp.R;
 import com.proyecto.irp.Utilitario.CalculaDivisor;
 
-public class ClienteAddActivity extends AppCompatActivity implements View.OnClickListener{
+public class ProveedorAddActivity extends AppCompatActivity implements View.OnClickListener{
+
     //PARAMETRO EXTRA PARA PASAR AL OTRO ACTIVIY
-    public static final String EXTRA_IDCLIENTE = "com.proyecto.irp.ui.cliente.EXTRA_IDCLIENTE";
-    public static final String EXTRA_RUCVERI = "com.proyecto.irp.ui.cliente.EXTRA_RUCVERI";
-    public static final String EXTRA_RUCDIV = "com.proyecto.irp.ui.cliente.EXTRA_RUCDIV";
-    public static final String EXTRA_NOMBRECLIENTE = "com.proyecto.irp.ui.cliente.EXTRA_NOMBRECLIENTE";
-    public static final String EXTRA_TIPOCLIENTE = "com.proyecto.irp.ui.cliente.EXTRA_TIPOCLIENTE";
+    public static final String EXTRA_IDPROVEEDOR = "com.proyecto.irp.ui.proveedor.EXTRA_IDPROVEEDOR";
+    public static final String EXTRA_RUCVERI = "com.proyecto.irp.ui.proveedor.EXTRA_RUCVERI";
+    public static final String EXTRA_RUCDIV = "com.proyecto.irp.ui.proveedor.EXTRA_RUCDIV";
+    public static final String EXTRA_NOMBREPROVEEDOR = "com.proyecto.irp.ui.proveedor.EXTRA_NOMBREPROVEEDOR";
+    public static final String EXTRA_TIPOPROVEEDOR = "com.proyecto.irp.ui.proveedor.EXTRA_TIPOPROVEEDOR";
 
     RadioGroup grupoTipoCliente;
     RadioButton fisica,juridica;
     EditText vrucvericliente,vrucdivcliente,vnombrecliente;
     Button btnRegistrar;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cliente_add);
+        setContentView(R.layout.activity_proveedor_add);
+
         inicializacion();
         eventos();
 
@@ -46,18 +47,18 @@ public class ClienteAddActivity extends AppCompatActivity implements View.OnClic
 
         //para poner titulo si es agregar o modificar
         Intent intent = getIntent();
-        if (intent.hasExtra(EXTRA_IDCLIENTE)){
-            setTitle("Editar Cliente");
+        if (intent.hasExtra(EXTRA_IDPROVEEDOR)){
+            setTitle("Editar Proveedor");
             vrucvericliente.setText(intent.getStringExtra(EXTRA_RUCVERI));
             vrucdivcliente.setText(intent.getStringExtra(EXTRA_RUCDIV));
-            vnombrecliente.setText(intent.getStringExtra(EXTRA_NOMBRECLIENTE));
-            if (intent.getStringExtra(EXTRA_TIPOCLIENTE).trim().equals("0")){
-                grupoTipoCliente.check(R.id.rbFisica);
+            vnombrecliente.setText(intent.getStringExtra(EXTRA_NOMBREPROVEEDOR));
+            if (intent.getStringExtra(EXTRA_TIPOPROVEEDOR).trim().equals("0")){
+                grupoTipoCliente.check(R.id.rbFisicaP);
             }else{
-                grupoTipoCliente.check(R.id.rbJuridica);
+                grupoTipoCliente.check(R.id.rbJuridicaP);
             }
         }else {
-            setTitle("Agregar Cliente");
+            setTitle("Agregar Proveedor");
         }
 
         //PARA QUE CALCULE EL CODIGO VERIFICADRO DEL RUC
@@ -69,22 +70,21 @@ public class ClienteAddActivity extends AppCompatActivity implements View.OnClic
                 }
             }
         });
-
     }
 
     private void inicializacion() {
-        grupoTipoCliente = findViewById(R.id.rbgTipoCliente);
+        grupoTipoCliente = findViewById(R.id.rbgTipoProveedor);
         grupoTipoCliente.clearCheck();
-        grupoTipoCliente.check(R.id.rbFisica);
+        grupoTipoCliente.check(R.id.rbFisicaP);
 
-        fisica = findViewById(R.id.rbFisica);
-        juridica = findViewById(R.id.rbJuridica);
+        fisica = findViewById(R.id.rbFisicaP);
+        juridica = findViewById(R.id.rbJuridicaP);
 
-        vrucvericliente = findViewById(R.id.txtRucVeriCliente);
-        vrucdivcliente = findViewById(R.id.txtRucDivCliente);
-        vnombrecliente = findViewById(R.id.txtNombreCliente);
+        vrucvericliente = findViewById(R.id.txtRucVeriProveedor);
+        vrucdivcliente = findViewById(R.id.txtRucDivProveedor);
+        vnombrecliente = findViewById(R.id.txtNombreProveedor);
 
-        btnRegistrar = findViewById(R.id.btnGrabaCliente);
+        btnRegistrar = findViewById(R.id.btnGrabaProveedor);
     }
 
     private void eventos() {
@@ -115,13 +115,13 @@ public class ClienteAddActivity extends AppCompatActivity implements View.OnClic
             Intent data = new Intent();
             data.putExtra(EXTRA_RUCVERI,rucveri);
             data.putExtra(EXTRA_RUCDIV,rucdiv);
-            data.putExtra(EXTRA_NOMBRECLIENTE,nombrecliente);
-            data.putExtra(EXTRA_TIPOCLIENTE,tipocliente);
+            data.putExtra(EXTRA_NOMBREPROVEEDOR,nombrecliente);
+            data.putExtra(EXTRA_TIPOPROVEEDOR,tipocliente);
 
             //VERIFICAR SI ES MODIFICAR O NUEVO
-            int id = getIntent().getIntExtra(EXTRA_IDCLIENTE,-1);
+            int id = getIntent().getIntExtra(EXTRA_IDPROVEEDOR,-1);
             if (id != -1){
-                data.putExtra(EXTRA_IDCLIENTE,id);
+                data.putExtra(EXTRA_IDPROVEEDOR,id);
             }
             setResult(RESULT_OK,data);
             finish();
@@ -132,7 +132,7 @@ public class ClienteAddActivity extends AppCompatActivity implements View.OnClic
     public void onClick(View v) {
         int id = v.getId();
         switch (id){
-            case R.id.btnGrabaCliente:
+            case R.id.btnGrabaProveedor:
                 save();
                 break;
         }

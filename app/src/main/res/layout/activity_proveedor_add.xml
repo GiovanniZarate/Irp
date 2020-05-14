@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorFondo"
+    tools:context=".ui.proveedor.ProveedorAddActivity">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvtituloregistroproveedor"
+        android:layout_width="300dp"
+        android:layout_height="80dp"
+        android:gravity="center|top"
+        android:text="@string/tituloRegistroProveedor"
+        android:textAlignment="inherit"
+        android:textColor="@color/colorTextView"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/txtInputNombreProveedor"
+        app:layout_constraintEnd_toEndOf="@+id/tvtituloregistroproveedor"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/tvtituloregistroproveedor"
+        app:layout_constraintTop_toBottomOf="@+id/tvtituloregistroproveedor">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txtInputRucVeriProveedor"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:hint="CI/RUC : Sin Guion"
+            android:textColor="@color/colorEditText"
+            android:textColorHighlight="@color/colorEditText"
+            android:textColorHint="@color/colorEditText"
+            android:textColorLink="@color/colorEditText"
+            android:textCursorDrawable="@color/colorEditText"
+            app:counterEnabled="true"
+            app:counterMaxLength="12"
+            app:errorEnabled="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:startIconContentDescription="@string/content_cedula_end_icon"
+            app:startIconDrawable="@drawable/ic_cedula"
+            tools:layout_editor_absoluteY="188dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtRucVeriProveedor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:singleLine="true" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txtInputRucDivProveedor"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/txthint_DivCliente"
+            android:textColor="@color/colorEditText"
+            android:textColorHighlight="@color/colorEditText"
+            android:textColorHint="@color/colorEditText"
+            android:textColorLink="@color/colorEditText"
+            android:textCursorDrawable="@color/colorEditText"
+            app:counterEnabled="true"
+            app:counterMaxLength="1"
+            app:errorEnabled="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="188dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtRucDivProveedor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:singleLine="true" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txtInputNombreProveedor"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:hint="@string/txthint_nombrecontribu"
+        android:textColor="@color/colorEditText"
+        android:textColorHighlight="@color/colorEditText"
+        android:textColorHint="@color/colorEditText"
+        android:textColorLink="@color/colorEditText"
+        android:textCursorDrawable="@color/colorEditText"
+        app:counterEnabled="true"
+        app:counterMaxLength="40"
+        app:errorEnabled="true"
+        app:layout_constraintBottom_toTopOf="@+id/rbgTipoProveedor"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:startIconContentDescription="@string/content_cedula_end_icon"
+        app:startIconDrawable="@drawable/ic_cedula">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtNombreProveedor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:imeOptions="actionNext"
+            android:singleLine="true" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <RadioGroup
+        android:id="@+id/rbgTipoProveedor"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:gravity="center_horizontal"
+        android:imeOptions="actionNext"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnGrabaProveedor"
+        app:layout_constraintEnd_toEndOf="@+id/txtInputNombreProveedor"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/txtInputNombreProveedor"
+        app:layout_constraintTop_toBottomOf="@+id/txtInputNombreProveedor">
+
+        <RadioButton
+            android:id="@+id/rbFisicaP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:imeOptions="actionNext"
+            android:paddingEnd="30dp"
+            android:singleLine="true"
+            android:text="Fisica"
+            android:textSize="16dp" />
+
+        <RadioButton
+            android:id="@+id/rbJuridicaP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:imeOptions="actionNext"
+            android:paddingEnd="10dp"
+            android:singleLine="true"
+            android:text="Juridica"
+            android:textSize="16dp" />
+    </RadioGroup>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnGrabaProveedor"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:text="@string/btn_registrarcliente"
+        android:textAllCaps="false"
+        android:textColor="@color/colorButton"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/rbgTipoProveedor"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/rbgTipoProveedor"
+        app:layout_constraintTop_toBottomOf="@+id/rbgTipoProveedor" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

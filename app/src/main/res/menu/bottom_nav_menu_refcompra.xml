@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_proveedor"
+        android:icon="@drawable/ic_proveedor"
+        android:title="@string/title_nav_proveedor" />
+
+    <item
+        android:id="@+id/navigation_tipoegreso"
+        android:icon="@drawable/ic_egreso"
+        android:title="@string/title_navigation_tipoegreso" />
+
+    <item
+        android:id="@+id/navigation_clasegreso"
+        android:icon="@drawable/ic_clasficacioningreegre"
+        android:title="@string/title_navigation_clasegreso" />
+
+</menu>
