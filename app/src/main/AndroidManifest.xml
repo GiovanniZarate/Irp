@@ -22,7 +22,7 @@
         <activity
             android:name=".ui.MenuRefCompraActivity"
             android:screenOrientation="portrait"
-            android:parentActivityName=".ui.MenuDrawerActivity"
+            android:launchMode="singleTop"
             />
         <activity
             android:name=".ui.tipocomprobante.TipoComprobanteAddActivity"
@@ -51,7 +51,7 @@
         <activity android:name=".ui.CrearcuentaActivity" />
         <activity
             android:name=".ui.MenuRefVentaActivity"
-            android:parentActivityName=".ui.MenuDrawerActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.MainActivity"

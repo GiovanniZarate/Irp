@@ -7,7 +7,12 @@
     android:background="@color/colorFondo"
     tools:context=".ui.clasingreso.ClasIngresoAddActivity">
 
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvtituloregistroclasingreso"
         android:layout_width="300dp"
@@ -69,6 +74,6 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/txtInputDescripcionClasIngreso"
         app:layout_constraintTop_toBottomOf="@+id/txtInputDescripcionClasIngreso" />
-
-
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

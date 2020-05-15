@@ -6,7 +6,13 @@
     android:layout_height="match_parent"
     android:background="@color/colorFondo"
     tools:context=".ui.MainActivity">
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvtituloregistro"
         android:layout_width="300dp"
@@ -153,5 +159,6 @@
             android:layout_height="wrap_content"
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
-
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
