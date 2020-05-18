@@ -10,70 +10,104 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tvtituloregistrotipocomprobante"
-        android:layout_width="300dp"
-        android:layout_height="80dp"
-        android:gravity="center|top"
-        android:text="@string/tituloRegistroTipoComprobante"
-        android:textAlignment="inherit"
-        android:textColor="@color/colorTextView"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/txtInputDescripcionTipocomprobante"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="spread" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/txtInputDescripcionTipocomprobante"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/txthint_descricpionTipoComprobante"
-        android:textColor="@color/colorEditText"
-        android:textColorHighlight="@color/colorEditText"
-        android:textColorHint="@color/colorEditText"
-        android:textColorLink="@color/colorEditText"
-        android:textCursorDrawable="@color/colorEditText"
-        app:counterEnabled="true"
-        app:counterMaxLength="180"
-        app:errorEnabled="true"
-        app:layout_constraintBottom_toTopOf="@+id/btnGrabaTipoComprobante"
-        app:layout_constraintEnd_toEndOf="@+id/tvtituloregistrotipocomprobante"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/tvtituloregistrotipocomprobante"
-        app:layout_constraintTop_toBottomOf="@+id/tvtituloregistrotipocomprobante">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/txtDescripcionTipoComprobante"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:imeOptions="actionNext"
-            android:singleLine="false" />
+            android:layout_height="match_parent">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvtituloregistrotipocomprobante"
+                android:layout_width="300dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="32dp"
+                android:gravity="center|top"
+                android:text="@string/tituloRegistroTipoComprobante"
+                android:textAlignment="inherit"
+                android:textColor="@color/colorTextView"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnGrabaTipoComprobante"
-        style="?attr/materialButtonOutlinedStyle"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:padding="12dp"
-        android:text="@string/btn_registrartipocomprobante"
-        android:textAllCaps="false"
-        android:textColor="@color/colorButton"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/txtInputDescripcionTipocomprobante"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/txtInputDescripcionTipocomprobante"
-        app:layout_constraintTop_toBottomOf="@+id/txtInputDescripcionTipocomprobante" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txtInputDescripcionTipocomprobante"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:hint="@string/txthint_descricpionTipoComprobante"
+                android:textColor="@color/colorEditText"
+                android:textColorHighlight="@color/colorEditText"
+                android:textColorHint="@color/colorEditText"
+                android:textColorLink="@color/colorEditText"
+                android:textCursorDrawable="@color/colorEditText"
+                app:counterEnabled="true"
+                app:counterMaxLength="180"
+                app:errorEnabled="true"
+                app:layout_constraintBottom_toTopOf="@+id/rbgTipocpb"
+                app:layout_constraintEnd_toEndOf="@+id/tvtituloregistrotipocomprobante"
+                app:layout_constraintStart_toStartOf="@+id/tvtituloregistrotipocomprobante"
+                app:layout_constraintTop_toBottomOf="@+id/tvtituloregistrotipocomprobante">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtDescripcionTipoComprobante"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionNext"
+                    android:singleLine="false" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <RadioGroup
+                android:id="@+id/rbgTipocpb"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:gravity="center_horizontal"
+                android:imeOptions="actionNext"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                app:layout_constraintBottom_toTopOf="@+id/btnGrabaTipoComprobante"
+                app:layout_constraintEnd_toEndOf="@+id/txtInputDescripcionTipocomprobante"
+                app:layout_constraintStart_toStartOf="@+id/txtInputDescripcionTipocomprobante"
+                app:layout_constraintTop_toBottomOf="@+id/txtInputDescripcionTipocomprobante">
+
+                <RadioButton
+                    android:id="@+id/rbCompra"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionNext"
+                    android:paddingEnd="30dp"
+                    android:singleLine="true"
+                    android:text="Compra"
+                    android:textSize="16dp" />
+
+                <RadioButton
+                    android:id="@+id/rbVenta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionNext"
+                    android:paddingEnd="10dp"
+                    android:singleLine="true"
+                    android:text="Venta"
+                    android:textSize="16dp" />
+            </RadioGroup>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnGrabaTipoComprobante"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:padding="12dp"
+                android:text="@string/btn_registrartipocomprobante"
+                android:textAllCaps="false"
+                android:textColor="@color/colorButton"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@+id/rbgTipocpb"
+                app:layout_constraintStart_toStartOf="@+id/rbgTipocpb"
+                app:layout_constraintTop_toBottomOf="@+id/rbgTipocpb" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

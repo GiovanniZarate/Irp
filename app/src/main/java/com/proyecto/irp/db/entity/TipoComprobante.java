@@ -8,9 +8,15 @@ public class TipoComprobante {
     @PrimaryKey(autoGenerate = true)
     private int idtipocomprobante;
     private String descripcion;
+    private int tipocpb;
 
-    public TipoComprobante(String descripcion) {
+    public int getTipocpb() {
+        return tipocpb;
+    }
+
+    public TipoComprobante(String descripcion, int tipocpb) {
         this.descripcion = descripcion;
+        this.tipocpb = tipocpb;
     }
 
     public void setIdtipocomprobante(int idtipocomprobante) {

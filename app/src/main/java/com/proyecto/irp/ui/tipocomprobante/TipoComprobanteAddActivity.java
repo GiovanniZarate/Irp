@@ -11,6 +11,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import com.proyecto.irp.R;
 
@@ -18,9 +20,13 @@ public class TipoComprobanteAddActivity extends AppCompatActivity implements Vie
     //PARAMETRO EXTRA PARA PASAR AL OTRO ACTIVIY
     public static final String EXTRA_IDTIPOCOMPROBANTE = "com.proyecto.irp.ui.tipocomprobante.EXTRA_IDTIPOCOMPROBANTE";
     public static final String EXTRA_DESCRITIPOCOMPROBANTE = "com.proyecto.irp.ui.tipocomprobante.EXTRA_DESCRITIPOCOMPROBANTE";
+    public static final String EXTRA_TIPOCPB = "com.proyecto.irp.ui.tipocomprobante.EXTRA_TIPOCPB";
 
     EditText vdescripcion;
     Button btnRegistrar;
+
+    RadioGroup grupoTipoCpb;
+    RadioButton ingreso,egreso;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +43,11 @@ public class TipoComprobanteAddActivity extends AppCompatActivity implements Vie
         if (intent.hasExtra(EXTRA_IDTIPOCOMPROBANTE)){
             setTitle("Editar Tipo Comprobante");
             vdescripcion.setText(intent.getStringExtra(EXTRA_DESCRITIPOCOMPROBANTE));
+            if (intent.getStringExtra(EXTRA_TIPOCPB).trim().equals("0")){
+                grupoTipoCpb.check(R.id.rbCompra);
+            }else{
+                grupoTipoCpb.check(R.id.rbVenta);
+            }
         }else {
             setTitle("Agregar Tipo Comprobante");
         }
@@ -45,6 +56,13 @@ public class TipoComprobanteAddActivity extends AppCompatActivity implements Vie
     private void inicializacion() {
         vdescripcion = findViewById(R.id.txtDescripcionTipoComprobante);
         btnRegistrar = findViewById(R.id.btnGrabaTipoComprobante);
+
+        grupoTipoCpb = findViewById(R.id.rbgTipocpb);
+        grupoTipoCpb.clearCheck();
+        grupoTipoCpb.check(R.id.rbCompra);
+
+        ingreso = findViewById(R.id.rbCompra);
+        egreso = findViewById(R.id.rbVenta);
     }
 
     private void eventos() {
@@ -56,12 +74,21 @@ public class TipoComprobanteAddActivity extends AppCompatActivity implements Vie
     private void save() {
         String descripcion = vdescripcion.getText().toString();
 
+        String tipocpb="";
+        // tipocpb : 0 - INGRESO   1- EGRESO
+        if (ingreso.isChecked()){
+            tipocpb="0";
+        }else{
+            tipocpb="1";
+        }
+
 
         if(descripcion.trim().isEmpty()){
             vdescripcion.setError("Debes ingresar descripción");
         }else{
             Intent data = new Intent();
             data.putExtra(EXTRA_DESCRITIPOCOMPROBANTE,descripcion);
+            data.putExtra(EXTRA_TIPOCPB,tipocpb);
 
 
             //VERIFICAR SI ES MODIFICAR O NUEVO

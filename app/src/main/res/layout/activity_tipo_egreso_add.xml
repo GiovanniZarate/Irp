@@ -12,10 +12,12 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvtituloregistrotipoegreso"
         android:layout_width="300dp"
         android:layout_height="80dp"
+        android:layout_marginTop="32dp"
         android:gravity="center|top"
         android:text="@string/tituloRegistroTipoEgreso"
         android:textAlignment="inherit"

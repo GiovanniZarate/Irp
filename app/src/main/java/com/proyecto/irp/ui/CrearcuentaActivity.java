@@ -84,8 +84,8 @@ public class CrearcuentaActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void volverLogin() {
-        //Intent i = new Intent(CrearcuentaActivity.this, MainActivity.class);
-        Intent i = new Intent(CrearcuentaActivity.this, ContribuyenteActivity.class);
+        Intent i = new Intent(CrearcuentaActivity.this, MainActivity.class);
+        //Intent i = new Intent(CrearcuentaActivity.this, ContribuyenteActivity.class);
         startActivity(i);
         finish();
     }

@@ -31,7 +31,7 @@ import com.proyecto.irp.db.entity.TipoEgreso;
 //paso 1 - LOS PERMISOS PARA ACCEDER A LAS ENTIDADES
 @Database(entities = {Ejercicio.class, Contribuyente.class, Cliente.class,
         ClasificacionIngreso.class, TipoComprobante.class, Proveedor.class, TipoEgreso.class,
-        ClasificacionEgreso.class}, version = 21)
+        ClasificacionEgreso.class}, version = 22)
 public abstract class AppDatabase extends RoomDatabase {
 
 
@@ -73,16 +73,83 @@ public abstract class AppDatabase extends RoomDatabase {
     };
 
     private static class PopulateDbAsyncTask extends AsyncTask<Void,Void,Void>{
-        private ContribuyenteDao contribuyenteDao;
+        private ClasificacionIngresoDao clasificacionIngresoDao;
+        private TipoComprobanteDao tipoComprobanteDao;
+        private TipoEgresoDao tipoEgresoDao;
+        private ClasificacionEgresoDao clasificacionEgresoDao;
+        private ClienteDao clienteDao;
+        private ProveedorDao proveedorDao;
+        private EjercicioDao ejercicioDao;
 
         private PopulateDbAsyncTask(AppDatabase db){
-            contribuyenteDao = db.contribuyenteDao();
+            clasificacionIngresoDao = db.clasificacionIngresoDao();
+            tipoComprobanteDao = db.tipoComprobanteDao();
+            tipoEgresoDao = db.tipoEgresoDao();
+            clasificacionEgresoDao = db.clasificacionEgresoDao();
+            clienteDao = db.clienteDao();
+            proveedorDao = db.proveedorDao();
+            ejercicioDao = db.getEjercicioDao();
         }
         @Override
         protected Void doInBackground(Void... voids) {
-            contribuyenteDao.insert(new Contribuyente("4203593","4203593-7","Carlos Giovanni Zarate Ruiz","123"));
-            contribuyenteDao.insert(new Contribuyente("757522","757522-7","Ignacio Zarate","123"));
-            contribuyenteDao.insert(new Contribuyente("5331231","5331231-7","Juana Carolina Fariña Silvero","123"));
+            //contribuyenteDao.insert(new Contribuyente("4203593","4203593-7","Carlos Giovanni Zarate Ruiz","123"));
+
+            ///CLASIFICACION DE INGRESO POR DEFECTO
+            clasificacionIngresoDao.insert(new ClasificacionIngreso("Honorarios Profesionales y otras remuneraciones percibidas por servicios prestados"));
+            clasificacionIngresoDao.insert(new ClasificacionIngreso("Dividendos y utilidades"));
+            clasificacionIngresoDao.insert(new ClasificacionIngreso("Venta Ocacional de Inmuebles, cesión de derechos, venta de títulos, acciones, cuotas de capital y similares"));
+            clasificacionIngresoDao.insert(new ClasificacionIngreso("Intereses, comisiones o redimientos de Capitales Mobiliarios e Inmobiliarios(Ej.: Venta de Bienes Muebles; Alquiler de Muebles e Inmuebles)"));
+            clasificacionIngresoDao.insert(new ClasificacionIngreso("Otros Ingresos Gravados o No Gravados por el IRP"));
+            //TIPO DE COMPROBANTEO POR DEFECTO
+            // tipocpb : 0 - INGRESO
+            tipoComprobanteDao.insert(new TipoComprobante("Factura",0));
+            tipoComprobanteDao.insert(new TipoComprobante("Nota de Crédito",0));
+            tipoComprobanteDao.insert(new TipoComprobante("Liquidación de Salario",0));
+            tipoComprobanteDao.insert(new TipoComprobante("Extracto de Cuenta (cuando no exista la obligación de emitir comprobantes de ventas)",0));
+            tipoComprobanteDao.insert(new TipoComprobante("Otros Documentos que respalden los ingresos (cunado no exista la obligación de emitir comprobantes de ventas)",0));
+            //1- EGRESO
+            tipoComprobanteDao.insert(new TipoComprobante("Factura",1));
+            tipoComprobanteDao.insert(new TipoComprobante("Autofactura",1));
+            tipoComprobanteDao.insert(new TipoComprobante("Boleta de Venta",1));
+            tipoComprobanteDao.insert(new TipoComprobante("Nota de Crédito",1));
+            //FALTA MAS VER LUEGO
+
+            //TIPO DE EGRESO
+            tipoEgresoDao.insert(new TipoEgreso("Gasto"));
+            tipoEgresoDao.insert(new TipoEgreso("Inversiones Relacionadas a la Actividad Gravada"));
+            tipoEgresoDao.insert(new TipoEgreso("Inversiones Personales y de familiares a Cargo"));
+
+            //CLASIFICACION EGRESO DEPENDE DE TIPO EGRESO
+            //1- GASTO
+            clasificacionEgresoDao.insert(new ClasificacionEgreso("Gastos personales y de familiares a cargo realizados en el país",1));
+            clasificacionEgresoDao.insert(new ClasificacionEgreso("Gastos relacionados a la actividad gravada realizados en el pais",1));
+            clasificacionEgresoDao.insert(new ClasificacionEgreso("Donaciones",1));
+            clasificacionEgresoDao.insert(new ClasificacionEgreso("Amortización o cancelación de préstamos obtenidos antes de ser contribuyente del IRP, así como sus intereses, comisiones y otros recargos",1));
+            clasificacionEgresoDao.insert(new ClasificacionEgreso("Cuotas de capital de las financiaciones, así como los intereses, las comisiones y otros recargos pagados por la adquisición de bienes o servicios",1));
+            clasificacionEgresoDao.insert(new ClasificacionEgreso("Intereses, comisiones y otros recargos pagados por los préstamos obtenidos, con posterioridad a ser contribuyente del IRP",1));
+            //2- INVERSIONES RELACIONADAS A LA ACTIVIDAD GRAVADA
+            clasificacionEgresoDao.insert(new ClasificacionEgreso("Muebles, Equipos y Herramientas",2));
+            clasificacionEgresoDao.insert(new ClasificacionEgreso("Adquisición de inmuebles, construcción o mejoras de inmuebles",2));
+            clasificacionEgresoDao.insert(new ClasificacionEgreso("Educación y/o Capacitación",2));
+            clasificacionEgresoDao.insert(new ClasificacionEgreso("Inversión en licencias, franquicias y otros similares",2));
+            clasificacionEgresoDao.insert(new ClasificacionEgreso("Compra de acciones o cuotas partes de sociedades constituídas en el país",2));
+            //3- INVERSIONES PERSONALES Y DE FAMILIARES A CARGO
+            clasificacionEgresoDao.insert(new ClasificacionEgreso("Adquisición de inmuebles, construcción o mejoras de inmuebles",3));
+            clasificacionEgresoDao.insert(new ClasificacionEgreso("Educación y/o Capacitación",3));
+            clasificacionEgresoDao.insert(new ClasificacionEgreso("Colocaciones de dinero",3));
+            clasificacionEgresoDao.insert(new ClasificacionEgreso("Salud",3));
+
+
+            //CLIENTE DE PRUEBA
+            clienteDao.insert(new Cliente("Carlos Giovanni Zarate Ruiz","4203593-7",0,4203593,7));
+
+            //PROVEEDOR DE PRUEBA
+            proveedorDao.insert(new Proveedor("Carlos Giovanni Zarate Ruiz","4203593-7",0,4203593,7));
+
+
+            //EJERECICIO DEBE TOMAR EL AÑO ACTUAL
+            ejercicioDao.insert(new Ejercicio(1,2020,0,0,0,0,0,0));
+
 
             return null;
         }

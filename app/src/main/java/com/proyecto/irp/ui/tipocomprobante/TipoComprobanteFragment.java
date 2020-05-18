@@ -82,6 +82,7 @@ public class TipoComprobanteFragment extends Fragment {
                Intent intent = new Intent(getActivity(),TipoComprobanteAddActivity.class);
                intent.putExtra(TipoComprobanteAddActivity.EXTRA_IDTIPOCOMPROBANTE,entity.getIdtipocomprobante());
                intent.putExtra(TipoComprobanteAddActivity.EXTRA_DESCRITIPOCOMPROBANTE,entity.getDescripcion());
+               intent.putExtra(TipoComprobanteAddActivity.EXTRA_TIPOCPB,String.valueOf(entity.getTipocpb()));
 
                startActivityForResult(intent, EDIT_TIPOCOMPROBANTE_REQUEST);
            }
@@ -101,21 +102,34 @@ public class TipoComprobanteFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == ADD_TIPOCOMPROBANTE_REQUEST && resultCode == RESULT_OK) {
             String descripcion = data.getStringExtra(TipoComprobanteAddActivity.EXTRA_DESCRITIPOCOMPROBANTE);
+            String tipo = data.getStringExtra(TipoComprobanteAddActivity.EXTRA_TIPOCPB);
+            int tipocpb;
+            if (tipo.trim().equals("0")){
+                tipocpb=0;
+            }else {
+                tipocpb=1;
+            }
 
-
-            TipoComprobante entity = new TipoComprobante(descripcion);
+            TipoComprobante entity = new TipoComprobante(descripcion,tipocpb);
             tipoComprobanteViewModel.insert(entity);
             Toast.makeText(getActivity(),msgtoast+" Registrado con exito", Toast.LENGTH_SHORT).show();
 
         }else if  (requestCode == EDIT_TIPOCOMPROBANTE_REQUEST && resultCode == RESULT_OK) {
             String descripcion = data.getStringExtra(TipoComprobanteAddActivity.EXTRA_DESCRITIPOCOMPROBANTE);
+            String tipo = data.getStringExtra(TipoComprobanteAddActivity.EXTRA_TIPOCPB);
+            int tipocpb;
+            if (tipo.trim().equals("0")){
+                tipocpb=0;
+            }else {
+                tipocpb=1;
+            }
             int id = data.getIntExtra(TipoComprobanteAddActivity.EXTRA_IDTIPOCOMPROBANTE,-1);
             if (id == -1){
                 Toast.makeText(getActivity(),msgtoast+" no fue Modificado", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            TipoComprobante entity = new TipoComprobante(descripcion);
+            TipoComprobante entity = new TipoComprobante(descripcion,tipocpb);
             entity.setIdtipocomprobante(id);
             tipoComprobanteViewModel.update(entity);
             Toast.makeText(getActivity(),msgtoast+"  modificado", Toast.LENGTH_SHORT).show();

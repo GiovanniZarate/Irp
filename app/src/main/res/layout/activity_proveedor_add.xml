@@ -13,22 +13,24 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tvtituloregistroproveedor"
-        android:layout_width="300dp"
-        android:layout_height="80dp"
-        android:gravity="center|top"
-        android:text="@string/tituloRegistroProveedor"
-        android:textAlignment="inherit"
-        android:textColor="@color/colorTextView"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvtituloregistroproveedor"
+            android:layout_width="300dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="32dp"
+            android:gravity="center|top"
+            android:text="@string/tituloRegistroProveedor"
+            android:textAlignment="inherit"
+            android:textColor="@color/colorTextView"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
