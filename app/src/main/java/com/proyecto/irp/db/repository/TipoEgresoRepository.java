@@ -16,6 +16,7 @@ import java.util.List;
 public class TipoEgresoRepository {
     private TipoEgresoDao tipoEgresoDao;
     private LiveData<List<TipoEgreso>> alltipoegreso;
+    private List<TipoEgreso> tipoegresocombo;
 
     AppDatabase db;
 
@@ -24,12 +25,17 @@ public class TipoEgresoRepository {
         db = AppDatabase.getDatabase(application);
         tipoEgresoDao = db.tipoEgresoDao();
         alltipoegreso = tipoEgresoDao.getAllTipoEgreso();
+        tipoegresocombo = tipoEgresoDao.getAllTipoEgresoCombo();
     }
 
 
     //EVENTOS A REALIZAR CON LA CLASE: INSERT, UPDATE, DELETE, LISTAR, ETC.
     public LiveData<List<TipoEgreso>> getAllTipoEgreso() {
         return alltipoegreso;
+    }
+
+    public List<TipoEgreso> getAllTipoEgresoCombo() {
+        return tipoegresocombo;
     }
 
     public void insert(TipoEgreso tipoEgreso){

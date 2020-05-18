@@ -19,16 +19,23 @@ public class ClasEgresoViewModel extends AndroidViewModel {
     private ClasificacionEgresoRepository repository;
     private LiveData<List<ClasificacionEgreso>> allDatos;
 
+    private List<ClasificacionEgreso> allDatoscombo;
+
     public ClasEgresoViewModel(@NonNull Application application) {
         super(application);
         //Al llamar a la clase viewmodel carga estos datos
         repository = new ClasificacionEgresoRepository(application);
         allDatos = repository.getAllClasificacionEgreso();
+        allDatoscombo = repository.getAllClasificacionEgresoCombo();
     }
 
     //AQUI LLAMA A LOS DISTINTOS METODOS DE LA CLASE REPOSITORY COMO SER : INSERT, UPDATE, DELETE, ETC
     public LiveData<List<ClasificacionEgreso>> getAllClasficacionEgreso() {
         return allDatos;
+    }
+
+    public List<ClasificacionEgreso> getAllClasficacionEgresoCombo() {
+        return allDatoscombo;
     }
 
     public void insert(ClasificacionEgreso clasificacionEgreso){

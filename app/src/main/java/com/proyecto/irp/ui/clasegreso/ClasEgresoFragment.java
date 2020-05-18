@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.proyecto.irp.R;
+import com.proyecto.irp.db.dao.ClasificacionEgresoDao;
 import com.proyecto.irp.db.entity.ClasificacionEgreso;
 import com.proyecto.irp.ui.adapter.ClasificacionEgresoAdapter;
 
@@ -74,6 +75,14 @@ public class ClasEgresoFragment extends Fragment {
                 adapter.setClasficacionEgreso(lista);
             }
         });
+       /* clasEgresoViewModel.getAllClasficacionEgreso().observe(getActivity(), new Observer<List<ClasificacionEgreso>>() {
+            @Override
+            public void onChanged(List<ClasificacionEgreso> lista) {
+                adapter.setClasficacionEgreso(lista);
+            }
+        });*/
+
+
 
         //PARA PASAR LOS DATOS  EN LOS TEXTOS PARA EDITAR (para ello se crea en al adpater un listener)
         adapter.setOnItemClickListener(new ClasificacionEgresoAdapter.OnItemClickListener() {
@@ -82,6 +91,10 @@ public class ClasEgresoFragment extends Fragment {
                 Intent intent = new Intent(getActivity(),ClasEgresoAddActivity.class);
                 intent.putExtra(ClasEgresoAddActivity.EXTRA_IDCLASEGRESO,entity.getIdclasificacionegreso());
                 intent.putExtra(ClasEgresoAddActivity.EXTRA_DESCRICLASEGRESO,entity.getDescripcion());
+               // intent.putExtra(ClasEgresoAddActivity.EXTRA_TIPOEGRESO,entity.getCodtipoegreso());
+                //converti a string porque envia null
+                intent.putExtra(ClasEgresoAddActivity.EXTRA_TIPOEGRESO,String.valueOf(entity.getCodtipoegreso()));
+                intent.putExtra(ClasEgresoAddActivity.EXTRA_TIPOEGRESOSELECTED,entity.tipoEgreso.getDescripciontipoegreso());
 
                 startActivityForResult(intent, EDIT_CLASEGRESO_REQUEST);
             }

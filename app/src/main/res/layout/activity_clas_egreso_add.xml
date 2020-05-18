@@ -6,99 +6,111 @@
     android:layout_height="match_parent"
     android:background="@color/colorFondo"
     tools:context=".ui.clasegreso.ClasEgresoAddActivity">
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tvtituloregistroclasegreso"
-        android:layout_width="300dp"
-        android:layout_height="80dp"
-        android:gravity="center|top"
-        android:text="@string/tituloRegistroClasEgreso"
-        android:textAlignment="inherit"
-        android:textColor="@color/colorTextView"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/txtInputTipoEgreso"
+        android:layout_height="match_parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteY="82dp">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/txtInputTipoEgreso"
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/txthint_TipoEgreso"
-        android:textColor="@color/colorEditText"
-        android:textColorHighlight="@color/colorEditText"
-        android:textColorHint="@color/colorEditText"
-        android:textColorLink="@color/colorEditText"
-        android:textCursorDrawable="@color/colorEditText"
-        app:counterEnabled="true"
-        app:counterMaxLength="180"
-        app:layout_constraintBottom_toTopOf="@+id/txtInputDescripcionClasEgreso"
-        app:layout_constraintEnd_toEndOf="@+id/tvtituloregistroclasegreso"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/tvtituloregistroclasegreso"
-        app:layout_constraintTop_toBottomOf="@+id/tvtituloregistroclasegreso">
-
-        <AutoCompleteTextView
-            android:id="@+id/cb_tipoegreso"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:inputType="none" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/txtInputDescripcionClasEgreso"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/txthint_descricpionClasIngreso"
-        android:textColor="@color/colorEditText"
-        android:textColorHighlight="@color/colorEditText"
-        android:textColorHint="@color/colorEditText"
-        android:textColorLink="@color/colorEditText"
-        android:textCursorDrawable="@color/colorEditText"
-        app:counterEnabled="true"
-        app:counterMaxLength="180"
-        app:errorEnabled="true"
-        app:layout_constraintBottom_toTopOf="@+id/btnGrabaClasEgreso"
-        app:layout_constraintEnd_toEndOf="@+id/txtInputTipoEgreso"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/txtInputTipoEgreso"
-        app:layout_constraintTop_toBottomOf="@+id/txtInputTipoEgreso">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/txtDescripcionClasEgreso"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:imeOptions="actionNext"
-            android:singleLine="false" />
+            android:layout_height="match_parent">
 
-    </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnGrabaClasEgreso"
-        style="?attr/materialButtonOutlinedStyle"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:padding="12dp"
-        android:text="@string/btn_registrarcliente"
-        android:textAllCaps="false"
-        android:textColor="@color/colorButton"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/txtInputDescripcionClasEgreso"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/txtInputDescripcionClasEgreso"
-        app:layout_constraintTop_toBottomOf="@+id/txtInputDescripcionClasEgreso" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvtituloregistroclasegreso"
+                android:layout_width="300dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="32dp"
+                android:gravity="center|top"
+                android:text="@string/tituloRegistroClasEgreso"
+                android:textAlignment="inherit"
+                android:textColor="@color/colorTextView"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/textView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="spread_inside" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <Spinner
+                android:id="@+id/spinnerTipoEgreso"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/txtInputDescripcionClasEgreso"
+                app:layout_constraintEnd_toEndOf="@+id/textView"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@+id/textView"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txtInputDescripcionClasEgreso"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="@string/txthint_descricpionClasIngreso"
+                android:textColor="@color/colorEditText"
+                android:textColorHighlight="@color/colorEditText"
+                android:textColorHint="@color/colorEditText"
+                android:textColorLink="@color/colorEditText"
+                android:textCursorDrawable="@color/colorEditText"
+                app:counterEnabled="true"
+                app:counterMaxLength="180"
+                app:errorEnabled="true"
+                app:layout_constraintBottom_toTopOf="@+id/btnGrabaClasEgreso"
+                app:layout_constraintEnd_toEndOf="@+id/spinnerTipoEgreso"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@+id/spinnerTipoEgreso"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerTipoEgreso">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtDescripcionClasEgreso"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionNext"
+                    android:singleLine="false" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnGrabaClasEgreso"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="302dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:padding="12dp"
+                android:text="@string/btn_registrarcliente"
+                android:textAllCaps="false"
+                android:textColor="@color/colorButton"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/txtInputDescripcionClasEgreso"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@+id/txtInputDescripcionClasEgreso"
+                app:layout_constraintTop_toBottomOf="@+id/txtInputDescripcionClasEgreso" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:paddingStart="5dp"
+                android:text="Seleccione Tipo de Egreso"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/spinnerTipoEgreso"
+                app:layout_constraintEnd_toEndOf="@+id/tvtituloregistroclasegreso"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@+id/tvtituloregistroclasegreso"
+                app:layout_constraintTop_toBottomOf="@+id/tvtituloregistroclasegreso" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,8 +9,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.proyecto.irp.R;
+import com.proyecto.irp.db.dao.ClasificacionEgresoDao;
 import com.proyecto.irp.db.entity.ClasificacionEgreso;
 import com.proyecto.irp.db.entity.ClasificacionIngreso;
+import com.proyecto.irp.db.entity.TipoEgreso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +22,7 @@ public class ClasificacionEgresoAdapter extends RecyclerView.Adapter<Clasificaci
 
     private OnItemClickListener listener;
     private List<ClasificacionEgreso> clasificacionEgresos = new ArrayList<>();
+
 
     //1) SE CREA LA CLASE Holder
     public class ClasificacionEgresoHolder extends RecyclerView.ViewHolder{
@@ -56,9 +59,14 @@ public class ClasificacionEgresoAdapter extends RecyclerView.Adapter<Clasificaci
     @Override
     public void onBindViewHolder(@NonNull ClasificacionEgresoHolder holder, int position) {
         ClasificacionEgreso currentItem = clasificacionEgresos.get(position);
+        //TipoEgreso tegreso = new TipoEgreso("");
         holder.tvIdclasegreso.setText("Id: "+String.valueOf(currentItem.getIdclasificacionegreso()));
-        holder.tvDescriEgreso.setText(currentItem.getDescripcion());
-        holder.tvDescriClasegreso.setText(currentItem.getIdclasificacionegreso());
+        holder.tvDescriEgreso.setText(currentItem.tipoEgreso.getDescripciontipoegreso());
+        //holder.tvDescriEgreso.setText(String.valueOf(currentItem.getCodtipoegreso()));
+        holder.tvDescriClasegreso.setText(currentItem.getDescripcion());
+        //book.getAuthor().getName()
+
+
     }
 
     @Override

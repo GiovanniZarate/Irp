@@ -17,6 +17,8 @@ public class ClasificacionEgresoRepository {
     private ClasificacionEgresoDao clasificacionEgresoDao;
     private LiveData<List<ClasificacionEgreso>> allClasificacionEgreso;
 
+    private List<ClasificacionEgreso> allClasificacionEgresoCombo;
+
     AppDatabase db;
 
     //METODO CONSTRUCTOR
@@ -24,12 +26,17 @@ public class ClasificacionEgresoRepository {
         db = AppDatabase.getDatabase(application);
         clasificacionEgresoDao = db.clasificacionEgresoDao();
         allClasificacionEgreso = clasificacionEgresoDao.getAllClasificacionegreso();
+        allClasificacionEgresoCombo = clasificacionEgresoDao.getAllClasificacionegresoCombo();
     }
 
 
     //EVENTOS A REALIZAR CON LA CLASE: INSERT, UPDATE, DELETE, LISTAR, ETC.
     public LiveData<List<ClasificacionEgreso>> getAllClasificacionEgreso() {
         return allClasificacionEgreso;
+    }
+
+    public List<ClasificacionEgreso> getAllClasificacionEgresoCombo() {
+        return allClasificacionEgresoCombo;
     }
 
     public void insert(ClasificacionEgreso clasificacionEgreso){

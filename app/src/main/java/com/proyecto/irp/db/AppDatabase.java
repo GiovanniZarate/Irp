@@ -31,8 +31,10 @@ import com.proyecto.irp.db.entity.TipoEgreso;
 //paso 1 - LOS PERMISOS PARA ACCEDER A LAS ENTIDADES
 @Database(entities = {Ejercicio.class, Contribuyente.class, Cliente.class,
         ClasificacionIngreso.class, TipoComprobante.class, Proveedor.class, TipoEgreso.class,
-        ClasificacionEgreso.class}, version = 8)
+        ClasificacionEgreso.class}, version = 21)
 public abstract class AppDatabase extends RoomDatabase {
+
+
 
     public abstract EjercicioDao getEjercicioDao();
     public abstract ContribuyenteDao contribuyenteDao();

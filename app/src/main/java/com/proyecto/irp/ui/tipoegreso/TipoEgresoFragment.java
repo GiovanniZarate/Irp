@@ -82,7 +82,7 @@ public class TipoEgresoFragment extends Fragment {
             public void onItemClick(TipoEgreso entity) {
                 Intent intent = new Intent(getActivity(),TipoEgresoAddActivity.class);
                 intent.putExtra(TipoEgresoAddActivity.EXTRA_IDTIPOEGRESO,entity.getIdtipoegreso());
-                intent.putExtra(TipoEgresoAddActivity.EXTRA_DESCRITIPOEGRESO,entity.getDescripcion());
+                intent.putExtra(TipoEgresoAddActivity.EXTRA_DESCRITIPOEGRESO,entity.getDescripciontipoegreso());
 
                 startActivityForResult(intent, EDIT_TIPOEGRESO_REQUEST);
             }

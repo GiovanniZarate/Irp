@@ -25,4 +25,8 @@ public interface TipoEgresoDao {
 
     @Query("SELECT * FROM tipoegreso order by idtipoegreso ASC")
     LiveData<List<TipoEgreso>> getAllTipoEgreso();
+
+
+    @Query("SELECT * FROM tipoegreso order by idtipoegreso ASC")
+    List<TipoEgreso> getAllTipoEgresoCombo();
 }

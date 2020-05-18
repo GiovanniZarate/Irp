@@ -18,17 +18,23 @@ public class TipoEgresoViewModel extends AndroidViewModel {
     //SE INICIALIZA EL REPOSITORY Y EL LISTADO DE CLIENTES EN ESTE CASO
     private TipoEgresoRepository repository;
     private LiveData<List<TipoEgreso>> allDatos;
+    private List<TipoEgreso> tipoegresoCombo;
 
     public TipoEgresoViewModel(@NonNull Application application) {
         super(application);
         //Al llamar a la clase viewmodel carga estos datos
         repository = new TipoEgresoRepository(application);
         allDatos = repository.getAllTipoEgreso();
+        tipoegresoCombo = repository.getAllTipoEgresoCombo();
     }
 
     //AQUI LLAMA A LOS DISTINTOS METODOS DE LA CLASE REPOSITORY COMO SER : INSERT, UPDATE, DELETE, ETC
     public LiveData<List<TipoEgreso>> getAllTipoegreso() {
         return allDatos;
+    }
+
+    public List<TipoEgreso> getAllTipoegresoCombo() {
+        return tipoegresoCombo;
     }
 
     public void insert(TipoEgreso tipoEgreso){

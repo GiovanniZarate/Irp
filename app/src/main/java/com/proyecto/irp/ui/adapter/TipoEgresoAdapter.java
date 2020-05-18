@@ -56,7 +56,7 @@ public class TipoEgresoAdapter extends RecyclerView.Adapter<TipoEgresoAdapter.Ti
     public void onBindViewHolder(@NonNull TipoEgresoHolder holder, int position) {
         TipoEgreso currentItem = tipoEgresos.get(position);
         holder.tvId.setText("Id: "+String.valueOf(currentItem.getIdtipoegreso()));
-        holder.tvDescri.setText(currentItem.getDescripcion());
+        holder.tvDescri.setText(currentItem.getDescripciontipoegreso());
     }
 
     @Override
