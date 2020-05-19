@@ -14,12 +14,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.navigation.NavigationView;
 import com.proyecto.irp.Config.SessionManager;
 import com.proyecto.irp.R;
+import com.proyecto.irp.ui.compra.CompraFragment;
 import com.proyecto.irp.ui.fragments.IniFragment;
+import com.proyecto.irp.ui.perfilusuario.PerfilUsuarioFragment;
+import com.proyecto.irp.ui.venta.VentaFragment;
 
 public class MenuDrawerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -37,8 +41,11 @@ public class MenuDrawerActivity extends AppCompatActivity implements NavigationV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_drawer);
 
+        //se agrega el toolbar
         toolbar = findViewById(R.id.toolbar_drawer);
         setSupportActionBar(toolbar);
+
+
         drawerLayout = findViewById(R.id.drawer);
         navigationView = findViewById(R.id.navigationViewDrawer);
 
@@ -48,31 +55,53 @@ public class MenuDrawerActivity extends AppCompatActivity implements NavigationV
         //PARA QUE EL MENU SE MUESTRE
         actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.drawer_open,R.string.drawer_close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
-        actionBarDrawerToggle.setDrawerIndicatorEnabled(true);
+        //actionBarDrawerToggle.setDrawerIndicatorEnabled(true);
         actionBarDrawerToggle.syncState();
 
         //CARGAR FRAGMENT INICIAL
-        fragmentManager = getSupportFragmentManager();
+        /*fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.contenedor_drawer,new IniFragment());
-        fragmentTransaction.commit();
+        fragmentTransaction.commit();*/
+
+       if (savedInstanceState == null){
+            getSupportFragmentManager().beginTransaction().replace(R.id.contenedor_drawer,
+                    new IniFragment()).commit();
+            navigationView.setCheckedItem(R.id.Inicio);
+        }
+
     }
+
+    //SE AGREGA HOY 19/05/2020
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        //PARA CERRAR EL DRAWER AL SELECCIONAR UN ITEM
-        drawerLayout.closeDrawer(GravityCompat.START);
-        fragmentManager = getSupportFragmentManager();
+
+        //fragmentManager = getSupportFragmentManager();
         switch (item.getItemId()){
-            case R.id.home:
+            case R.id.Inicio:
                 //CARGAR FRAGMENT INICIAL
-                //fragmentTransaction = fragmentManager.beginTransaction().replace(R.id.contenedor_drawer,new IniFragment());
+               // fragmentManager = getSupportFragmentManager();
+               // fragmentTransaction = fragmentManager.beginTransaction().replace(R.id.contenedor_drawer,new IniFragment());
                 //fragmentTransaction.commit();
-                fragmentManager.beginTransaction().replace(R.id.contenedor_drawer,new IniFragment()).commit();
+                //fragmentManager.beginTransaction().replace(R.id.contenedor_drawer,new IniFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.contenedor_drawer,
+                        new IniFragment()).commit();
                 break;
             case R.id.libroventa:
-               // Intent i = new Intent(MenuDrawerActivity.this, MenuRefVentaActivity.class);
+                //fragmentManager = getSupportFragmentManager();
+                //fragmentTransaction = fragmentManager.beginTransaction().replace(R.id.contenedor_drawer,new VentaFragment());
+                //fragmentTransaction.commit();
+                //Toast.makeText(this,"EN PROCESO", Toast.LENGTH_SHORT).show();
+                getSupportFragmentManager().beginTransaction().replace(R.id.contenedor_drawer,
+                        new VentaFragment()).commit();
+                break;
+            case R.id.librocompra:
+                // Intent i = new Intent(MenuDrawerActivity.this, MenuRefVentaActivity.class);
                 //startActivity(i);
+                getSupportFragmentManager().beginTransaction().replace(R.id.contenedor_drawer,
+                        new CompraFragment()).commit();
                 break;
             case R.id.referenciaVenta:
                 Intent rv = new Intent(MenuDrawerActivity.this, MenuRefVentaActivity.class);
@@ -82,12 +111,24 @@ public class MenuDrawerActivity extends AppCompatActivity implements NavigationV
                 Intent rc = new Intent(MenuDrawerActivity.this, MenuRefCompraActivity.class);
                 startActivity(rc);
                 break;
+            case R.id.perfilUsuario:
+                //fragmentTransaction = fragmentManager.beginTransaction().replace(R.id.contenedor_drawer,new PerfilUsuarioFragment());
+                //fragmentTransaction.commit();
+                //fragmentManager = getSupportFragmentManager();
+               // fragmentTransaction = fragmentManager.beginTransaction().replace(R.id.contenedor_drawer,new PerfilUsuarioFragment());
+                //fragmentTransaction.commit();
+                //fragmentManager.beginTransaction().add(R.id.contenedor_drawer,new PerfilUsuarioFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.contenedor_drawer,
+                        new PerfilUsuarioFragment()).commit();
+                break;
             case R.id.cerrar_sesion:
                  cerrarSesion();
                 break;
 
         }
-        return false;
+        //PARA CERRAR EL DRAWER AL SELECCIONAR UN ITEM
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
     }
 
     //PARA VALIDAR LA SALIDA DEL SISTEMA MUESTRE UN MENSAJE

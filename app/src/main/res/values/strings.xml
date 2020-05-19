@@ -45,5 +45,7 @@
     <string name="tituloRegistroTipoEgreso">Registro Tipo de Egreso</string>
     <string name="tituloRegistroClasEgreso">Registro Clasificación de Egreso</string>
     <string name="txthint_TipoEgreso">Seleccione Tipo Egreso</string>
+    <string name="tituloPerfilUsuario">MIS DATOS</string>
+    <string name="btn_actualizaPassword">Actualizar Contraseña</string>
 
 </resources>

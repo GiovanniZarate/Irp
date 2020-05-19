@@ -16,14 +16,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
+
 
 import com.proyecto.irp.R;
-import com.proyecto.irp.db.entity.ClasificacionEgreso;
 import com.proyecto.irp.db.entity.TipoEgreso;
 import com.proyecto.irp.ui.tipoegreso.TipoEgresoViewModel;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 public class ClasEgresoAddActivity extends AppCompatActivity implements View.OnClickListener {
