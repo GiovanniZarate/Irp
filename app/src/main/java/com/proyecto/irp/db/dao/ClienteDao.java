@@ -31,4 +31,7 @@ public interface ClienteDao {
     //PARA VERIFICA SI YA EXISTE EL USUARIO Cliente POR NRO. DE CEDULA
     @Query("SELECT COUNT(*) FROM cliente where ruc = :id" )
     int verificaCedula(String id);
+
+    @Query("SELECT * FROM cliente order by idcliente ASC")
+    List<Cliente> getAllClienteCombo();
 }

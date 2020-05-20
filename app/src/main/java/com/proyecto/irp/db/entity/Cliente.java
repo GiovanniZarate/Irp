@@ -1,6 +1,7 @@
 package com.proyecto.irp.db.entity;
 
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
@@ -49,5 +50,11 @@ public class Cliente {
 
     public int getDiv() {
         return div;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return nombre;
     }
 }

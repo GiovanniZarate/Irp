@@ -15,6 +15,7 @@ import java.util.List;
 public class ClasificacionIngresoRepository {
     private ClasificacionIngresoDao clasificacionIngresoDao;
     private LiveData<List<ClasificacionIngreso>> allClasificacioningreso;
+    private List<ClasificacionIngreso> tipoIngresocombo;
 
     AppDatabase db;
 
@@ -23,12 +24,17 @@ public class ClasificacionIngresoRepository {
         db = AppDatabase.getDatabase(application);
         clasificacionIngresoDao = db.clasificacionIngresoDao();
         allClasificacioningreso = clasificacionIngresoDao.getAllClasificacioningreso();
+        tipoIngresocombo = clasificacionIngresoDao.getAllTipoIngresoCombo();
     }
 
 
     //EVENTOS A REALIZAR CON LA CLASE: INSERT, UPDATE, DELETE, LISTAR, ETC.
     public LiveData<List<ClasificacionIngreso>> getAllClasificacioningreso() {
         return allClasificacioningreso;
+    }
+
+    public List<ClasificacionIngreso> getAllTipoIngresoCombo() {
+        return tipoIngresocombo;
     }
 
     public void insert(ClasificacionIngreso cliente){

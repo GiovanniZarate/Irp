@@ -18,17 +18,22 @@ public class ClasIngresoViewModel extends AndroidViewModel {
     //SE INICIALIZA EL REPOSITORY Y EL LISTADO DE CLIENTES EN ESTE CASO
     private ClasificacionIngresoRepository repository;
     private LiveData<List<ClasificacionIngreso>> allDatos;
-
+    private List<ClasificacionIngreso> tipoingreso;
     public ClasIngresoViewModel(@NonNull Application application) {
         super(application);
         //Al llamar a la clase viewmodel carga estos datos
         repository = new ClasificacionIngresoRepository(application);
         allDatos = repository.getAllClasificacioningreso();
+        tipoingreso = repository.getAllTipoIngresoCombo();
     }
 
     //AQUI LLAMA A LOS DISTINTOS METODOS DE LA CLASE REPOSITORY COMO SER : INSERT, UPDATE, DELETE, ETC
     public LiveData<List<ClasificacionIngreso>> getAllClientes() {
         return allDatos;
+    }
+
+    public List<ClasificacionIngreso> getAllTipoIngresoCombo() {
+        return tipoingreso;
     }
 
     public void insert(ClasificacionIngreso datos){

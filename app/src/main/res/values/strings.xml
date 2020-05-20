@@ -47,5 +47,10 @@
     <string name="txthint_TipoEgreso">Seleccione Tipo Egreso</string>
     <string name="tituloPerfilUsuario">MIS DATOS</string>
     <string name="btn_actualizaPassword">Actualizar Contraseña</string>
+    <string name="title_activity_menu_mov_venta">MenuMovVentaActivity</string>
+    <string name="title_nav_cargaventa">Ingreso</string>
+    <string name="title_nav_buscaventa">Busqueda Ingreso</string>
+    <string name="title_navigation_cargaventa">Carga Ingreso</string>
+    <string name="title_navigation_buscaventa">Busqueda Ingreso</string>
 
 </resources>

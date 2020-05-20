@@ -61,10 +61,10 @@ public class ClasificacionEgresoAdapter extends RecyclerView.Adapter<Clasificaci
         ClasificacionEgreso currentItem = clasificacionEgresos.get(position);
         //TipoEgreso tegreso = new TipoEgreso("");
         holder.tvIdclasegreso.setText("Id: "+String.valueOf(currentItem.getIdclasificacionegreso()));
+        //holder.tvDescriEgreso.setText(currentItem.tipoEgreso.getDescripciontipoegreso());
         holder.tvDescriEgreso.setText(currentItem.tipoEgreso.getDescripciontipoegreso());
-        //holder.tvDescriEgreso.setText(String.valueOf(currentItem.getCodtipoegreso()));
         holder.tvDescriClasegreso.setText(currentItem.getDescripcion());
-        //book.getAuthor().getName()
+
 
 
     }

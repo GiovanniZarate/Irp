@@ -14,7 +14,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.navigation.NavigationView;
@@ -23,7 +22,6 @@ import com.proyecto.irp.R;
 import com.proyecto.irp.ui.compra.CompraFragment;
 import com.proyecto.irp.ui.fragments.IniFragment;
 import com.proyecto.irp.ui.perfilusuario.PerfilUsuarioFragment;
-import com.proyecto.irp.ui.venta.VentaFragment;
 
 public class MenuDrawerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -90,12 +88,10 @@ public class MenuDrawerActivity extends AppCompatActivity implements NavigationV
                         new IniFragment()).commit();
                 break;
             case R.id.libroventa:
-                //fragmentManager = getSupportFragmentManager();
-                //fragmentTransaction = fragmentManager.beginTransaction().replace(R.id.contenedor_drawer,new VentaFragment());
-                //fragmentTransaction.commit();
-                //Toast.makeText(this,"EN PROCESO", Toast.LENGTH_SHORT).show();
-                getSupportFragmentManager().beginTransaction().replace(R.id.contenedor_drawer,
-                        new VentaFragment()).commit();
+                /*getSupportFragmentManager().beginTransaction().replace(R.id.contenedor_drawer,
+                        new VentaFragment()).commit();*/
+                Intent rmv = new Intent(MenuDrawerActivity.this, MenuMovVentaActivity.class);
+                startActivity(rmv);
                 break;
             case R.id.librocompra:
                 // Intent i = new Intent(MenuDrawerActivity.this, MenuRefVentaActivity.class);

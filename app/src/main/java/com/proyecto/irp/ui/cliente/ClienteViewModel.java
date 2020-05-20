@@ -22,17 +22,22 @@ public class ClienteViewModel extends AndroidViewModel {
     //SE INICIALIZA EL REPOSITORY Y EL LISTADO DE CLIENTES EN ESTE CASO
     private ClienteRepository repository;
     private LiveData<List<Cliente>> allClientes;
-
+    private List<Cliente> clientecombo;
     public ClienteViewModel(@NonNull Application application) {
         super(application);
         //Al llamar a la clase viewmodel carga estos datos
         repository = new ClienteRepository(application);
         allClientes = repository.getAllClientes();
+        clientecombo = repository.getAllClienteCombo();
     }
 
     //AQUI LLAMA A LOS DISTINTOS METODOS DE LA CLASE REPOSITORY COMO SER : INSERT, UPDATE, DELETE, ETC
     public LiveData<List<Cliente>> getAllClientes() {
         return allClientes;
+    }
+
+    public List<Cliente> getAllClienteCombo() {
+        return clientecombo;
     }
 
     public void insert(Cliente cliente){

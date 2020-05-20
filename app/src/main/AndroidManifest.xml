@@ -9,21 +9,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.clasegreso.ClasEgresoAddActivity"
-            android:parentActivityName=".ui.MenuRefCompraActivity"
+        <activity
+            android:name=".ui.venta.VentaCargaAddActivity"
+            android:parentActivityName=".ui.MenuMovVentaActivity"
             android:screenOrientation="portrait"
             ></activity>
-        <activity android:name=".ui.tipoegreso.TipoEgresoAddActivity"
-            android:parentActivityName=".ui.MenuRefCompraActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.proveedor.ProveedorAddActivity"
-            android:parentActivityName=".ui.MenuRefCompraActivity"
+        <activity
+            android:name=".ui.MenuMovVentaActivity"
+            android:label="@string/title_activity_menu_mov_venta"
             android:screenOrientation="portrait"/>
         <activity
+            android:name=".ui.clasegreso.ClasEgresoAddActivity"
+            android:parentActivityName=".ui.MenuRefCompraActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.tipoegreso.TipoEgresoAddActivity"
+            android:parentActivityName=".ui.MenuRefCompraActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.proveedor.ProveedorAddActivity"
+            android:parentActivityName=".ui.MenuRefCompraActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ui.MenuRefCompraActivity"
-            android:screenOrientation="portrait"
             android:launchMode="singleTop"
-            />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.tipocomprobante.TipoComprobanteAddActivity"
             android:parentActivityName=".ui.MenuRefVentaActivity"

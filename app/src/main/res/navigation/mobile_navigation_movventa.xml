@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_cargaventa">
+
+    <fragment
+        android:id="@+id/navigation_cargaventa"
+        android:name="com.proyecto.irp.ui.venta.VentaCargaFragment"
+        android:label="@string/title_navigation_cargaventa"
+        tools:layout="@layout/ventacarga_fragment" />
+
+    <fragment
+        android:id="@+id/navigation_buscaventa"
+        android:name="com.proyecto.irp.ui.venta.VentaBusquedaFragment"
+        android:label="@string/title_navigation_buscaventa"
+        tools:layout="@layout/venta_busqueda_fragment" />
+
+</navigation>

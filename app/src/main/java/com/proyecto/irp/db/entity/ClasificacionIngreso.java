@@ -1,5 +1,6 @@
 package com.proyecto.irp.db.entity;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
@@ -23,6 +24,12 @@ public class ClasificacionIngreso {
     }
 
     public String getDescripcion() {
+        return descripcion;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
         return descripcion;
     }
 }

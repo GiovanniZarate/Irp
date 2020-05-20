@@ -28,5 +28,8 @@ public interface ClasificacionIngresoDao {
     @Query("SELECT * FROM clasificacioningreso order by idclasificacioningreso ASC")
     LiveData<List<ClasificacionIngreso>> getAllClasificacioningreso();
 
+    @Query("SELECT * FROM clasificacioningreso order by idclasificacioningreso ASC")
+    List<ClasificacionIngreso> getAllTipoIngresoCombo();
+
 
 }

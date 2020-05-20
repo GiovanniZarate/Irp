@@ -14,6 +14,7 @@ import java.util.List;
 public class ClienteRepository {
     private ClienteDao clienteDao;
     private LiveData<List<Cliente>> allClientes;
+    private List<Cliente> clientecombo;
 
     AppDatabase db;
 
@@ -22,12 +23,17 @@ public class ClienteRepository {
         db = AppDatabase.getDatabase(application);
         clienteDao = db.clienteDao();
         allClientes = clienteDao.getAllClientes();
+        clientecombo = clienteDao.getAllClienteCombo();
     }
 
 
     //EVENTOS A REALIZAR CON LA CLASE: INSERT, UPDATE, DELETE, LISTAR, ETC.
     public LiveData<List<Cliente>> getAllClientes() {
         return allClientes;
+    }
+
+    public List<Cliente> getAllClienteCombo() {
+        return clientecombo;
     }
 
     public void insert(Cliente cliente){

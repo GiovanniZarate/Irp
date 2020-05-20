@@ -87,7 +87,21 @@ public class ClienteFragment extends Fragment {
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
         itemTouchHelper.attachToRecyclerView(recyclerView);
 
-       /// clienteViewModel.insert(new Cliente("Giovanni Zarate","4203593-7",1,4203593,7));
+        /*clienteViewModel.insert(new Cliente("Cliente Opcional de prueba ","432545-5",1,4323545,5));
+        clienteViewModel.insert(new Cliente("Cliente Opcional de prueba ","4327545-5",1,4327545,5));
+        clienteViewModel.insert(new Cliente("Cliente Opcional de prueba ","32545-5",1,4325545,5));
+        clienteViewModel.insert(new Cliente("Cliente Opcional de prueba ","34545-5",1,4324545,5));
+        clienteViewModel.insert(new Cliente("Cliente Opcional de prueba ","432245-5",1,4322545,5));
+        clienteViewModel.insert(new Cliente("Cliente Opcional de prueba ","4329545-5",1,4329545,5));
+        clienteViewModel.insert(new Cliente("Cliente Opcional de prueba ","432145-5",1,4323145,5));
+        clienteViewModel.insert(new Cliente("Cliente Opcional de prueba ","432395-5",1,4323595,5));
+
+        clienteViewModel.insert(new Cliente("Cliente Opcional de prueba ","132355-5",1,1323595,5));
+        clienteViewModel.insert(new Cliente("Cliente Opcional de prueba ","2323595-5",1,2323595,5));
+        clienteViewModel.insert(new Cliente("Cliente Opcional de prueba ","332395-5",1,3323595,5));
+        clienteViewModel.insert(new Cliente("Cliente Opcional de prueba ","932355-5",1,9323595,5));
+        clienteViewModel.insert(new Cliente("Cliente Opcional de prueba ","832595-5",1,8323595,5));
+        clienteViewModel.insert(new Cliente("Cliente Opcional de prueba ","633595-5",1,6323595,5));*/
 
         //PARA PASAR LOS DATOS  EN LOS TEXTOS PARA EDITAR (para ello se crea en al adpater un listener)
         adapter.setOnItemClickListener(new ClienteAdapter.OnItemClickListener() {

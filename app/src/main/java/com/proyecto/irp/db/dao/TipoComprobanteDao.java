@@ -25,4 +25,7 @@ public interface TipoComprobanteDao {
 
     @Query("SELECT * FROM tipocomprobante order by idtipocomprobante ASC")
     LiveData<List<TipoComprobante>> getAllTipoComprobante();
+
+    @Query("SELECT * FROM tipocomprobante order by idtipocomprobante ASC")
+    List<TipoComprobante> getAllTipoComprobanteCombo();
 }

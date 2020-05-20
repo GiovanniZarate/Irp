@@ -33,7 +33,8 @@ import androidx.room.PrimaryKey;
 
 @Entity(foreignKeys = @ForeignKey(entity = TipoEgreso.class,
                                  parentColumns = "idtipoegreso",
-                                 childColumns = "id_tipoegreso"))
+                                 childColumns = "id_tipoegreso"),
+                                 indices = @Index(value="id_tipoegreso"))
 
 
 
@@ -46,7 +47,7 @@ public class ClasificacionEgreso {
     @ColumnInfo(name = "id_tipoegreso")
     public int codtipoegreso;
 
-    /*@Ignore
+   /* @Ignore
     public String descripcion_tipoegreso;
 
     public String getDescripcion_tipoegreso() {
@@ -96,6 +97,9 @@ public class ClasificacionEgreso {
     }*/
 
 
+
+ /*@Ignore
+  public TipoEgreso tegre;*/
 
 
 }

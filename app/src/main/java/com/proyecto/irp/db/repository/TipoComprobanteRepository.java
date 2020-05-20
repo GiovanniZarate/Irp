@@ -16,6 +16,7 @@ import java.util.List;
 public class TipoComprobanteRepository {
     private TipoComprobanteDao clasificacionIngresoDao;
     private LiveData<List<TipoComprobante>> allClasificacioningreso;
+    private List<TipoComprobante> tipoComprobantecombo;
 
     AppDatabase db;
 
@@ -24,12 +25,17 @@ public class TipoComprobanteRepository {
         db = AppDatabase.getDatabase(application);
         clasificacionIngresoDao = db.tipoComprobanteDao();
         allClasificacioningreso = clasificacionIngresoDao.getAllTipoComprobante();
+        tipoComprobantecombo = clasificacionIngresoDao.getAllTipoComprobanteCombo();
     }
 
 
     //EVENTOS A REALIZAR CON LA CLASE: INSERT, UPDATE, DELETE, LISTAR, ETC.
     public LiveData<List<TipoComprobante>> getAllTipoComprobante() {
         return allClasificacioningreso;
+    }
+
+    public List<TipoComprobante> getAllTipoComprobanteCombo() {
+        return tipoComprobantecombo;
     }
 
     public void insert(TipoComprobante cliente){

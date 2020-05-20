@@ -15,6 +15,7 @@ import com.proyecto.irp.db.dao.ClasificacionIngresoDao;
 import com.proyecto.irp.db.dao.ClienteDao;
 import com.proyecto.irp.db.dao.ContribuyenteDao;
 import com.proyecto.irp.db.dao.EjercicioDao;
+import com.proyecto.irp.db.dao.FacturaVentaDao;
 import com.proyecto.irp.db.dao.ProveedorDao;
 import com.proyecto.irp.db.dao.TipoComprobanteDao;
 import com.proyecto.irp.db.dao.TipoEgresoDao;
@@ -23,6 +24,7 @@ import com.proyecto.irp.db.entity.ClasificacionIngreso;
 import com.proyecto.irp.db.entity.Cliente;
 import com.proyecto.irp.db.entity.Contribuyente;
 import com.proyecto.irp.db.entity.Ejercicio;
+import com.proyecto.irp.db.entity.Facturaventa;
 import com.proyecto.irp.db.entity.Proveedor;
 import com.proyecto.irp.db.entity.TipoComprobante;
 import com.proyecto.irp.db.entity.TipoEgreso;
@@ -31,7 +33,7 @@ import com.proyecto.irp.db.entity.TipoEgreso;
 //paso 1 - LOS PERMISOS PARA ACCEDER A LAS ENTIDADES
 @Database(entities = {Ejercicio.class, Contribuyente.class, Cliente.class,
         ClasificacionIngreso.class, TipoComprobante.class, Proveedor.class, TipoEgreso.class,
-        ClasificacionEgreso.class}, version = 22)
+        ClasificacionEgreso.class, Facturaventa.class}, version = 24,exportSchema = true)
 public abstract class AppDatabase extends RoomDatabase {
 
 
@@ -44,6 +46,8 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract ProveedorDao proveedorDao();
     public abstract TipoEgresoDao tipoEgresoDao();
     public abstract ClasificacionEgresoDao clasificacionEgresoDao();
+
+    public abstract FacturaVentaDao facturaVentaDao();
 
     //Para crear instancia de la base de datos
     //Verificar si no existe crear de caso contrario
@@ -81,6 +85,8 @@ public abstract class AppDatabase extends RoomDatabase {
         private ProveedorDao proveedorDao;
         private EjercicioDao ejercicioDao;
 
+        private FacturaVentaDao facturaVentaDao;
+
         private PopulateDbAsyncTask(AppDatabase db){
             clasificacionIngresoDao = db.clasificacionIngresoDao();
             tipoComprobanteDao = db.tipoComprobanteDao();
@@ -89,6 +95,7 @@ public abstract class AppDatabase extends RoomDatabase {
             clienteDao = db.clienteDao();
             proveedorDao = db.proveedorDao();
             ejercicioDao = db.getEjercicioDao();
+            facturaVentaDao = db.facturaVentaDao();
         }
         @Override
         protected Void doInBackground(Void... voids) {
@@ -150,6 +157,13 @@ public abstract class AppDatabase extends RoomDatabase {
             //EJERECICIO DEBE TOMAR EL AÑO ACTUAL
             ejercicioDao.insert(new Ejercicio(1,2020,0,0,0,0,0,0));
 
+
+            //FACTURA VENTA - INGRESO PRUEBA CARGA
+            Facturaventa facturaventa =
+                    new Facturaventa(25052020,1,1,1,1,1,
+                            "001-002-0000123",1500000,0,0,0,0,
+                            0,1,2,123,20,5,2020);
+            facturaVentaDao.insert(facturaventa);
 
             return null;
         }
