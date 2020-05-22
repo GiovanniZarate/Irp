@@ -85,6 +85,10 @@ public class ClienteAddActivity extends AppCompatActivity implements View.OnClic
         vnombrecliente = findViewById(R.id.txtNombreCliente);
 
         btnRegistrar = findViewById(R.id.btnGrabaCliente);
+
+
+
+        vrucvericliente.setSelection(vrucvericliente.getSelectionEnd());
     }
 
     private void eventos() {

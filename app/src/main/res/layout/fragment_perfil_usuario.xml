@@ -9,11 +9,12 @@
     >
 
 
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        >
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_editor_absoluteY="110dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -23,149 +24,147 @@
                 android:id="@+id/tvtituloPerfilUsuario"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
                 android:gravity="center"
                 android:text="@string/tituloPerfilUsuario"
                 android:textColor="@color/colorTextView"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/textView3"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_chainStyle="spread_inside" />
+                app:layout_constraintTop_toTopOf="parent" />
 
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtCedulaPefil"
-                android:layout_width="0dp"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:enabled="false"
                 android:inputType="number"
                 android:singleLine="true"
                 android:textColor="@color/colorAccent"
                 android:textSize="12sp"
-                app:layout_constraintBottom_toTopOf="@+id/textView4"
                 app:layout_constraintEnd_toEndOf="@+id/textView3"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="@+id/textView3"
                 app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtRucPerfil"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:singleLine="true"
+                android:textColor="@color/colorAccent"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="@+id/textView4"
+                app:layout_constraintStart_toStartOf="@+id/textView4"
+                app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtNombrePerfil"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:enabled="true"
+                android:singleLine="true"
+                android:textColor="@color/colorAccent"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="@+id/textView5"
+                app:layout_constraintStart_toStartOf="@+id/textView5"
+                app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtContrasenaPerfil"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:textColor="@color/colorAccent"
+                app:layout_constraintEnd_toEndOf="@+id/textView6"
+                app:layout_constraintStart_toStartOf="@+id/textView6"
+                app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+
+            <TextView
+                android:id="@+id/textView20"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="EJERCICIO"
+                android:textAlignment="textEnd"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/txtContrasenaPerfil"
+                app:layout_constraintStart_toStartOf="@+id/txtContrasenaPerfil"
+                app:layout_constraintTop_toBottomOf="@+id/txtContrasenaPerfil" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtEjercicioPerfil"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:enabled="false"
                 android:singleLine="true"
                 android:textColor="@color/colorAccent"
                 android:textSize="12sp"
-                app:layout_constraintBottom_toTopOf="@+id/textView5"
-                app:layout_constraintEnd_toEndOf="@+id/textView4"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="@+id/textView4"
-                app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/txtNombrePerfil"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:enabled="true"
-                android:singleLine="true"
-                android:textColor="@color/colorAccent"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toTopOf="@+id/textView6"
-                app:layout_constraintEnd_toEndOf="@+id/textView5"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="@+id/textView5"
-                app:layout_constraintTop_toBottomOf="@+id/textView5" />
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/txtContrasenaPerfil"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:textColor="@color/colorAccent"
-                app:layout_constraintBottom_toTopOf="@+id/btnActualizaPassword"
-                app:layout_constraintEnd_toEndOf="@+id/textView6"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="@+id/textView6"
-                app:layout_constraintTop_toBottomOf="@+id/textView6" />
+                app:layout_constraintEnd_toEndOf="@+id/textView20"
+                app:layout_constraintStart_toStartOf="@+id/textView20"
+                app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnActualizaPassword"
                 style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:padding="12dp"
                 android:text="@string/btn_actualizaPassword"
                 android:textAllCaps="false"
                 android:textColor="@color/colorButton"
                 android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/txtContrasenaPerfil"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="@+id/txtContrasenaPerfil"
-                app:layout_constraintTop_toBottomOf="@+id/txtContrasenaPerfil" />
+                app:layout_constraintEnd_toEndOf="@+id/txtEjercicioPerfil"
+                app:layout_constraintStart_toStartOf="@+id/txtEjercicioPerfil"
+                app:layout_constraintTop_toBottomOf="@+id/txtEjercicioPerfil" />
 
             <TextView
                 android:id="@+id/textView3"
-                android:layout_width="0dp"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:text="CEDULA"
                 android:textAlignment="textEnd"
                 android:textSize="10sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/txtCedulaPefil"
                 app:layout_constraintEnd_toEndOf="@+id/tvtituloPerfilUsuario"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="@+id/tvtituloPerfilUsuario"
                 app:layout_constraintTop_toBottomOf="@+id/tvtituloPerfilUsuario" />
 
             <TextView
                 android:id="@+id/textView4"
-                android:layout_width="0dp"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:text="RUC"
                 android:textAlignment="textEnd"
                 android:textSize="10sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/txtRucPerfil"
                 app:layout_constraintEnd_toEndOf="@+id/txtCedulaPefil"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="@+id/txtCedulaPefil"
                 app:layout_constraintTop_toBottomOf="@+id/txtCedulaPefil" />
 
             <TextView
                 android:id="@+id/textView5"
-                android:layout_width="0dp"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:text="NOMBRE Y APELLIDO"
                 android:textAlignment="textEnd"
                 android:textSize="10sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/txtNombrePerfil"
                 app:layout_constraintEnd_toEndOf="@+id/txtRucPerfil"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="@+id/txtRucPerfil"
                 app:layout_constraintTop_toBottomOf="@+id/txtRucPerfil" />
 
             <TextView
                 android:id="@+id/textView6"
-                android:layout_width="0dp"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:text="CONTRASEÑA"
                 android:textAlignment="textEnd"
                 android:textSize="10sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/txtContrasenaPerfil"
                 app:layout_constraintEnd_toEndOf="@+id/txtNombrePerfil"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="@+id/txtNombrePerfil"
                 app:layout_constraintTop_toBottomOf="@+id/txtNombrePerfil" />
 

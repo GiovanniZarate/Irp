@@ -35,4 +35,13 @@ public class NuevoEJercicioDialogViewModel extends AndroidViewModel {
         ejercicioRepository.update(ejercicioactualizar);
     }
 
+    //verfica EJERCIICO ACTUAL
+    public int verificaEjercicio(int anho){
+        return ejercicioRepository.verificaEjercicio(anho);
+    }
+
+    //TRAE EJERCIICO ACTUAL
+    public Ejercicio traeEjercicioActual(int anho){
+        return ejercicioRepository.traeEjercicioActual(anho);
+    }
 }

@@ -14,7 +14,11 @@ import android.widget.Toast;
 import com.proyecto.irp.R;
 import com.proyecto.irp.Utilitario.CalculaDivisor;
 import com.proyecto.irp.db.entity.Contribuyente;
+import com.proyecto.irp.db.entity.Ejercicio;
 import com.proyecto.irp.viewmodel.ContribuyenteViewModel;
+import com.proyecto.irp.viewmodel.NuevoEJercicioDialogViewModel;
+
+import java.util.Calendar;
 
 public class CrearcuentaActivity extends AppCompatActivity implements View.OnClickListener{
     TextView tvLoginVolver;
@@ -22,6 +26,9 @@ public class CrearcuentaActivity extends AppCompatActivity implements View.OnCli
     EditText vcedula,vruc,vnombre, vcontrasena;
 
     private ContribuyenteViewModel contribuyenteViewModel;
+    private NuevoEJercicioDialogViewModel nuevoEJercicioDialogViewModel;
+
+    Calendar cal= Calendar.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +42,7 @@ public class CrearcuentaActivity extends AppCompatActivity implements View.OnCli
 
         //INSTANCIAR EL VIEW MODEL
         contribuyenteViewModel = ViewModelProviders.of(this).get(ContribuyenteViewModel.class);
+        nuevoEJercicioDialogViewModel = ViewModelProviders.of(this).get(NuevoEJercicioDialogViewModel.class);
        /* contribuyenteViewModel.getAllContribuyentes().observe(this, new Observer<List<Contribuyente>>() {
             @Override
             public void onChanged(List<Contribuyente> contribuyentes) {
@@ -111,6 +119,16 @@ public class CrearcuentaActivity extends AppCompatActivity implements View.OnCli
             if (contribuyenteViewModel.verificaCedula(contribuyente.getDocumento()) == 0){
                 //INSERTA EN LA BD SQLITE
                 contribuyenteViewModel.insert(contribuyente);
+
+                int year= cal.get(Calendar.YEAR);
+                //INSERTAR EL PERIODO ACTUAL SOLO UNA VEZ
+                //mientras crear año
+                if (nuevoEJercicioDialogViewModel.verificaEjercicio(year) == 0){
+                    nuevoEJercicioDialogViewModel.insertarEjercicio(new Ejercicio(0,
+                            year,0,
+                            0,0,0,0,0));
+                    Toast.makeText(this,"EJercicio "+year+ " Creado", Toast.LENGTH_SHORT).show();
+                }
                 Toast.makeText(this,"Contribuyente Registrado con exito", Toast.LENGTH_SHORT).show();
                 finish();
             }else {

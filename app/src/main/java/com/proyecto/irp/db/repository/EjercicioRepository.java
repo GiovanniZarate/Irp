@@ -14,7 +14,7 @@ import java.util.List;
 public class EjercicioRepository {
     private EjercicioDao ejercicioDao;
     private LiveData<List<Ejercicio>> allEjercicios;
-    //private LiveData<List<Ejercicio>>
+    //private Ejercicio ejercicioActual;
 
     public EjercicioRepository(Application application){
         AppDatabase db = AppDatabase.getDatabase(application);
@@ -28,6 +28,32 @@ public class EjercicioRepository {
     //METODO PARA INSERTAR DATOS
     public void insert(Ejercicio ejercicio){
         new insertAsyncTask(ejercicioDao).execute(ejercicio);
+    }
+
+    //VERIFICA EJERCICIO ACTUAL
+    public int verificaEjercicio(int anho){
+        return ejercicioDao.verificaAnho(anho);
+    }
+
+
+    //TRAE EJERCICIO ACTUAL
+    public Ejercicio traeEjercicioActual(int anho){
+        return ejercicioDao.TraeEjerecicioActual(anho);
+    }
+
+    //CLASES ASYNCTACSK
+    private static class InsertAsyncTask extends AsyncTask<Ejercicio,Void,Void> {
+        private EjercicioDao ejercicioDao;
+
+        private InsertAsyncTask(EjercicioDao ejercicioDao){
+            this.ejercicioDao = ejercicioDao;
+        }
+
+        @Override
+        protected Void doInBackground(Ejercicio... ejercicios) {
+            ejercicioDao.insert(ejercicios[0]);
+            return null;
+        }
     }
 
 

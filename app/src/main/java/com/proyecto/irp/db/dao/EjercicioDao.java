@@ -44,6 +44,15 @@ public interface EjercicioDao {
     long insert(Ejercicio ejercicios);
 
 
+    //para verificar si ya existe el año
+    @Query("SELECT COUNT(*) FROM " + Ejercicio.TABLE_NAME + " where anho = :vanho" )
+    int verificaAnho(int vanho);
+
+
+    @Query("SELECT * FROM " + Ejercicio.TABLE_NAME + " where anho = :vanho" )
+    Ejercicio TraeEjerecicioActual(int vanho);
+
+
     /*
     * @Query("SELECT * FROM nota")
     List<Nota> getNotas();

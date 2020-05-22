@@ -8,28 +8,18 @@
     tools:context=".ui.venta.VentaCargaAddActivity">
 
     <TextView
-        android:id="@+id/tvtituloFacturaVenta"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ingreso "
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
         android:id="@+id/tvFacturaVentaContribuyente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Periodo 2020 Contribuyente: Carlos Giovanni Zarate Ruiz"
+        android:text="Contribuyente: Carlos Giovanni Zarate Ruiz"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvtituloFacturaVenta" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvFacturaVentaContribuyente">
 
@@ -132,7 +122,7 @@
 
     <LinearLayout
         android:id="@+id/contenedorFacturaTipoDoc"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
@@ -142,7 +132,6 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:paddingStart="5dp"
             android:text="Seleccione Tipo de Documento"
             android:textColor="@color/colorAccent"
@@ -153,14 +142,13 @@
             style="@style/Widget.AppCompat.Spinner.Underlined"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:outlineAmbientShadowColor="@color/colorEditText"
             android:outlineSpotShadowColor="@color/colorPrimary" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/contenedorFacturaVentaTipoIngreso"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
@@ -170,7 +158,6 @@
             android:id="@+id/tvtipoingreso"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:paddingStart="5dp"
             android:text="Seleccione Tipo de Ingreso"
             android:textColor="@color/colorAccent"
@@ -181,14 +168,13 @@
             style="@style/Widget.AppCompat.Spinner.Underlined"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:outlineAmbientShadowColor="@color/colorEditText"
             android:outlineSpotShadowColor="@color/colorPrimary" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/contenedorFacturaVentaCliente"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
@@ -198,7 +184,6 @@
             android:id="@+id/tvcliente"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:paddingStart="5dp"
             android:text="Seleccione Cliente"
             android:textColor="@color/colorAccent"
@@ -209,14 +194,13 @@
             style="@style/Widget.AppCompat.Spinner.Underlined"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:outlineAmbientShadowColor="@color/colorEditText"
             android:outlineSpotShadowColor="@color/colorPrimary" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/contenedorNrofactura"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
@@ -239,6 +223,7 @@
 
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/InputLayoutNro1"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -268,6 +253,7 @@
                 android:textSize="18sp" />
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/InputLayoutNro2"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -297,6 +283,7 @@
                 android:textSize="18sp" />
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/InputLayoutNro3"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -321,7 +308,7 @@
 
     <LinearLayout
         android:id="@+id/contenedorImportes"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
@@ -331,39 +318,266 @@
             android:id="@+id/contenedorimportesgravados"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingEnd="2dp">
 
-            <TextView
-                android:id="@+id/textView7"
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Imp. Gravado 10%:" />
+                android:hint="Gravada 10%"
+                android:textColor="@color/colorEditText"
+                android:textColorHighlight="@color/colorEditText"
+                android:textColorHint="@color/colorEditText"
+                android:textColorLink="@color/colorEditText"
+                android:textCursorDrawable="@color/colorEditText">
 
-            <TextView
-                android:id="@+id/textView9"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtimpgrav10FacturaVenta"
+                    android:layout_width="105dp"
+                    android:layout_height="48dp"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:text="0"
+                    android:textSize="14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Imp. Gravado 5%:" />
+                android:hint="Imp. 10%"
+                android:textColor="@color/colorEditText"
+                android:textColorHighlight="@color/colorEditText"
+                android:textColorHint="@color/colorHintEnable"
+                android:textColorLink="@color/colorEditText"
+                android:textCursorDrawable="@color/colorEditText">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtimp10FacturaVenta"
+                    android:layout_width="105dp"
+                    android:layout_height="48dp"
+                    android:enabled="false"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:focusable="false"
+                    android:text="0"
+                    android:textSize="14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="IVA 10%"
+                android:textColor="@color/colorEditText"
+                android:textColorHighlight="@color/colorEditText"
+                android:textColorHint="@color/colorHintEnable"
+                android:textColorLink="@color/colorEditText"
+                android:textCursorDrawable="@color/colorEditText">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtiva10FacturaVenta"
+                    android:layout_width="105dp"
+                    android:layout_height="48dp"
+                    android:enabled="false"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:text="0"
+                    android:focusable="false"
+                    android:textSize="14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/contenedorimporteivas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingStart="2dp"
+            android:paddingEnd="2dp">
 
-            <TextView
-                android:id="@+id/textView10"
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Imp. 10%:" />
+                android:hint="Gravada 5%"
+                android:textColor="@color/colorEditText"
+                android:textColorHighlight="@color/colorEditText"
+                android:textColorHint="@color/colorEditText"
+                android:textColorLink="@color/colorEditText"
+                android:textCursorDrawable="@color/colorEditText">
 
-            <TextView
-                android:id="@+id/textView11"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtimpgrav5FacturaVenta"
+                    android:layout_width="105dp"
+                    android:layout_height="48dp"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:text="0"
+                    android:textSize="14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Imp. 5%:" />
+                android:hint="Imp. 5%"
+                android:textColor="@color/colorEditText"
+                android:textColorHighlight="@color/colorEditText"
+                android:textColorHint="@color/colorHintEnable"
+                android:textColorLink="@color/colorEditText"
+                android:textCursorDrawable="@color/colorEditText">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtimp5FacturaVenta"
+                    android:layout_width="105dp"
+                    android:layout_height="48dp"
+                    android:enabled="false"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:text="0"
+                    android:focusable="false"
+                    android:textSize="14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="IVA 5%"
+                android:textColor="@color/colorEditText"
+                android:textColorHighlight="@color/colorEditText"
+                android:textColorHint="@color/colorHintEnable"
+                android:textColorLink="@color/colorEditText"
+                android:textCursorDrawable="@color/colorEditText">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtiva5FacturaVenta"
+                    android:layout_width="105dp"
+                    android:layout_height="48dp"
+                    android:enabled="false"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:text="0"
+                    android:focusable="false"
+                    android:textSize="14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
         </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/contenedoriva"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingStart="2dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Exenta"
+                android:textColor="@color/colorEditText"
+                android:textColorHighlight="@color/colorEditText"
+                android:textColorHint="@color/colorEditText"
+                android:textColorLink="@color/colorEditText"
+                android:textCursorDrawable="@color/colorEditText">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtimpexentaFacturaVenta"
+                    android:layout_width="105dp"
+                    android:layout_height="48dp"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:imeOptions="actionGo"
+                    android:text="0"
+                    android:textSize="14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Sub Total"
+                android:textColor="@color/colorEditText"
+                android:textColorHighlight="@color/colorEditText"
+                android:textColorHint="@color/colorHintEnable"
+                android:textColorLink="@color/colorEditText"
+                android:textCursorDrawable="@color/colorEditText">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtsubtotalFacturaVenta"
+                    android:layout_width="105dp"
+                    android:layout_height="48dp"
+                    android:enabled="false"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:text="0"
+                    android:focusable="false"
+                    android:textSize="14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Total IVA"
+                android:textColor="@color/colorEditText"
+                android:textColorHighlight="@color/colorEditText"
+                android:textColorHint="@color/colorHintEnable"
+                android:textColorLink="@color/colorEditText"
+                android:textCursorDrawable="@color/colorEditText">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtivatotalFacturaVenta"
+                    android:layout_width="105dp"
+                    android:layout_height="48dp"
+                    android:enabled="false"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:text="0"
+                    android:focusable="false"
+                    android:textSize="14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/contenedroneto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/contenedorImportes">
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Neto"
+            android:textColor="@color/colorEditText"
+            android:textColorHighlight="@color/colorEditText"
+            android:textColorHint="@color/colorEditText"
+            android:textColorLink="@color/colorEditText"
+            android:textCursorDrawable="@color/colorEditText">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtnetoFacturaVenta"
+                android:layout_width="200dp"
+                android:layout_height="48dp"
+                android:enabled="false"
+                android:inputType="number"
+                android:maxLength="10"
+                android:text="0"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 
 

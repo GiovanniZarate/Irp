@@ -25,7 +25,7 @@ import java.util.List;
 
 public class PerfilUsuarioFragment extends Fragment  {
 
-    EditText vcedulaperfil,vrucperfil,vnombreperfil, vcontrasenaperfil;
+    EditText vcedulaperfil,vrucperfil,vnombreperfil, vcontrasenaperfil,vejercicioperfil;
     Button btnActualizaPerfil;
     private ContribuyenteViewModel contribuyenteViewModel;
 
@@ -45,6 +45,8 @@ public class PerfilUsuarioFragment extends Fragment  {
 
         String vcedula = managerUsuario.ObtenerDatos().getUsuario();
         final String vcontrasena = managerUsuario.ObtenerDatos().getClave();
+        final int vanho = managerUsuario.ObtenerDatos().getAnho();
+        final int videjercicio = managerUsuario.ObtenerDatos().getIdejercicio();
 
 
         //INSTANCIAR EL VIEW MODEL
@@ -58,6 +60,7 @@ public class PerfilUsuarioFragment extends Fragment  {
                     vnombreperfil.setText(perfil.getNombres().toString().trim());
                     vcontrasenaperfil.setText(perfil.getContrasena().toString().trim());
                     codigocontribu = perfil.getIdcontribuyente();
+                    vejercicioperfil.setText(String.valueOf(vanho));
                 }
             }
         });
@@ -76,7 +79,9 @@ public class PerfilUsuarioFragment extends Fragment  {
 
                 //ACTUALIZA EN EL SHARED PREFERENCES
                 //Guardar en un shared los datos del usuario
-                managerUsuario.RegistrarUsuario( vcedulaperfil.getText().toString(),vcontrasenaperfil.getText().toString());
+                managerUsuario.RegistrarUsuario( vcedulaperfil.getText().toString(),
+                        vcontrasenaperfil.getText().toString(),vrucperfil.getText().toString(),
+                        vnombreperfil.getText().toString(),vanho,videjercicio,codigocontribu);
 
                 //Snackbar.make(v, "Datos Modificados..", Snackbar.LENGTH_LONG).show();
                 Toast.makeText(getActivity(),"Datos Modificados ",Toast.LENGTH_SHORT).show();
@@ -94,6 +99,7 @@ public class PerfilUsuarioFragment extends Fragment  {
         vrucperfil = view.findViewById(R.id.txtRucPerfil);
         vnombreperfil = view.findViewById(R.id.txtNombrePerfil);
         vcontrasenaperfil = view.findViewById(R.id.txtContrasenaPerfil);
+        vejercicioperfil = view.findViewById(R.id.txtEjercicioPerfil);
 
         btnActualizaPerfil = view.findViewById(R.id.btnActualizaPassword);
 

@@ -22,6 +22,7 @@ import com.proyecto.irp.db.repository.EjercicioRepository;
 import com.proyecto.irp.viewmodel.ContribuyenteViewModel;
 import com.proyecto.irp.viewmodel.NuevoEJercicioDialogViewModel;
 
+import java.util.Calendar;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
@@ -30,10 +31,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button btnLogin;
     TextView tvCrearCuenta;
 
+    Calendar cal= Calendar.getInstance();
+
     private ContribuyenteViewModel contribuyenteViewModel;
    // private EjercicioDao ejercicioDao;
+   private NuevoEJercicioDialogViewModel nuevoEJercicioDialogViewModel;
 
-    private NuevoEJercicioDialogViewModel nuevoEJercicioDialogViewModel;
+   private Ejercicio ejercicioActual;
+
 
     AppDatabase db;
     SessionManager managerUsuario;
@@ -62,10 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //INSTANCIAR EL VIEW MODEL
         contribuyenteViewModel = ViewModelProviders.of(this).get(ContribuyenteViewModel.class);
-
-
         nuevoEJercicioDialogViewModel = ViewModelProviders.of(this).get(NuevoEJercicioDialogViewModel.class);
-
 
         //DEVOLVER LA CANTIDAD DE REGISTRO QUE EXISTE EN LA TABLA
       //  int cantidad = db.getEjercicioDao().count();
@@ -103,6 +105,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void Login(){
 
+
+        //EJERCICIO ACTUAL TRAE
+        int year= cal.get(Calendar.YEAR);
+        ejercicioActual = nuevoEJercicioDialogViewModel.traeEjercicioActual(year);
+
+
         final String vcedula = cedula.getText().toString();
         final String vcontrasena = contrasena.getText().toString();
 
@@ -123,12 +131,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     for (Contribuyente user: contribuyentes){
                         if (user.getDocumento().equals(vcedula) && user.getContrasena().equals(vcontrasena)) {
                             //Guardar en un shared los datos del usuario
-                            managerUsuario.RegistrarUsuario(user.getDocumento(),user.getContrasena());
-
-                            //mientras crear año
-                            /*nuevoEJercicioDialogViewModel.insertarEjercicio(new Ejercicio(1,2020,0,
-                                    0,0,0,0,0));*/
-
+                            managerUsuario.RegistrarUsuario(user.getDocumento(),
+                                    user.getContrasena(),user.getRuc(),user.getNombres(),
+                                    ejercicioActual.getAnho(),ejercicioActual.getIdejercicio(),
+                                    user.getIdcontribuyente());
 
                             Intent intent = new Intent(MainActivity.this, MenuDrawerActivity.class);
                             startActivity(intent);

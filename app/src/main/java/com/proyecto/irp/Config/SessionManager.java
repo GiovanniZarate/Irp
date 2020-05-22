@@ -12,11 +12,18 @@ public class SessionManager {
     }
 
     //metodo para registrar
-    public boolean RegistrarUsuario(String usuario,String clave){
+    public boolean RegistrarUsuario(String usuario,String clave,String ruc,
+                                    String nombrecontribuyente,int anho,
+                                    int idejercicio,int idcontribuyente){
         SharedPreferences.Editor edit = contenedor.edit();
         edit.putBoolean("login",true);
         edit.putString("usuario",usuario);
         edit.putString("clave",clave);
+        edit.putString("ruc",ruc);
+        edit.putString("nombrecontribuyente",nombrecontribuyente);
+        edit.putInt("anho",anho);
+        edit.putInt("idejercicio",idejercicio);
+        edit.putInt("idcontribuyente",idcontribuyente);
         edit.commit();
         return true;
     }
@@ -28,7 +35,13 @@ public class SessionManager {
 
     //METODO PARA
     public SessionUsuario ObtenerDatos(){
-        return new SessionUsuario(contenedor.getString("usuario",""),contenedor.getString("clave",""));
+        return new SessionUsuario(contenedor.getString("usuario",""),
+                contenedor.getString("clave",""),
+                contenedor.getString("ruc",""),
+                contenedor.getString("nombrecontribuyente",""),
+                contenedor.getInt("anho",0),
+                contenedor.getInt("idejercicio",0),
+                contenedor.getInt("idcontribuyente",0));
     }
 
     //para salir y limpiar el shared
