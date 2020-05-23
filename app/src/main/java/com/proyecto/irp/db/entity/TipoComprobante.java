@@ -1,6 +1,7 @@
 package com.proyecto.irp.db.entity;
 
 import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -8,15 +9,12 @@ import androidx.room.PrimaryKey;
 public class TipoComprobante {
     @PrimaryKey(autoGenerate = true)
     private int idtipocomprobante;
-    private String descripcion;
+    @ColumnInfo(name = "descripcion_tipocomprobante")
+    private String descripciontipocomprobante;
     private int tipocpb;
 
-    public int getTipocpb() {
-        return tipocpb;
-    }
-
-    public TipoComprobante(String descripcion, int tipocpb) {
-        this.descripcion = descripcion;
+    public TipoComprobante(String descripciontipocomprobante, int tipocpb) {
+        this.descripciontipocomprobante = descripciontipocomprobante;
         this.tipocpb = tipocpb;
     }
 
@@ -28,13 +26,17 @@ public class TipoComprobante {
         return idtipocomprobante;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getDescripciontipocomprobante() {
+        return descripciontipocomprobante;
+    }
+
+    public int getTipocpb() {
+        return tipocpb;
     }
 
     @NonNull
     @Override
     public String toString() {
-        return  descripcion;
+        return descripciontipocomprobante;
     }
 }

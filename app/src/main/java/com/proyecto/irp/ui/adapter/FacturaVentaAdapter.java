@@ -3,6 +3,7 @@ package com.proyecto.irp.ui.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,12 +12,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.proyecto.irp.R;
 import com.proyecto.irp.db.entity.Facturaventa;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FacturaVentaAdapter extends RecyclerView.Adapter<FacturaVentaAdapter.FacturaVentaHolder>  {
     private OnItemClickListener listener;
     private List<Facturaventa> facturaventas = new ArrayList<>();
+
+    DecimalFormat formateador = new DecimalFormat("###,###.##");
+
 
     public class FacturaVentaHolder extends RecyclerView.ViewHolder {
         //Se crean las variables
@@ -53,10 +58,12 @@ public class FacturaVentaAdapter extends RecyclerView.Adapter<FacturaVentaAdapte
     public void onBindViewHolder(@NonNull FacturaVentaAdapter.FacturaVentaHolder holder, int position) {
         Facturaventa currentItem = facturaventas.get(position);
         holder.tvNrofactura.setText("Nro. Factura: "+String.valueOf(currentItem.getNrofacturaventa()));
-        holder.tvFechaFactura.setText("Fecha: "+String.valueOf(currentItem.getFechaventa()));
-        holder.tvTipoFactura.setText("Tipo: "+currentItem.getId_comprobante());
-        holder.tvRucClienteFactura.setText("Cliente: "+currentItem.getId_cliente());
-        holder.tvTotalFactura.setText("Total: "+currentItem.getTotal_venta());
+        holder.tvFechaFactura.setText("Fecha: "+String.valueOf(currentItem.getDia_venta().trim()
+                .concat("/").concat(currentItem.getMes_venta().trim()).concat("/")
+                .concat(currentItem.getAnho_venta())));
+        holder.tvTipoFactura.setText("Tipo: "+currentItem.tipoComprobante.getDescripciontipocomprobante());
+        holder.tvRucClienteFactura.setText("Cliente: "+currentItem.cliente.getNombre());
+        holder.tvTotalFactura.setText("Total: "+formateador.format(currentItem.getTotal_venta()));
     }
 
     @Override
@@ -94,5 +101,7 @@ public class FacturaVentaAdapter extends RecyclerView.Adapter<FacturaVentaAdapte
     public void setOnItemClickListener(OnItemClickListener listener){
         this.listener = listener;
     }
+
+
 
 }

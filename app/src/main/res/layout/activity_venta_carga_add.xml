@@ -40,6 +40,7 @@
 
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/InputLayoutDia"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -52,7 +53,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txtdiaFacturaVenta"
-                    android:layout_width="55dp"
+                    android:layout_width="70dp"
                     android:layout_height="48dp"
                     android:imeOptions="actionNext"
                     android:inputType="number"
@@ -69,6 +70,7 @@
                 android:textSize="18sp" />
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/InputLayoutMes"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -81,7 +83,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txtmesFacturaVenta"
-                    android:layout_width="55dp"
+                    android:layout_width="70dp"
                     android:layout_height="48dp"
                     android:imeOptions="actionNext"
                     android:inputType="number"
@@ -98,6 +100,7 @@
                 android:textSize="18sp" />
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/InputLayoutAnho"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -110,7 +113,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txtanhoFacturaVenta"
-                    android:layout_width="80dp"
+                    android:layout_width="130dp"
                     android:layout_height="48dp"
                     android:imeOptions="actionNext"
                     android:inputType="number"
@@ -322,6 +325,7 @@
             android:paddingEnd="2dp">
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/InputLayoutImpGrav10"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -399,6 +403,7 @@
             android:paddingEnd="2dp">
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/InputLayoutImpGrav5"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -477,6 +482,7 @@
             android:paddingStart="2dp">
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/InputLayoutImpExenta"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -491,9 +497,9 @@
                     android:id="@+id/txtimpexentaFacturaVenta"
                     android:layout_width="105dp"
                     android:layout_height="48dp"
+                    android:imeOptions="actionGo"
                     android:inputType="number"
                     android:maxLength="10"
-                    android:imeOptions="actionGo"
                     android:text="0"
                     android:textSize="14sp" />
             </com.google.android.material.textfield.TextInputLayout>

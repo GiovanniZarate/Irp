@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         inicializacion();
         eventos();
 
+
+
         //VERIFICA SI YA ESTA LOGEANDO LLEVA A LA PANTALLA PRINCIPAL
         if (managerUsuario.isLogin()){
             Intent intent = new Intent(MainActivity.this, MenuDrawerActivity.class);
@@ -69,10 +71,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         contribuyenteViewModel = ViewModelProviders.of(this).get(ContribuyenteViewModel.class);
         nuevoEJercicioDialogViewModel = ViewModelProviders.of(this).get(NuevoEJercicioDialogViewModel.class);
 
+        creaejercicio();
+
         //DEVOLVER LA CANTIDAD DE REGISTRO QUE EXISTE EN LA TABLA
       //  int cantidad = db.getEjercicioDao().count();
       //  Toast.makeText(this,"Existen: "+cantidad+ " de registros",Toast.LENGTH_SHORT).show();
 
+    }
+
+    private void creaejercicio() {
+        int year= cal.get(Calendar.YEAR);
+        //INSERTAR EL PERIODO ACTUAL SOLO UNA VEZ
+        //mientras crear año
+        if (nuevoEJercicioDialogViewModel.verificaEjercicio(year) == 0){
+            nuevoEJercicioDialogViewModel.insertarEjercicio(new Ejercicio(0,
+                    year,0,
+                    0,0,0,0,0));
+            Toast.makeText(this,"EJercicio "+year+ " Creado", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void inicializacion() {

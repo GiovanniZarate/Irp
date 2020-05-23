@@ -81,7 +81,7 @@ public class TipoComprobanteFragment extends Fragment {
            public void onItemClick(TipoComprobante entity) {
                Intent intent = new Intent(getActivity(),TipoComprobanteAddActivity.class);
                intent.putExtra(TipoComprobanteAddActivity.EXTRA_IDTIPOCOMPROBANTE,entity.getIdtipocomprobante());
-               intent.putExtra(TipoComprobanteAddActivity.EXTRA_DESCRITIPOCOMPROBANTE,entity.getDescripcion());
+               intent.putExtra(TipoComprobanteAddActivity.EXTRA_DESCRITIPOCOMPROBANTE,entity.getDescripciontipocomprobante());
                intent.putExtra(TipoComprobanteAddActivity.EXTRA_TIPOCPB,String.valueOf(entity.getTipocpb()));
 
                startActivityForResult(intent, EDIT_TIPOCOMPROBANTE_REQUEST);

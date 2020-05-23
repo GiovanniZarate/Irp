@@ -33,7 +33,7 @@ import com.proyecto.irp.db.entity.TipoEgreso;
 //paso 1 - LOS PERMISOS PARA ACCEDER A LAS ENTIDADES
 @Database(entities = {Ejercicio.class, Contribuyente.class, Cliente.class,
         ClasificacionIngreso.class, TipoComprobante.class, Proveedor.class, TipoEgreso.class,
-        ClasificacionEgreso.class, Facturaventa.class}, version = 24,exportSchema = true)
+        ClasificacionEgreso.class, Facturaventa.class}, version = 28,exportSchema = true)
 public abstract class AppDatabase extends RoomDatabase {
 
 
@@ -58,7 +58,7 @@ public abstract class AppDatabase extends RoomDatabase {
         if (INSTANCE == null){
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             AppDatabase.class, Constantes.BD_NAME)
-                            .fallbackToDestructiveMigration()
+                            //.fallbackToDestructiveMigration()
                             .allowMainThreadQueries()
                             .addCallback(roomCallback)  //PARA INSERTAR LOS DATOS DE PREUBA
                             .build();
@@ -162,7 +162,7 @@ public abstract class AppDatabase extends RoomDatabase {
             Facturaventa facturaventa =
                     new Facturaventa(25052020,1,1,1,1,1,
                             "001-002-0000123",1500000,0,0,0,0,
-                            0,1,2,123,20,5,2020);
+                            0,"1","2","123","20","5","2020");
             facturaVentaDao.insert(facturaventa);
 
             return null;

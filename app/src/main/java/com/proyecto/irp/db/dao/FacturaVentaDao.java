@@ -25,6 +25,18 @@ public interface FacturaVentaDao {
     void delete(Facturaventa facturaventa);
 
 
-    @Query("SELECT * FROM facturaventa order by idfacturaventa ASC")
+    @Query("SELECT facturaventa.*,tipocomprobante.descripcion_tipocomprobante,cliente.nombre " +
+            "FROM facturaventa " +
+            "INNER JOIN tipocomprobante on facturaventa.id_comprobante=tipocomprobante.idtipocomprobante " +
+            "INNER JOIN cliente on facturaventa.id_cliente=cliente.idcliente " +
+            "order by idfacturaventa ASC")
     LiveData<List<Facturaventa>> getAllFacturaventa();
+
+
+
+    /*@Query("SELECT clasificacionegreso.*,tipoegreso.descripcion_tipoegreso AS descripcion_tipoegreso
+    FROM clasificacionegreso "
+            +"INNER JOIN tipoegreso  on clasificacionegreso.id_tipoegreso=tipoegreso.idtipoegreso "
+            +"order by idclasificacionegreso ASC ")
+    public LiveData<List<ClasificacionEgreso>> getAllClasificacionegreso();*/
 }

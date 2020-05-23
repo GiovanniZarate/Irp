@@ -1,6 +1,7 @@
 package com.proyecto.irp.db.entity;
 
 import androidx.room.ColumnInfo;
+import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Index;
@@ -56,21 +57,21 @@ public class Facturaventa {
     public int iva10_venta;
     public int gravada5_venta;
     public int iva5_venta;
-    public int nro1_venta;
-    public int nro2_venta;
-    public int nro3_venta;
+    public String nro1_venta;
+    public String nro2_venta;
+    public String nro3_venta;
 
-    public int dia_venta;
-    public int mes_venta;
-    public int anho_venta;
+    public String dia_venta;
+    public String mes_venta;
+    public String anho_venta;
 
 
     public Facturaventa(long fechaventa, int id_cliente,
                         int id_clasificacioningreso, int id_contribuyente, int id_ejercicio,
                         int id_comprobante, String nrofacturaventa, int total_venta,
                         int exenta_venta, int gravada10_venta, int iva10_venta,
-                        int gravada5_venta, int iva5_venta, int nro1_venta, int nro2_venta,
-                        int nro3_venta, int dia_venta, int mes_venta, int anho_venta) {
+                        int gravada5_venta, int iva5_venta, String nro1_venta, String nro2_venta,
+                        String nro3_venta, String dia_venta, String mes_venta, String anho_venta) {
 
         this.fechaventa = fechaventa;
         this.id_cliente = id_cliente;
@@ -153,27 +154,35 @@ public class Facturaventa {
         return iva5_venta;
     }
 
-    public int getNro1_venta() {
+    public String getNro1_venta() {
         return nro1_venta;
     }
 
-    public int getNro2_venta() {
+    public String getNro2_venta() {
         return nro2_venta;
     }
 
-    public int getNro3_venta() {
+    public String getNro3_venta() {
         return nro3_venta;
     }
 
-    public int getDia_venta() {
+    public String getDia_venta() {
         return dia_venta;
     }
 
-    public int getMes_venta() {
+    public String getMes_venta() {
         return mes_venta;
     }
 
-    public int getAnho_venta() {
+    public String getAnho_venta() {
         return anho_venta;
     }
+
+    @Embedded()
+    public TipoComprobante tipoComprobante;
+    @Embedded(prefix = "ci")
+    public ClasificacionIngreso clasificacionIngreso;
+    @Embedded
+    public Cliente cliente;
+
 }

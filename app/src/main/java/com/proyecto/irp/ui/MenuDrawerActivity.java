@@ -130,13 +130,7 @@ public class MenuDrawerActivity extends AppCompatActivity implements NavigationV
     //PARA VALIDAR LA SALIDA DEL SISTEMA MUESTRE UN MENSAJE
     //Controla la pulsación del botón Atrás
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode==event.KEYCODE_BACK){
-            salirApp();
-        }
-        return super.onKeyDown(keyCode, event);
-    }
+
 
     private void cerrarSesion(){
         new MaterialAlertDialogBuilder(this,R.style.ThemeOverlay_App_MaterialAlertDialog)
@@ -218,8 +212,23 @@ public class MenuDrawerActivity extends AppCompatActivity implements NavigationV
     public void onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)){
             drawerLayout.closeDrawer(GravityCompat.START);
+
         }else{
             super.onBackPressed();
+
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode==event.KEYCODE_BACK){
+            //para que vuelva al inicio que no quede en otro al dar atas
+            if (drawerLayout.isDrawerOpen(GravityCompat.START)){
+                drawerLayout.closeDrawer(GravityCompat.START);}
+            getSupportFragmentManager().beginTransaction().replace(R.id.contenedor_drawer,
+                    new IniFragment()).commit();
+            salirApp();
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

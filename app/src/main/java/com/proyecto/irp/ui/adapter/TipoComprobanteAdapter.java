@@ -56,7 +56,7 @@ public class TipoComprobanteAdapter extends RecyclerView.Adapter<TipoComprobante
     public void onBindViewHolder(@NonNull TipoComprabanteHolder holder, int position) {
         TipoComprobante currentItem = tipoComprobantes.get(position);
         holder.tvId.setText("Id: "+String.valueOf(currentItem.getIdtipocomprobante()));
-        holder.tvDescri.setText(currentItem.getDescripcion());
+        holder.tvDescri.setText(currentItem.getDescripciontipocomprobante());
     }
 
     @Override

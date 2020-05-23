@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputFilter;
@@ -12,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -19,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
+import com.proyecto.irp.Config.SessionManager;
 import com.proyecto.irp.R;
 import com.proyecto.irp.Utilitario.InputFilterMinMax;
 import com.proyecto.irp.Utilitario.TextValidator;
@@ -36,15 +39,39 @@ import java.util.List;
 public class VentaCargaAddActivity extends AppCompatActivity  {
 
     //PARAMETRO EXTRA PARA PASAR AL OTRO ACTIVIY
-    public static final String EXTRA_IDFACTURAVETNA = "com.proyecto.irp.ui.venta.EXTRA_IDFACTURAVETNA";
+    public static final String EXTRA_IDFACTURAVENTA = "com.proyecto.irp.ui.venta.EXTRA_IDFACTURAVETNA";
+    public static final String EXTRA_FECHAFACTURAVENTA = "com.proyecto.irp.ui.venta.EXTRA_FECHAFACTURAVENTA";
+    public static final String EXTRA_CLIENTE = "com.proyecto.irp.ui.venta.EXTRA_CLIENTE";
+    public static final String EXTRA_CLIENTESELECTED = "com.proyecto.irp.ui.venta.EXTRA_CLIENTESELECTED";
+    public static final String EXTRA_CLASIFICACIONINGRESO = "com.proyecto.irp.ui.venta.EXTRA_CLASIFICACIONINGRESO";
+    public static final String EXTRA_CLASIFICACIONINGRESOSELECTED = "com.proyecto.irp.ui.venta.EXTRA_CLASIFICACIONINGRESOSELECTED";
+    public static final String EXTRA_TIPOCOMPROBANTE = "com.proyecto.irp.ui.venta.EXTRA_TIPOCOMPROBANTE";
+    public static final String EXTRA_TIPOCOMPROBANTESELECTED = "com.proyecto.irp.ui.venta.EXTRA_TIPOCOMPROBANTESELECTED";
+    public static final String EXTRA_CONTRIBUYENTE = "com.proyecto.irp.ui.venta.EXTRA_CONTRIBUYENTE";
+    public static final String EXTRA_EJERCICIO = "com.proyecto.irp.ui.venta.EXTRA_EJERCICIO";
+    public static final String EXTRA_NROFACTURA = "com.proyecto.irp.ui.venta.EXTRA_NROFACTURA";
+    public static final String EXTRA_TOTALVENTA = "com.proyecto.irp.ui.venta.EXTRA_TOTALVENTA";
+    public static final String EXTRA_EXENTAVENTA = "com.proyecto.irp.ui.venta.EXTRA_EXENTAVENTA";
+    public static final String EXTRA_GRAVADA10VENTA = "com.proyecto.irp.ui.venta.EXTRA_GRAVADA10VENTA";
+    public static final String EXTRA_IVA10VENTA = "com.proyecto.irp.ui.venta.EXTRA_IVA10VENTA";
+    public static final String EXTRA_GRAVADA5VENTA = "com.proyecto.irp.ui.venta.EXTRA_GRAVADA5VENTA";
+    public static final String EXTRA_IVA5VENTA = "com.proyecto.irp.ui.venta.EXTRA_IVA5VENTA";
+    public static final String EXTRA_NRO1VENTA = "com.proyecto.irp.ui.venta.EXTRA_NRO1VENTA";
+    public static final String EXTRA_NRO2VENTA = "com.proyecto.irp.ui.venta.EXTRA_NRO2VENTA";
+    public static final String EXTRA_NRO3VENTA = "com.proyecto.irp.ui.venta.EXTRA_NRO3VENTA";
+    public static final String EXTRA_DIAVENTA = "com.proyecto.irp.ui.venta.EXTRA_DIAVENTA";
+    public static final String EXTRA_MESVENTA = "com.proyecto.irp.ui.venta.EXTRA_MESVENTA";
+    public static final String EXTRA_ANHOVENTA = "com.proyecto.irp.ui.venta.EXTRA_ANHOVENTA";
 
 
     EditText tvdia,tvmes,tvanho,tvnro1,tvnro2,tvnro3,tvimpgrav10,tvimpgrav5,tvimpexenta,
     tvimp10,tvimp5,tvimpsubtotal,tviva10,tviva5,tvtotaliva,tvneto;
+
     Spinner spinnerTipoDocumento,spinnerTipoIngreso,spinnerCliente;
-    TextInputLayout ilnro1,ilnro2,ilnro3;
 
+    TextInputLayout ilnro1,ilnro2,ilnro3,ildia,ilmes,ilanho,ilimpgrav10,ilimpgrav5,ilimpexe;
 
+    String codtipodocumento,codtipoingreso,codcliente;
 
     private TipoComprobanteViewModel tipoComprobanteViewModel;
     private List<TipoComprobante> combocomprobante;
@@ -57,6 +84,9 @@ public class VentaCargaAddActivity extends AppCompatActivity  {
 
 
     ArrayAdapter adapter_comprobante,adapter_tipoingreso,adapter_cliente;
+
+    SessionManager managerUsuario;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,9 +109,14 @@ public class VentaCargaAddActivity extends AppCompatActivity  {
         cargacombocliente();
 
         //para completar con cero el nro factura
-       validanrofactura(tvnro1,3,"1",ilnro1);
-       validanrofactura(tvnro2,3,"2",ilnro2);
-       validanrofactura(tvnro3,7,"3",ilnro3);
+        completacero(tvnro1,3,"1",ilnro1);
+        completacero(tvnro2,3,"2",ilnro2);
+        completacero(tvnro3,7,"3",ilnro3);
+
+       //PARA COMPLETAR DIA Y MES
+        completacero(tvdia,2,"",ildia);
+        completacero(tvmes,2,"",ilmes);
+        completacero(tvanho,4,"",ilanho);
 
         //eventos campo importes
         //GRAVADA 10
@@ -112,6 +147,7 @@ public class VentaCargaAddActivity extends AppCompatActivity  {
                         //tvimp10.setText(""+gravada10);
                         //tviva10.setText(""+iva10);
                         calculatotales();
+                        //ilimpgrav10.setError("");
                     }
                 }else{
                     //Toast.makeText(v.getContext(),"Entra",Toast.LENGTH_SHORT).show();
@@ -147,6 +183,7 @@ public class VentaCargaAddActivity extends AppCompatActivity  {
                         //tviva5.setText(""+iva5);
 
                         calculatotales();
+                        //ilimpgrav5.setError("");
                     }
                 }else{
                     //Toast.makeText(v.getContext(),"Entra",Toast.LENGTH_SHORT).show();
@@ -168,6 +205,7 @@ public class VentaCargaAddActivity extends AppCompatActivity  {
                     }else{
                         //CALCULAR IVA GRAVADA Y PASAR A LOS TEXTOS
                         calculatotales();
+                        //ilimpexe.setError("");
                     }
                 }else{
                     if (tvimpexenta.getText().toString().trim().equals("0")){
@@ -181,12 +219,53 @@ public class VentaCargaAddActivity extends AppCompatActivity  {
         tvimpgrav5.addTextChangedListener(new separador_miles(tvimpgrav5));
         tvimpexenta.addTextChangedListener(new separador_miles(tvimpexenta));
 
+        //PARA SABER SI SE VA A EDITAR O AGREGAR NUEVO
+        modoAgregarEditar();
+
+        //CAPTURAR VALOR SELECCIONADO COMOBO
+        capturaCombo();
+
        //seleccionar valor text desde hasta
        // campo1.setSelection(start, end);
         //Seleccionar completo el Texto
         //campo1.selectAll();
 }
 
+    private void capturaCombo() {
+
+        //COMBO TIPO DOCUMENTO
+        spinnerTipoDocumento.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                TipoComprobante tipoComprobante = (TipoComprobante) spinnerTipoDocumento.getAdapter().getItem(position);
+                codtipodocumento = String.valueOf(tipoComprobante.getIdtipocomprobante());
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) { }
+        });
+        //COMBO TIPO INGRESO
+        spinnerTipoIngreso.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                ClasificacionIngreso clasificacionIngreso = (ClasificacionIngreso) spinnerTipoIngreso.getAdapter().getItem(position);
+                codtipoingreso = String.valueOf(clasificacionIngreso.getIdclasificacioningreso());
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) { }
+        });
+        //COMBO CLIENTE
+        spinnerCliente.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Cliente cliente = (Cliente) spinnerCliente.getAdapter().getItem(position);
+                codcliente = String.valueOf(cliente.getIdcliente());
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) { }
+        });
+
+
+    }
 
     private void inicializacion() {
         tvdia = findViewById(R.id.txtdiaFacturaVenta);
@@ -198,6 +277,17 @@ public class VentaCargaAddActivity extends AppCompatActivity  {
         ilnro1 = findViewById(R.id.InputLayoutNro1);
         ilnro2 = findViewById(R.id.InputLayoutNro2);
         ilnro3 = findViewById(R.id.InputLayoutNro3);
+
+
+
+        ildia = findViewById(R.id.InputLayoutDia);
+        ilmes = findViewById(R.id.InputLayoutMes);
+        ilanho = findViewById(R.id.InputLayoutAnho);
+
+        ilimpgrav10 = findViewById(R.id.InputLayoutImpGrav10);
+        ilimpgrav5 = findViewById(R.id.InputLayoutImpGrav5);
+        ilimpexe = findViewById(R.id.InputLayoutImpExenta);
+
 
         spinnerTipoDocumento = findViewById(R.id.spinnerTipoDocumento);
         spinnerTipoIngreso = findViewById(R.id.spinnerTipoIngreso);
@@ -221,7 +311,33 @@ public class VentaCargaAddActivity extends AppCompatActivity  {
         tvdia.setFilters(new InputFilter[]{ new InputFilterMinMax("1", "31")});
         tvmes.setFilters(new InputFilter[]{ new InputFilterMinMax("1", "12")});
         tvanho.setFilters(new InputFilter[]{ new InputFilterMinMax("1", "2060")});
+
+        managerUsuario = new SessionManager(getApplicationContext());
     }
+
+    private void modoAgregarEditar() {
+        //para poner titulo si es agregar o modificar
+         intent = getIntent();
+        if (intent.hasExtra(EXTRA_IDFACTURAVENTA)){
+            setTitle("Editar Ingreso");
+            recibirValoresEditar();
+        }else {
+            setTitle("Agregar Ingreso");
+        }
+    }
+
+    private void recibirValoresEditar() {
+        tvdia.setText(intent.getStringExtra(EXTRA_DIAVENTA));
+        tvmes.setText(intent.getStringExtra(EXTRA_MESVENTA));
+        tvanho.setText(intent.getStringExtra(EXTRA_ANHOVENTA));
+        /*for (int i = 0; i <  spinnerTipoDocumento.getAdapter().getCount(); i++){
+            if (spinnerTipoDocumento.getAdapter().getItem(i).toString().trim().equals(intent.getStringExtra(EXTRA_TIPOCOMPROBANTESELECTED).toString().trim())){
+                spinnerTipoDocumento.setSelection(i);
+                break;
+            }
+       }*/
+    }
+
 
     private void calculatotales(){
        int  ivatotal = Integer.parseInt(tviva10.getText().toString().replace(".",""))
@@ -266,7 +382,7 @@ public class VentaCargaAddActivity extends AppCompatActivity  {
     }
 
 
-    private void validanrofactura(final EditText edtnrofactura, final int cantidad, final String msg,
+    private void completacero(final EditText edtnrofactura, final int cantidad, final String msg,
                                   final TextInputLayout textInputLayout){
         //PARA QUE COMPLETE CON CERO
         edtnrofactura.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -274,7 +390,7 @@ public class VentaCargaAddActivity extends AppCompatActivity  {
                 if(!hasFocus ){
                     if (edtnrofactura.getText().toString().isEmpty()){
                         //edtnrofactura.setError("Debe Ingresar Nro "+msg);
-                        textInputLayout.setError("Ingresar Nro "+msg);
+                        textInputLayout.setError("Vacio"+msg);
                     }else{
                         completacero(edtnrofactura,cantidad);
                         textInputLayout.setError("");
@@ -314,7 +430,115 @@ public class VentaCargaAddActivity extends AppCompatActivity  {
 
 
 
+    //METODO PARA GRABAR
+    private void save() {
 
+        /*else if(grava10.trim().isEmpty()){
+            ilimpgrav10.setError("Vacio");
+        }else if(grava5.trim().isEmpty()){
+            ilimpgrav5.setError("Vacio");
+        }else if(exe.trim().isEmpty()){
+            ilimpexe.setError("Vacio");
+        }*/
+
+        String dia = tvdia.getText().toString();
+        String mes = tvmes.getText().toString();
+        String anho = tvanho.getText().toString();
+
+        String nro1 = tvnro1.getText().toString();
+        String nro2 = tvnro2.getText().toString();
+        String nro3 = tvnro3.getText().toString();
+
+        String grava10 = tvimpgrav10.getText().toString().replace(".","");
+        String grava5 = tvimpgrav5.getText().toString().replace(".","");
+        String exe = tvimpexenta.getText().toString().replace(".","");
+
+        String neto = tvneto.getText().toString().replace(".","");
+
+        String iva10 = tviva10.getText().toString().replace(".","");
+        String iva5 = tviva5.getText().toString().replace(".","");
+
+        String contribu = String.valueOf(managerUsuario.ObtenerDatos().getIdcontribuyente());
+        String ejercicio =  String.valueOf(managerUsuario.ObtenerDatos().getIdejercicio());
+
+        //Toast.makeText(this,"VALOR CONTR "+contribu,Toast.LENGTH_SHORT).show();
+
+        if(dia.trim().isEmpty()){
+            ildia.setError("Vacio");
+        }else if(mes.trim().isEmpty()){
+            ilmes.setError("Vacio");
+        }else if(anho.trim().isEmpty()){
+            ilanho.setError("Vacio");
+        }else if(adapter_comprobante.isEmpty()){
+            Toast.makeText(this,"Debes Seleccionar Tipo de Documento",Toast.LENGTH_SHORT).show();
+        }else if(adapter_tipoingreso.isEmpty()){
+            Toast.makeText(this,"Debes Seleccionar Tipo de Ingreso",Toast.LENGTH_SHORT).show();
+        }else if(adapter_cliente.isEmpty()){
+            Toast.makeText(this,"Debes Seleccionar Cliente",Toast.LENGTH_SHORT).show();
+        }else if(anho.trim().isEmpty()){
+            ilanho.setError("Vacio");
+        }else if(nro1.trim().isEmpty()){
+            ilnro1.setError("Vacio");
+        }else if(nro2.trim().isEmpty()){
+            ilnro2.setError("Vacio");
+        }else if(nro3.trim().isEmpty()){
+            ilnro3.setError("Vacio");
+        }else if(grava5.trim().isEmpty()){
+            ilimpgrav5.setError("Vacio");
+        }else if(grava10.trim().isEmpty()){
+            ilimpgrav10.setError("Vacio");
+        }else if(exe.trim().isEmpty()){
+            ilimpexe.setError("Vacio");
+        }else if(contribu.trim() == null){
+            Toast.makeText(this,"Contribuyente no existe",Toast.LENGTH_SHORT).show();
+        }else if(ejercicio.trim() == null){
+            Toast.makeText(this,"Ejercicio no existe",Toast.LENGTH_SHORT).show();
+        }else if(neto.trim().equals("0")){
+            Toast.makeText(this,"Valor Neto No Puede Estar en Cero",Toast.LENGTH_SHORT).show();
+        }else{
+            Intent data = new Intent();
+            data.putExtra(EXTRA_DIAVENTA,dia);
+            data.putExtra(EXTRA_TIPOCOMPROBANTE,codtipodocumento);
+            data.putExtra(EXTRA_FECHAFACTURAVENTA,codtipodocumento);
+            data.putExtra(EXTRA_CLIENTE,codcliente);
+            data.putExtra(EXTRA_CLASIFICACIONINGRESO,codtipoingreso);
+            data.putExtra(EXTRA_NROFACTURA, nro1.trim()+"-"+nro2.trim()+"-"+nro3.trim());
+            data.putExtra(EXTRA_CLASIFICACIONINGRESO,codtipoingreso);
+            data.putExtra(EXTRA_CONTRIBUYENTE,contribu);
+            data.putExtra(EXTRA_EJERCICIO,ejercicio);
+            data.putExtra(EXTRA_TOTALVENTA,neto);
+            data.putExtra(EXTRA_GRAVADA10VENTA,grava10);
+            data.putExtra(EXTRA_GRAVADA5VENTA,grava5);
+            data.putExtra(EXTRA_EXENTAVENTA,exe);
+            data.putExtra(EXTRA_IVA10VENTA,iva10);
+            data.putExtra(EXTRA_IVA5VENTA,iva5);
+            data.putExtra(EXTRA_NRO1VENTA,nro1);
+            data.putExtra(EXTRA_NRO2VENTA,nro2);
+            data.putExtra(EXTRA_NRO3VENTA,nro3);
+            data.putExtra(EXTRA_DIAVENTA,dia);
+            data.putExtra(EXTRA_MESVENTA,mes);
+            data.putExtra(EXTRA_ANHOVENTA,anho);
+
+            //VERIFICAR SI ES MODIFICAR O NUEVO
+            int id = getIntent().getIntExtra(EXTRA_IDFACTURAVENTA,-1);
+            if (id != -1){
+                data.putExtra(EXTRA_IDFACTURAVENTA,id);
+            }
+            setResult(RESULT_OK,data);
+            finish();
+        }
+    }
+
+    /*@Override
+    public void onClick(View v) {
+        int id = v.getId();
+        switch (id){
+            case R.id.btnGrabaClasEgreso:
+                save();
+                //Toast.makeText(this,"valor  "+codegreso+" - "+desegreso,Toast.LENGTH_SHORT).show();
+                break;
+        }
+    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -327,7 +551,7 @@ public class VentaCargaAddActivity extends AppCompatActivity  {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.save_contribuyente:
-               // save();
+                save();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
