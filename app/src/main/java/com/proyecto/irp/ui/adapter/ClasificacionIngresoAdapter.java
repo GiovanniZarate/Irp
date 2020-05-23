@@ -56,7 +56,7 @@ public class ClasificacionIngresoAdapter extends RecyclerView.Adapter<Clasificac
     public void onBindViewHolder(@NonNull ClasificacionIngresoHolder holder, int position) {
         ClasificacionIngreso currentItem = clasficacionIngreso.get(position);
         holder.tvIdclasingreso.setText("Id: "+String.valueOf(currentItem.getIdclasificacioningreso()));
-        holder.tvDescriClasIngreso.setText(currentItem.getDescripcion());
+        holder.tvDescriClasIngreso.setText(currentItem.getDescripcionclasificacioningreso());
     }
 
     @Override

@@ -132,21 +132,17 @@ public class VentaCargaAddActivity extends AppCompatActivity  {
                         tvimp10.setText("0");
                         tviva10.setText("0");
 
-                        calculatotales();
+                        calculatotales(0,3);
                     }else{
                         //CALCULAR IVA GRAVADA Y PASAR A LOS TEXTOS
-                        int valor10=0,iva10=0,gravada10=0;
+                        int valor10=0;
                         valor10 = Integer.parseInt(tvimpgrav10.getText().toString().replace(".",""));
                         //Math.round(Integer.parseInt(v_jtgrav10) * 0.1)
                         //iva10 = (int) Math.round(valor10/11 * 0.1);
-                        iva10 = valor10/11 ;
-                        gravada10 = valor10-iva10;
-
-                        formatotextoenableseparadormiles(tvimp10,gravada10);
-                        formatotextoenableseparadormiles(tviva10,iva10);
+                        //calculaiva(valor10,0);
                         //tvimp10.setText(""+gravada10);
                         //tviva10.setText(""+iva10);
-                        calculatotales();
+                        calculatotales(valor10,0);
                         //ilimpgrav10.setError("");
                     }
                 }else{
@@ -168,21 +164,17 @@ public class VentaCargaAddActivity extends AppCompatActivity  {
                         tvimp5.setText("0");
                         tviva5.setText("0");
 
-                        calculatotales();
+                        calculatotales(0,3);
                     }else{
                         //CALCULAR IVA GRAVADA Y PASAR A LOS TEXTOS
-                        int valor5=0,iva5=0,gravada5=0;
+                        int valor5=0;
                         valor5 = Integer.parseInt(tvimpgrav5.getText().toString().replace(".",""));
                         //iva5 = (int) Math.round(valor5/21 * 0.1);
-                        iva5 = valor5/21 ;
-                        gravada5 = valor5-iva5;
-
-                        formatotextoenableseparadormiles(tvimp5,gravada5);
-                        formatotextoenableseparadormiles(tviva5,iva5);
+                        //calculaiva(valor5,1);
                         //tvimp5.setText(""+gravada5);
                         //tviva5.setText(""+iva5);
 
-                        calculatotales();
+                        calculatotales(valor5,1);
                         //ilimpgrav5.setError("");
                     }
                 }else{
@@ -201,10 +193,10 @@ public class VentaCargaAddActivity extends AppCompatActivity  {
                     //SI ESTA VACIO PONE EN CERO
                     if (tvimpexenta.getText().toString().isEmpty()){
                         tvimpexenta.setText("0");
-                        calculatotales();
+                        calculatotales(0,3);
                     }else{
                         //CALCULAR IVA GRAVADA Y PASAR A LOS TEXTOS
-                        calculatotales();
+                        calculatotales(0,3);
                         //ilimpexe.setError("");
                     }
                 }else{
@@ -230,6 +222,23 @@ public class VentaCargaAddActivity extends AppCompatActivity  {
         //Seleccionar completo el Texto
         //campo1.selectAll();
 }
+
+    private void calculaiva(int valorgravada, int tipoiva) {
+        //gravda 10 - 0 gravada5 1
+        if (tipoiva==0){
+            int iva10=0,gravada10=0;
+            iva10 = valorgravada/11 ;
+            gravada10 = valorgravada-iva10;
+            formatotextoenableseparadormiles(tvimp10,gravada10);
+            formatotextoenableseparadormiles(tviva10,iva10);
+        }else if(tipoiva==1){
+            int iva5=0,gravada5=0;
+            iva5 = valorgravada/21 ;
+            gravada5 = valorgravada-iva5;
+            formatotextoenableseparadormiles(tvimp5,gravada5);
+            formatotextoenableseparadormiles(tviva5,iva5);
+        }
+    }
 
     private void capturaCombo() {
 
@@ -330,16 +339,47 @@ public class VentaCargaAddActivity extends AppCompatActivity  {
         tvdia.setText(intent.getStringExtra(EXTRA_DIAVENTA));
         tvmes.setText(intent.getStringExtra(EXTRA_MESVENTA));
         tvanho.setText(intent.getStringExtra(EXTRA_ANHOVENTA));
-        /*for (int i = 0; i <  spinnerTipoDocumento.getAdapter().getCount(); i++){
+        for (int i = 0; i <  spinnerTipoDocumento.getAdapter().getCount(); i++){
             if (spinnerTipoDocumento.getAdapter().getItem(i).toString().trim().equals(intent.getStringExtra(EXTRA_TIPOCOMPROBANTESELECTED).toString().trim())){
                 spinnerTipoDocumento.setSelection(i);
                 break;
             }
-       }*/
+       }
+        for (int i = 0; i <  spinnerTipoIngreso.getAdapter().getCount(); i++){
+            if (spinnerTipoIngreso.getAdapter().getItem(i).toString().trim().equals(intent.getStringExtra(EXTRA_CLASIFICACIONINGRESOSELECTED).toString().trim())){
+                spinnerTipoIngreso.setSelection(i);
+                break;
+            }
+        }
+        for (int i = 0; i <  spinnerCliente.getAdapter().getCount(); i++){
+            if (spinnerCliente.getAdapter().getItem(i).toString().trim().equals(intent.getStringExtra(EXTRA_CLIENTESELECTED).toString().trim())){
+                spinnerCliente.setSelection(i);
+                break;
+            }
+        }
+        tvnro1.setText(intent.getStringExtra(EXTRA_NRO1VENTA));
+        tvnro2.setText(intent.getStringExtra(EXTRA_NRO2VENTA));
+        tvnro3.setText(intent.getStringExtra(EXTRA_NRO3VENTA));
+
+        //Toast.makeText(this,"valor grav10 "+intent.getStringExtra(EXTRA_GRAVADA10VENTA),Toast.LENGTH_SHORT).show();
+
+        tvimpgrav10.setText(intent.getStringExtra(EXTRA_GRAVADA10VENTA));
+        tvimpgrav5.setText(intent.getStringExtra(EXTRA_GRAVADA5VENTA));
+        tvimpexenta.setText(intent.getStringExtra(EXTRA_EXENTAVENTA));
+
+        formatotextoenableseparadormiles(tviva10,Integer.parseInt(intent.getStringExtra(EXTRA_IVA10VENTA)));
+        formatotextoenableseparadormiles(tviva5,Integer.parseInt(intent.getStringExtra(EXTRA_IVA5VENTA)));
+
+        //tviva10.setText(intent.getStringExtra(EXTRA_IVA10VENTA));
+        //tviva5.setText(intent.getStringExtra(EXTRA_IVA5VENTA));
+        calculatotales(Integer.parseInt(intent.getStringExtra(EXTRA_GRAVADA10VENTA)),0);
+        calculatotales(Integer.parseInt(intent.getStringExtra(EXTRA_GRAVADA5VENTA)),1);
     }
 
 
-    private void calculatotales(){
+    private void calculatotales(int valorgravada,int tipo){
+        calculaiva(valorgravada,tipo);
+
        int  ivatotal = Integer.parseInt(tviva10.getText().toString().replace(".",""))
                +Integer.parseInt(tviva5.getText().toString().replace(".",""));
        int  gravadatotal = Integer.parseInt(tvimp10.getText().toString().replace(".",""))

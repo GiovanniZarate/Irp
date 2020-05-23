@@ -93,7 +93,19 @@ public class VentaCargaFragment extends Fragment {
                 intent.putExtra(VentaCargaAddActivity.EXTRA_TIPOCOMPROBANTE,String.valueOf(facturaventa.getId_comprobante()));
                 intent.putExtra(VentaCargaAddActivity.EXTRA_CLASIFICACIONINGRESO,String.valueOf(facturaventa.getId_clasificacioningreso()));
                 intent.putExtra(VentaCargaAddActivity.EXTRA_CLIENTE,String.valueOf(facturaventa.getId_cliente()));
+                intent.putExtra(VentaCargaAddActivity.EXTRA_TIPOCOMPROBANTESELECTED,facturaventa.tipoComprobante.getDescripciontipocomprobante());
+                intent.putExtra(VentaCargaAddActivity.EXTRA_CLASIFICACIONINGRESOSELECTED,facturaventa.clasificacionIngreso.getDescripcionclasificacioningreso());
+                intent.putExtra(VentaCargaAddActivity.EXTRA_CLIENTESELECTED,facturaventa.cliente.getNombre());
+                intent.putExtra(VentaCargaAddActivity.EXTRA_NRO1VENTA,facturaventa.getNro1_venta());
+                intent.putExtra(VentaCargaAddActivity.EXTRA_NRO2VENTA,facturaventa.getNro2_venta());
+                intent.putExtra(VentaCargaAddActivity.EXTRA_NRO3VENTA,facturaventa.getNro3_venta());
+                intent.putExtra(VentaCargaAddActivity.EXTRA_GRAVADA10VENTA,String.valueOf(facturaventa.getGravada10_venta()));
+                intent.putExtra(VentaCargaAddActivity.EXTRA_GRAVADA5VENTA,String.valueOf(facturaventa.getGravada5_venta()));
+                intent.putExtra(VentaCargaAddActivity.EXTRA_EXENTAVENTA,String.valueOf(facturaventa.getExenta_venta()));
+                intent.putExtra(VentaCargaAddActivity.EXTRA_IVA10VENTA,String.valueOf(facturaventa.getIva10_venta()));
+                intent.putExtra(VentaCargaAddActivity.EXTRA_IVA5VENTA,String.valueOf(facturaventa.getIva5_venta()));
 
+                //Toast.makeText(getActivity(),"valor enviado 10 "+facturaventa.getGravada10_venta(),Toast.LENGTH_SHORT).show();
                 //intent.putExtra(ClasEgresoAddActivity.EXTRA_TIPOEGRESOSELECTED,entity.tipoEgreso.getDescripciontipoegreso());
 
 
@@ -108,35 +120,37 @@ public class VentaCargaFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+    if (data!=null){
+        String dia = data.getStringExtra(VentaCargaAddActivity.EXTRA_DIAVENTA);
+        String mes =  data.getStringExtra(VentaCargaAddActivity.EXTRA_MESVENTA);
+        String anho =  data.getStringExtra(VentaCargaAddActivity.EXTRA_ANHOVENTA);
+
+        String nro1 = data.getStringExtra(VentaCargaAddActivity.EXTRA_NRO1VENTA);
+        String nro2 =  data.getStringExtra(VentaCargaAddActivity.EXTRA_NRO2VENTA);
+        String nro3 =  data.getStringExtra(VentaCargaAddActivity.EXTRA_NRO3VENTA);
+
+        long fecha = Long.parseLong(dia+mes+anho);
+        int idcliente = Integer.parseInt(data.getStringExtra(VentaCargaAddActivity.EXTRA_CLIENTE));
+        int idclasingreso = Integer.parseInt(data.getStringExtra(VentaCargaAddActivity.EXTRA_CLASIFICACIONINGRESO));
+        int idcontribuyente = Integer.parseInt(data.getStringExtra(VentaCargaAddActivity.EXTRA_CONTRIBUYENTE));
+        int idejercicio = Integer.parseInt(data.getStringExtra(VentaCargaAddActivity.EXTRA_EJERCICIO));
+        int idcomprobante = Integer.parseInt(data.getStringExtra(VentaCargaAddActivity.EXTRA_TIPOCOMPROBANTE));
+
+        String nrofactura = String.valueOf(nro1).trim().concat("-")
+                .concat(String.valueOf(nro2).trim().concat("-")
+                        .concat(String.valueOf(nro3).trim()));
+
+        int total = Integer.parseInt(data.getStringExtra(VentaCargaAddActivity.EXTRA_TOTALVENTA));
+        int EX = Integer.parseInt(data.getStringExtra(VentaCargaAddActivity.EXTRA_TOTALVENTA));
+        int grav10 = Integer.parseInt(data.getStringExtra(VentaCargaAddActivity.EXTRA_GRAVADA10VENTA));
+        int grav5 = Integer.parseInt(data.getStringExtra(VentaCargaAddActivity.EXTRA_GRAVADA5VENTA));
+        int exen = Integer.parseInt(data.getStringExtra(VentaCargaAddActivity.EXTRA_EXENTAVENTA));
+
+        int iva10 = Integer.parseInt(data.getStringExtra(VentaCargaAddActivity.EXTRA_IVA10VENTA));
+        int iva5 = Integer.parseInt(data.getStringExtra(VentaCargaAddActivity.EXTRA_IVA5VENTA));
+
+        //Toast.makeText(getActivity(),"data "+data,Toast.LENGTH_SHORT).show();
         if (requestCode == ADD_FACTURAVENTA_REQUEST && resultCode == RESULT_OK) {
-            String dia = data.getStringExtra(VentaCargaAddActivity.EXTRA_DIAVENTA);
-            String mes =  data.getStringExtra(VentaCargaAddActivity.EXTRA_MESVENTA);
-            String anho =  data.getStringExtra(VentaCargaAddActivity.EXTRA_ANHOVENTA);
-
-            String nro1 = data.getStringExtra(VentaCargaAddActivity.EXTRA_NRO1VENTA);
-            String nro2 =  data.getStringExtra(VentaCargaAddActivity.EXTRA_NRO2VENTA);
-            String nro3 =  data.getStringExtra(VentaCargaAddActivity.EXTRA_NRO3VENTA);
-
-            long fecha = Long.parseLong(dia+mes+anho);
-            int idcliente = Integer.parseInt(data.getStringExtra(VentaCargaAddActivity.EXTRA_CLIENTE));
-            int idclasingreso = Integer.parseInt(data.getStringExtra(VentaCargaAddActivity.EXTRA_CLASIFICACIONINGRESO));
-            int idcontribuyente = Integer.parseInt(data.getStringExtra(VentaCargaAddActivity.EXTRA_CONTRIBUYENTE));
-            int idejercicio = Integer.parseInt(data.getStringExtra(VentaCargaAddActivity.EXTRA_EJERCICIO));
-            int idcomprobante = Integer.parseInt(data.getStringExtra(VentaCargaAddActivity.EXTRA_TIPOCOMPROBANTE));
-
-            String nrofactura = String.valueOf(nro1).trim().concat("-")
-                    .concat(String.valueOf(nro2).trim().concat("-")
-                            .concat(String.valueOf(nro3).trim()));
-
-            int total = Integer.parseInt(data.getStringExtra(VentaCargaAddActivity.EXTRA_TOTALVENTA));
-            int EX = Integer.parseInt(data.getStringExtra(VentaCargaAddActivity.EXTRA_TOTALVENTA));
-            int grav10 = Integer.parseInt(data.getStringExtra(VentaCargaAddActivity.EXTRA_GRAVADA10VENTA));
-            int grav5 = Integer.parseInt(data.getStringExtra(VentaCargaAddActivity.EXTRA_GRAVADA5VENTA));
-            int exen = Integer.parseInt(data.getStringExtra(VentaCargaAddActivity.EXTRA_EXENTAVENTA));
-
-            int iva10 = Integer.parseInt(data.getStringExtra(VentaCargaAddActivity.EXTRA_IVA10VENTA));
-            int iva5 = Integer.parseInt(data.getStringExtra(VentaCargaAddActivity.EXTRA_IVA5VENTA));
-
             Facturaventa facturaventa = new Facturaventa(fecha,idcliente,idclasingreso,
                     idcontribuyente,idejercicio,idcomprobante,nrofactura,total,exen,grav10,iva10,
                     grav5,iva5,nro1,nro2,nro3,dia,mes,anho);
@@ -149,35 +163,26 @@ public class VentaCargaFragment extends Fragment {
 
         }
 
-       /* else if  (requestCode == EDIT_CLIENTE_REQUEST && resultCode == RESULT_OK) {
-            int rucveri =Integer.parseInt(data.getStringExtra(ClienteAddActivity.EXTRA_RUCVERI));
-            int rucdiv = Integer.parseInt(data.getStringExtra(ClienteAddActivity.EXTRA_RUCDIV));
-            String nombres = data.getStringExtra(ClienteAddActivity.EXTRA_NOMBRECLIENTE);
-            String tipo = data.getStringExtra(ClienteAddActivity.EXTRA_TIPOCLIENTE);
-            String ruc = String.valueOf(rucveri).trim().concat("-").concat(String.valueOf(rucdiv).trim());
-            int tipocliente;
-            if (tipo.trim().equals("0")){
-                tipocliente=0;
-            }else {
-                tipocliente=1;
-            }
-            int id = data.getIntExtra(ClienteAddActivity.EXTRA_IDCLIENTE,-1);
+        else if  (requestCode == EDIT_FACTURAVENTA_REQUEST && resultCode == RESULT_OK) {
+            int id = data.getIntExtra(VentaCargaAddActivity.EXTRA_IDFACTURAVENTA,-1);
             if (id == -1){
                 Toast.makeText(getActivity(),msgtoast+" no fue Modificado", Toast.LENGTH_SHORT).show();
                 return;
             }
             //Contribuyente contribuyente = new Contribuyente(cedula,ruc,nombres,contrasena);
-            Cliente cliente = new Cliente(nombres,ruc,tipocliente,rucveri,rucdiv);
-            cliente.setIdcliente(id);
-            clienteViewModel.update(cliente);
+            Facturaventa facturaventa = new Facturaventa(fecha,idcliente,idclasingreso,
+                    idcontribuyente,idejercicio,idcomprobante,nrofactura,total,exen,grav10,iva10,
+                    grav5,iva5,nro1,nro2,nro3,dia,mes,anho);
+            facturaventa.setIdfacturaventa(id);
+            ventaCargaViewModel.update(facturaventa);
             Toast.makeText(getActivity(),msgtoast+"  modificado", Toast.LENGTH_SHORT).show();
 
 
-        }*/
-
-        else{
+        } else{
             Toast.makeText(getActivity(),msgtoast+" no Registrado", Toast.LENGTH_SHORT).show();
         }
+
+    }
     }
 
 

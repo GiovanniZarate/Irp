@@ -79,7 +79,7 @@ public class ClasIngresoFragment extends Fragment {
             public void onItemClick(ClasificacionIngreso entity) {
                 Intent intent = new Intent(getActivity(),ClasIngresoAddActivity.class);
                 intent.putExtra(ClasIngresoAddActivity.EXTRA_IDCLASINGRESO,entity.getIdclasificacioningreso());
-                intent.putExtra(ClasIngresoAddActivity.EXTRA_DESCRICLASINGRESO,entity.getDescripcion());
+                intent.putExtra(ClasIngresoAddActivity.EXTRA_DESCRICLASINGRESO,entity.getDescripcionclasificacioningreso());
 
                 startActivityForResult(intent, EDIT_CLASINGRESO_REQUEST);
             }

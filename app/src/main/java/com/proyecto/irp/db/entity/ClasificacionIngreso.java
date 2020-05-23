@@ -1,6 +1,7 @@
 package com.proyecto.irp.db.entity;
 
 import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
@@ -9,10 +10,12 @@ import androidx.room.PrimaryKey;
 public class ClasificacionIngreso {
     @PrimaryKey(autoGenerate = true)
     private int idclasificacioningreso;
-    private String descripcion;
+    @ColumnInfo(name = "descripcion_clasificacioningreso")
+    private String descripcionclasificacioningreso;
 
-    public ClasificacionIngreso(String descripcion) {
-        this.descripcion = descripcion;
+
+    public ClasificacionIngreso(String descripcionclasificacioningreso) {
+        this.descripcionclasificacioningreso = descripcionclasificacioningreso;
     }
 
     public void setIdclasificacioningreso(int idclasificacioningreso) {
@@ -23,13 +26,13 @@ public class ClasificacionIngreso {
         return idclasificacioningreso;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getDescripcionclasificacioningreso() {
+        return descripcionclasificacioningreso;
     }
 
     @NonNull
     @Override
     public String toString() {
-        return descripcion;
+        return descripcionclasificacioningreso;
     }
 }

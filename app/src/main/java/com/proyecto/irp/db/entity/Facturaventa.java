@@ -180,7 +180,7 @@ public class Facturaventa {
 
     @Embedded()
     public TipoComprobante tipoComprobante;
-    @Embedded(prefix = "ci")
+    @Embedded
     public ClasificacionIngreso clasificacionIngreso;
     @Embedded
     public Cliente cliente;
