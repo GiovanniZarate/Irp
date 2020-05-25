@@ -1,5 +1,6 @@
 package com.proyecto.irp.ui.venta;
 
+import androidx.appcompat.widget.SearchView;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -12,12 +13,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+
 
 import com.proyecto.irp.R;
 import com.proyecto.irp.db.entity.Facturaventa;
 import com.proyecto.irp.ui.adapter.FacturaVentaAdapter;
+import com.proyecto.irp.ui.adapter.FacturaVentaBusAdapter;
 
 import java.util.List;
 
@@ -26,7 +33,8 @@ public class VentaBusquedaFragment extends Fragment {
     //INCIALIZAR ESTOAS
     private VentaBusquedaViewModel ventaBusquedaViewModel;
     RecyclerView recyclerView;
-    FacturaVentaAdapter adapter;
+    FacturaVentaBusAdapter adapter;
+    List<Facturaventa> facturaventas;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -39,9 +47,10 @@ public class VentaBusquedaFragment extends Fragment {
 
 
         //INSTANCIAR EL ADAPTER
-        adapter = new FacturaVentaAdapter();
+        adapter = new FacturaVentaBusAdapter();
         recyclerView.setAdapter(adapter);
 
+        setHasOptionsMenu(true);
 
         //INSTANCIAR EL VIEW MODEL
         ventaBusquedaViewModel = ViewModelProviders.of(this).get(VentaBusquedaViewModel.class);
@@ -63,5 +72,33 @@ public class VentaBusquedaFragment extends Fragment {
         return view;
     }
 
+   /* @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+    }*/
 
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+       inflater.inflate(R.menu.menu_busqueda,menu);
+
+        MenuItem busquedaItem = menu.findItem(R.id.buscador);
+        SearchView searchView = (SearchView) busquedaItem.getActionView();
+
+        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+        super.onCreateOptionsMenu(menu,inflater);
+    }
 }

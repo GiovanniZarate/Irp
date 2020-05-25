@@ -20,6 +20,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.proyecto.irp.Config.SessionManager;
 import com.proyecto.irp.R;
@@ -71,7 +72,7 @@ public class VentaCargaAddActivity extends AppCompatActivity  {
 
     TextInputLayout ilnro1,ilnro2,ilnro3,ildia,ilmes,ilanho,ilimpgrav10,ilimpgrav5,ilimpexe;
 
-    String codtipodocumento,codtipoingreso,codcliente;
+    String codtipodocumento,codtipoingreso,codcliente,ejercicioactual;
 
     private TipoComprobanteViewModel tipoComprobanteViewModel;
     private List<TipoComprobante> combocomprobante;
@@ -325,6 +326,7 @@ public class VentaCargaAddActivity extends AppCompatActivity  {
     }
 
     private void modoAgregarEditar() {
+        ejercicioactual = String.valueOf(managerUsuario.ObtenerDatos().getAnho());
         //para poner titulo si es agregar o modificar
          intent = getIntent();
         if (intent.hasExtra(EXTRA_IDFACTURAVENTA)){
@@ -332,6 +334,13 @@ public class VentaCargaAddActivity extends AppCompatActivity  {
             recibirValoresEditar();
         }else {
             setTitle("Agregar Ingreso");
+
+            if (ejercicioactual.trim()==null){
+                Toast.makeText(this,"Debes Crear Ejercicio ",Toast.LENGTH_LONG).show();
+            }else {
+                tvanho.setText(ejercicioactual);
+            }
+
         }
     }
 
@@ -398,13 +407,33 @@ public class VentaCargaAddActivity extends AppCompatActivity  {
         // tvneto.setText(""+neto);
     }
 
+    //ANTES DE GRABAR QUE VUELVA A RECALCULAR EL TODAL
+    /*private void calculatotalgrabar(){
+        int  ivatotal = Integer.parseInt(tviva10.getText().toString().replace(".",""))
+                +Integer.parseInt(tviva5.getText().toString().replace(".",""));
+        int  gravadatotal = Integer.parseInt(tvimp10.getText().toString().replace(".",""))
+                +Integer.parseInt(tvimp5.getText().toString().replace(".",""));
+
+
+
+        int neto = ivatotal +gravadatotal +
+                Integer.parseInt(tvimpexenta.getText().toString().replace(".",""));
+
+        Toast.makeText(this,"ivatotal "+ivatotal+ "gravadatotal "+gravadatotal+" neto "+neto,Toast.LENGTH_LONG).show();
+
+        formatotextoenableseparadormiles(tvimpsubtotal,gravadatotal);
+        formatotextoenableseparadormiles(tvtotaliva,ivatotal);
+        formatotextoenableseparadormiles(tvneto,neto);
+    }*/
+
+
    private void formatotextoenableseparadormiles(EditText editText,int value){
        DecimalFormat formateador = new DecimalFormat("###,###.##");
        editText.setText(formateador.format(value));
    }
 
 
-    private void completacero(EditText editText,int cantidad) {
+    private void completacerosifalta(EditText editText,int cantidad) {
         int l = 0;
         String aux = "";
         aux = editText.getText().toString().trim();
@@ -432,8 +461,16 @@ public class VentaCargaAddActivity extends AppCompatActivity  {
                         //edtnrofactura.setError("Debe Ingresar Nro "+msg);
                         textInputLayout.setError("Vacio"+msg);
                     }else{
-                        completacero(edtnrofactura,cantidad);
-                        textInputLayout.setError("");
+                        if(edtnrofactura.getText().toString().length()>cantidad){
+                            //VALIDAR QUE SE ESCRIBA LA CANTIDAD REQUERIDA
+                            int maxcaracter = edtnrofactura.getText().toString().trim().length();
+                            int mincaracter = maxcaracter - cantidad;
+                            edtnrofactura.setText(edtnrofactura.getText().toString().trim()
+                                    .substring(mincaracter,maxcaracter));
+                        } else{
+                            completacerosifalta(edtnrofactura,cantidad);
+                            textInputLayout.setError("");
+                        }
                     }
                 }
             }
@@ -481,33 +518,37 @@ public class VentaCargaAddActivity extends AppCompatActivity  {
             ilimpexe.setError("Vacio");
         }*/
 
-        String dia = tvdia.getText().toString();
-        String mes = tvmes.getText().toString();
-        String anho = tvanho.getText().toString();
 
-        String nro1 = tvnro1.getText().toString();
-        String nro2 = tvnro2.getText().toString();
-        String nro3 = tvnro3.getText().toString();
+
+
+
+      //  CALCULA DE NUEVO SI SE CAMBIA UN VALOR DE GRAVADA Y NO SE DA FOCUS
+        calculatotales(Integer.parseInt(tvimpgrav10.getText().toString().replace(".","")),0);
+        calculatotales(Integer.parseInt(tvimpgrav5.getText().toString().replace(".","")),1);
+        //calculatotales(Integer.parseInt(intent.getStringExtra(EXTRA_GRAVADA10VENTA)),0);
 
         String grava10 = tvimpgrav10.getText().toString().replace(".","");
         String grava5 = tvimpgrav5.getText().toString().replace(".","");
         String exe = tvimpexenta.getText().toString().replace(".","");
 
-        String neto = tvneto.getText().toString().replace(".","");
+
 
         String iva10 = tviva10.getText().toString().replace(".","");
         String iva5 = tviva5.getText().toString().replace(".","");
+
+
+        String neto = tvneto.getText().toString().replace(".","");
 
         String contribu = String.valueOf(managerUsuario.ObtenerDatos().getIdcontribuyente());
         String ejercicio =  String.valueOf(managerUsuario.ObtenerDatos().getIdejercicio());
 
         //Toast.makeText(this,"VALOR CONTR "+contribu,Toast.LENGTH_SHORT).show();
 
-        if(dia.trim().isEmpty()){
+        if(tvdia.getText().toString().trim().isEmpty()){
             ildia.setError("Vacio");
-        }else if(mes.trim().isEmpty()){
+        }else if(tvmes.getText().toString().trim().isEmpty()){
             ilmes.setError("Vacio");
-        }else if(anho.trim().isEmpty()){
+        }else if(tvanho.getText().toString().trim().isEmpty()){
             ilanho.setError("Vacio");
         }else if(adapter_comprobante.isEmpty()){
             Toast.makeText(this,"Debes Seleccionar Tipo de Documento",Toast.LENGTH_SHORT).show();
@@ -515,13 +556,11 @@ public class VentaCargaAddActivity extends AppCompatActivity  {
             Toast.makeText(this,"Debes Seleccionar Tipo de Ingreso",Toast.LENGTH_SHORT).show();
         }else if(adapter_cliente.isEmpty()){
             Toast.makeText(this,"Debes Seleccionar Cliente",Toast.LENGTH_SHORT).show();
-        }else if(anho.trim().isEmpty()){
-            ilanho.setError("Vacio");
-        }else if(nro1.trim().isEmpty()){
+        }else if(tvnro1.getText().toString().trim().isEmpty()){
             ilnro1.setError("Vacio");
-        }else if(nro2.trim().isEmpty()){
+        }else if(tvnro2.getText().toString().trim().isEmpty()){
             ilnro2.setError("Vacio");
-        }else if(nro3.trim().isEmpty()){
+        }else if(tvnro3.getText().toString().trim().isEmpty()){
             ilnro3.setError("Vacio");
         }else if(grava5.trim().isEmpty()){
             ilimpgrav5.setError("Vacio");
@@ -529,13 +568,44 @@ public class VentaCargaAddActivity extends AppCompatActivity  {
             ilimpgrav10.setError("Vacio");
         }else if(exe.trim().isEmpty()){
             ilimpexe.setError("Vacio");
+        }else if(!tvanho.getText().toString().trim().equals(ejercicioactual.trim())){
+            //Toast.makeText(this,"valor cargado "+tvanho.getText().toString().trim()+" valor del ejercio"+ejercicioactual.trim(),Toast.LENGTH_LONG).show();
+            ilanho.setError("Año no Corresponde al ejercicio");
         }else if(contribu.trim() == null){
             Toast.makeText(this,"Contribuyente no existe",Toast.LENGTH_SHORT).show();
         }else if(ejercicio.trim() == null){
             Toast.makeText(this,"Ejercicio no existe",Toast.LENGTH_SHORT).show();
         }else if(neto.trim().equals("0")){
             Toast.makeText(this,"Valor Neto No Puede Estar en Cero",Toast.LENGTH_SHORT).show();
-        }else{
+        }
+        else{
+            //VALIDA A LA HORA DE GRABAR LA CANTIDAD DE CARACTERES EN LOS CAMPOS
+            //DIA MES AÑO
+            verificacantidadcaractermayor(tvdia,2);
+            verificacantidadcaractermayor(tvmes,2);
+            verificacantidadcaractermayor(tvanho,4);
+
+            //AQUI LO CANTRARIO SI ES MENOR DEBE COMPLETAR DE NUEVO CON CEROS NRO1, NRO2 Y NRO3
+            verificacantidadcaractermayor(tvnro1,3);
+            verificacantidadcaractermayor(tvnro2,3);
+            verificacantidadcaractermayor(tvnro3,7);
+
+            String dia = tvdia.getText().toString();
+            String mes = tvmes.getText().toString();
+            String anho = tvanho.getText().toString();
+
+            String nro1 = tvnro1.getText().toString();
+            String nro2 = tvnro2.getText().toString();
+            String nro3 = tvnro3.getText().toString();
+            //si tienen todos cero
+            if (nro1.trim().equals("000")||nro2.trim().equals("000")||nro3.trim().equals("0000000")){
+                Toast.makeText(this,"Campos Nro.1, Nro.2 o Nro. 3 Tienes todos los valores en cero",
+                        Toast.LENGTH_LONG).show();
+                return;
+            }
+
+
+
             Intent data = new Intent();
             data.putExtra(EXTRA_DIAVENTA,dia);
             data.putExtra(EXTRA_TIPOCOMPROBANTE,codtipodocumento);
@@ -569,6 +639,18 @@ public class VentaCargaAddActivity extends AppCompatActivity  {
         }
     }
 
+    //PARA VERIFICAR LA CANTIDAD DE CARACTERES MAYORES  EN DIA MES AÑO
+    private void verificacantidadcaractermayor(EditText edtfecha,int cantcaracterpermitido){
+        if(edtfecha.getText().toString().length()>cantcaracterpermitido){
+            //VALIDAR QUE SE ESCRIBA LA CANTIDAD REQUERIDA
+            int maxcaracter = edtfecha.getText().toString().trim().length();
+            int mincaracter = maxcaracter - cantcaracterpermitido;
+            edtfecha.setText(edtfecha.getText().toString().trim()
+                    .substring(mincaracter,maxcaracter));
+        }else {
+            completacerosifalta(edtfecha,cantcaracterpermitido);
+        }
+    }
     /*@Override
     public void onClick(View v) {
         int id = v.getId();

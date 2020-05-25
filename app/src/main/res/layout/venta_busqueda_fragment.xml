@@ -7,7 +7,9 @@
     android:layout_height="match_parent"
     android:background="@color/colorFondo"
     android:id="@+id/contenedor_buscaventa"
-    tools:context=".ui.venta.VentaBusquedaFragment">
+
+    tools:context=".ui.venta.VentaBusquedaFragment"
+    >
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_facturaventabusca"
