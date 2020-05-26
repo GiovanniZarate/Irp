@@ -72,6 +72,8 @@ public class VentaCargaAddActivity extends AppCompatActivity  {
 
     TextInputLayout ilnro1,ilnro2,ilnro3,ildia,ilmes,ilanho,ilimpgrav10,ilimpgrav5,ilimpexe;
 
+    TextView tvcontribuyente;
+
     String codtipodocumento,codtipoingreso,codcliente,ejercicioactual;
 
     private TipoComprobanteViewModel tipoComprobanteViewModel;
@@ -322,11 +324,14 @@ public class VentaCargaAddActivity extends AppCompatActivity  {
         tvmes.setFilters(new InputFilter[]{ new InputFilterMinMax("1", "12")});
         tvanho.setFilters(new InputFilter[]{ new InputFilterMinMax("1", "2060")});
 
+        tvcontribuyente = findViewById(R.id.tvFacturaVentaContribuyente);
+
         managerUsuario = new SessionManager(getApplicationContext());
     }
 
     private void modoAgregarEditar() {
         ejercicioactual = String.valueOf(managerUsuario.ObtenerDatos().getAnho());
+        tvcontribuyente.setText(managerUsuario.ObtenerDatos().getRuc().trim()+" - "+managerUsuario.ObtenerDatos().getNombrecontribuyente().trim());
         //para poner titulo si es agregar o modificar
          intent = getIntent();
         if (intent.hasExtra(EXTRA_IDFACTURAVENTA)){
@@ -520,7 +525,16 @@ public class VentaCargaAddActivity extends AppCompatActivity  {
 
 
 
-
+       if(tvimpgrav5.getText().toString().trim().isEmpty()){
+            ilimpgrav5.setError("Vacio");
+           return;
+        }else if(tvimpgrav10.getText().toString().trim().isEmpty()){
+            ilimpgrav10.setError("Vacio");
+           return;
+        }else if(tvimpexenta.getText().toString().trim().isEmpty()){
+            ilimpexe.setError("Vacio");
+            return;
+        }
 
       //  CALCULA DE NUEVO SI SE CAMBIA UN VALOR DE GRAVADA Y NO SE DA FOCUS
         calculatotales(Integer.parseInt(tvimpgrav10.getText().toString().replace(".","")),0);
@@ -562,12 +576,6 @@ public class VentaCargaAddActivity extends AppCompatActivity  {
             ilnro2.setError("Vacio");
         }else if(tvnro3.getText().toString().trim().isEmpty()){
             ilnro3.setError("Vacio");
-        }else if(grava5.trim().isEmpty()){
-            ilimpgrav5.setError("Vacio");
-        }else if(grava10.trim().isEmpty()){
-            ilimpgrav10.setError("Vacio");
-        }else if(exe.trim().isEmpty()){
-            ilimpexe.setError("Vacio");
         }else if(!tvanho.getText().toString().trim().equals(ejercicioactual.trim())){
             //Toast.makeText(this,"valor cargado "+tvanho.getText().toString().trim()+" valor del ejercio"+ejercicioactual.trim(),Toast.LENGTH_LONG).show();
             ilanho.setError("Año no Corresponde al ejercicio");

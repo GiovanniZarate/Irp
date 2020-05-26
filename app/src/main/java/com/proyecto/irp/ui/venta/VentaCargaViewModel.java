@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.proyecto.irp.Config.SessionManager;
 import com.proyecto.irp.db.entity.Facturaventa;
 import com.proyecto.irp.db.repository.FacturaVentaRepository;
 
@@ -16,12 +17,15 @@ public class VentaCargaViewModel extends AndroidViewModel {
     //SE INICIALIZA EL REPOSITORY Y EL LISTADO DE CLIENTES EN ESTE CASO
     private FacturaVentaRepository repository;
     private LiveData<List<Facturaventa>> allDatos;
+    SessionManager managerUsuario;
 
     public VentaCargaViewModel(@NonNull Application application) {
         super(application);
+        managerUsuario = new SessionManager(application);
         //Al llamar a la clase viewmodel carga estos datos
         repository = new FacturaVentaRepository(application);
-        allDatos = repository.getAllFacturaVenta();
+        allDatos = repository.getAllFacturaVenta(managerUsuario.ObtenerDatos().getIdcontribuyente(),
+                managerUsuario.ObtenerDatos().getIdejercicio());
     }
 
     //AQUI LLAMA A LOS DISTINTOS METODOS DE LA CLASE REPOSITORY COMO SER : INSERT, UPDATE, DELETE, ETC

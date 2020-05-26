@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData;
 
 import com.proyecto.irp.db.AppDatabase;
 import com.proyecto.irp.db.dao.FacturaVentaDao;
+import com.proyecto.irp.db.entity.EstadisticaVentas;
 import com.proyecto.irp.db.entity.Facturaventa;
 
 import java.util.List;
@@ -22,14 +23,18 @@ public class FacturaVentaRepository {
     public FacturaVentaRepository(Application application) {
         db = AppDatabase.getDatabase(application);
         facturaVentaDao = db.facturaVentaDao();
-        allFacturaventa = facturaVentaDao.getAllFacturaventa();
+        //allFacturaventa = facturaVentaDao.getAllFacturaventa(codcontribu);
     }
 
     //EVENTOS A REALIZAR CON LA CLASE: INSERT, UPDATE, DELETE, LISTAR, ETC.
-    public LiveData<List<Facturaventa>> getAllFacturaVenta() {
-        return allFacturaventa;
+    public LiveData<List<Facturaventa>> getAllFacturaVenta(int codcontribu, int codejercicio) {
+        return facturaVentaDao.getAllFacturaventa(codcontribu,codejercicio);
     }
 
+    //MOSTRAR EL TOTAL DE VENTAS PARA GRAFICO
+    public LiveData<List<EstadisticaVentas>> getTotalVenta(int codcontribu, int codejercicio) {
+        return facturaVentaDao.getTotalVenta(codcontribu,codejercicio);
+    }
 
     public void insert(Facturaventa facturaventa){
         new InsertAsyncTask(facturaVentaDao).execute(facturaventa);

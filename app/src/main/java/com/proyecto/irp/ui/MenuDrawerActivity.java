@@ -20,6 +20,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.proyecto.irp.Config.SessionManager;
 import com.proyecto.irp.R;
 import com.proyecto.irp.ui.compra.CompraFragment;
+import com.proyecto.irp.ui.fragments.EstadisticasFragment;
 import com.proyecto.irp.ui.fragments.IniFragment;
 import com.proyecto.irp.ui.perfilusuario.PerfilUsuarioFragment;
 

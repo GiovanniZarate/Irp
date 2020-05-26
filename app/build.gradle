@@ -64,4 +64,7 @@ dependencies {
     //RECYCLERView Decorator
     implementation 'it.xabaras.android:recyclerview-swipedecorator:1.2.2'
 
+    //PARA EL GRAFICO DE TORTA TAMBIEN SE AGREGO MAVEN EN EL OTRO BULID.GRADLE
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
 }
