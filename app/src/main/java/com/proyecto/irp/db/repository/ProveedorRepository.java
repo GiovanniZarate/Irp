@@ -16,6 +16,7 @@ import java.util.List;
 public class ProveedorRepository {
     private ProveedorDao proveedorDao;
     private LiveData<List<Proveedor>> allProveedor;
+    private List<Proveedor> allProveedorCombo;
 
     AppDatabase db;
 
@@ -24,12 +25,17 @@ public class ProveedorRepository {
         db = AppDatabase.getDatabase(application);
         proveedorDao = db.proveedorDao();
         allProveedor = proveedorDao.getAllProveedor();
+        allProveedorCombo = proveedorDao.getAllProveedorCombo();
     }
 
 
     //EVENTOS A REALIZAR CON LA CLASE: INSERT, UPDATE, DELETE, LISTAR, ETC.
     public LiveData<List<Proveedor>> getAllProveedor() {
         return allProveedor;
+    }
+
+    public List<Proveedor> getAllProveedorCombo() {
+        return allProveedorCombo;
     }
 
     public void insert(Proveedor proveedor){

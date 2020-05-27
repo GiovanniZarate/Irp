@@ -10,14 +10,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.venta.VentaCargaAddActivity"
-            android:parentActivityName=".ui.MenuMovVentaActivity"
+            android:name=".ui.MenuMovCompraActivity"
+            android:label="@string/title_activity_menu_mov_compra"
             android:screenOrientation="portrait"
             ></activity>
+        <activity android:name=".ui.compra.CompraCargaAddActivity"
+            android:parentActivityName=".ui.MenuMovCompraActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.venta.VentaCargaAddActivity"
+            android:parentActivityName=".ui.MenuMovVentaActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.MenuMovVentaActivity"
             android:label="@string/title_activity_menu_mov_venta"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.clasegreso.ClasEgresoAddActivity"
             android:parentActivityName=".ui.MenuRefCompraActivity"

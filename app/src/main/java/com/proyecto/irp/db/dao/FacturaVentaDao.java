@@ -46,8 +46,8 @@ public interface FacturaVentaDao {
             "where id_contribuyente=:codcontribuyente and id_ejercicio=:codejercicio " +
             "GROUP by id_ejercicio " +
             "union " +
-            "SELECT anho,1500000 totalventa from facturaventa " +
-            "join ejercicio on facturaventa.id_ejercicio=ejercicio._id " +
+            "SELECT anho,sum(total_compra) totalventa from facturacompra " +
+            "join ejercicio on facturacompra.id_ejercicio=ejercicio._id " +
             "where id_contribuyente=:codcontribuyente and id_ejercicio=:codejercicio " +
             "GROUP by id_ejercicio ")
     LiveData<List<EstadisticaVentas>> getTotalVenta(int codcontribuyente, int codejercicio);

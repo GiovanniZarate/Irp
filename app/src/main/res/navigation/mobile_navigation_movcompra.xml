@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_cargacompra">
+
+    <fragment
+        android:id="@+id/navigation_cargacompra"
+        android:name="com.proyecto.irp.ui.compra.CompraCargaFragment"
+        android:label="@string/title_navigation_cargacompra"
+        tools:layout="@layout/compracarga_fragment" />
+
+    <fragment
+        android:id="@+id/navigation_buscacompra"
+        android:name="com.proyecto.irp.ui.compra.CompraBusquedaFragment"
+        android:label="@string/title_navigation_buscacompra"
+        tools:layout="@layout/fragment_compra_busqueda" />
+
+</navigation>

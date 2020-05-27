@@ -1,5 +1,6 @@
 package com.proyecto.irp.db.entity;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Embedded;
 import androidx.room.Entity;
@@ -101,5 +102,9 @@ public class ClasificacionEgreso {
  /*@Ignore
   public TipoEgreso tegre;*/
 
-
+    @NonNull
+    @Override
+    public String toString() {
+        return descripcion;
+    }
 }

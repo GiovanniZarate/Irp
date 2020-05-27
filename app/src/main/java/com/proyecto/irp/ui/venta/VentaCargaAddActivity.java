@@ -105,7 +105,7 @@ public class VentaCargaAddActivity extends AppCompatActivity  {
 
         //PONER EN EL TOOLBAR PARA CERRAR
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_volver);
-        setTitle("Ingreso - 2020");
+        setTitle("Ingreso - "+managerUsuario.ObtenerDatos().getAnho());
 
         cargacombocomprobante();
         cargacombotipoingreso();

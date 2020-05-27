@@ -52,5 +52,10 @@
     <string name="title_nav_buscaventa">Busqueda Ingreso</string>
     <string name="title_navigation_cargaventa">Carga Ingreso</string>
     <string name="title_navigation_buscaventa">Busqueda Ingreso</string>
+    <string name="title_activity_menu_mov_compra">MenuMovCompraActivity</string>
+    <string name="title_nav_cargacompra">Egreso</string>
+    <string name="title_nav_buscacompra">Busqueda Egreso</string>
+    <string name="title_navigation_cargacompra">Egresos</string>
+    <string name="title_navigation_buscacompra">Busqueda Egreso</string>
 
 </resources>

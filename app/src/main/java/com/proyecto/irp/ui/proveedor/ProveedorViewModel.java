@@ -17,12 +17,18 @@ public class ProveedorViewModel extends AndroidViewModel {
     //SE INICIALIZA EL REPOSITORY Y EL LISTADO DE CLIENTES EN ESTE CASO
     private ProveedorRepository repository;
     private LiveData<List<Proveedor>> allDatos;
+    private List<Proveedor> allDatoscombo;
 
     public ProveedorViewModel(@NonNull Application application) {
         super(application);
         //Al llamar a la clase viewmodel carga estos datos
         repository = new ProveedorRepository(application);
         allDatos = repository.getAllProveedor();
+        allDatoscombo = repository.getAllProveedorCombo();
+    }
+
+    public List<Proveedor> getAllProveedorCombo() {
+        return allDatoscombo;
     }
 
     //AQUI LLAMA A LOS DISTINTOS METODOS DE LA CLASE REPOSITORY COMO SER : INSERT, UPDATE, DELETE, ETC

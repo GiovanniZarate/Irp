@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_cargacompra"
+        android:icon="@drawable/ic_compra"
+        android:title="@string/title_nav_cargacompra" />
+
+    <item
+        android:id="@+id/navigation_buscacompra"
+        android:icon="@drawable/ic_search"
+        android:title="@string/title_nav_buscacompra" />
+
+
+
+</menu>

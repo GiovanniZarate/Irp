@@ -32,4 +32,8 @@ public interface ProveedorDao {
     //PARA VERIFICA SI YA EXISTE EL USUARIO Cliente POR NRO. DE CEDULA
     @Query("SELECT COUNT(*) FROM proveedor where ruc = :id" )
     int verificaCedula(String id);
+
+
+    @Query("SELECT * FROM proveedor order by idproveedor ASC")
+    List<Proveedor> getAllProveedorCombo();
 }

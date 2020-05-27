@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorFondo"
     android:padding="5dp"
-    tools:context=".ui.venta.VentaCargaAddActivity">
+    tools:context=".ui.compra.CompraCargaAddActivity">
 
     <TextView
-        android:id="@+id/tvFacturaVentaContribuyente"
+        android:id="@+id/tvFacturaCompraContribuyente"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:drawableStart="@drawable/ic_group"
@@ -23,12 +22,14 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="@+id/tvFacturaVentaContribuyente"
-        app:layout_constraintStart_toStartOf="@+id/tvFacturaVentaContribuyente"
-        app:layout_constraintTop_toBottomOf="@+id/tvFacturaVentaContribuyente">
+        app:layout_constraintEnd_toEndOf="@+id/tvFacturaCompraContribuyente"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tvFacturaCompraContribuyente"
+        app:layout_constraintTop_toBottomOf="@+id/tvFacturaCompraContribuyente">
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/padd"
+            android:id="@+id/padcompra"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingLeft="5dp"
@@ -36,7 +37,7 @@
             android:paddingRight="10dp">
 
             <LinearLayout
-                android:id="@+id/linearLayout2"
+                android:id="@+id/linearLayoutFechaCompra"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -45,7 +46,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/tvtitulofecha"
+                    android:id="@+id/tvtitulofechacompra"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingStart="5dp"
@@ -54,14 +55,14 @@
                     android:textStyle="bold" />
 
                 <LinearLayout
-                    android:id="@+id/contenedorFacturaVentaFecha"
+                    android:id="@+id/contenedorFacturaCompraFecha"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/InputLayoutDia"
+                        android:id="@+id/InputLayoutDiaCompra"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -73,7 +74,7 @@
                         android:textCursorDrawable="@color/colorEditText">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/txtdiaFacturaVenta"
+                            android:id="@+id/txtdiaFacturaCompra"
                             android:layout_width="105dp"
                             android:layout_height="48dp"
                             android:layout_weight="1"
@@ -92,7 +93,7 @@
                         android:textSize="18sp" />
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/InputLayoutMes"
+                        android:id="@+id/InputLayoutMesCompra"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -104,7 +105,7 @@
                         android:textCursorDrawable="@color/colorEditText">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/txtmesFacturaVenta"
+                            android:id="@+id/txtmesFacturaCompra"
                             android:layout_width="105dp"
                             android:layout_height="48dp"
                             android:layout_weight="1"
@@ -123,7 +124,7 @@
                         android:textSize="18sp" />
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/InputLayoutAnho"
+                        android:id="@+id/InputLayoutAnhoCompra"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -135,7 +136,7 @@
                         android:textCursorDrawable="@color/colorEditText">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/txtanhoFacturaVenta"
+                            android:id="@+id/txtanhoFacturaCompra"
                             android:layout_width="108dp"
                             android:layout_height="48dp"
                             android:layout_weight="1"
@@ -149,13 +150,13 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/contenedorFacturaTipoDoc"
+                android:id="@+id/contenedorFacturaTipoDocCompra"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="@+id/linearLayout2"
-                app:layout_constraintStart_toStartOf="@+id/linearLayout2"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+                app:layout_constraintEnd_toEndOf="@+id/linearLayoutFechaCompra"
+                app:layout_constraintStart_toStartOf="@+id/linearLayoutFechaCompra"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayoutFechaCompra">
 
                 <TextView
                     android:id="@+id/textView"
@@ -167,7 +168,7 @@
                     android:textStyle="bold" />
 
                 <Spinner
-                    android:id="@+id/spinnerTipoDocumento"
+                    android:id="@+id/spinnerTipoDocumentoCompra"
                     style="@style/Widget.AppCompat.Spinner.Underlined"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -176,25 +177,25 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/contenedorFacturaVentaTipoIngreso"
+                android:id="@+id/contenedorFacturaCompraTipoEgreso"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="@+id/contenedorFacturaTipoDoc"
-                app:layout_constraintStart_toStartOf="@+id/contenedorFacturaTipoDoc"
-                app:layout_constraintTop_toBottomOf="@+id/contenedorFacturaTipoDoc">
+                app:layout_constraintEnd_toEndOf="@+id/contenedorFacturaTipoDocCompra"
+                app:layout_constraintStart_toStartOf="@+id/contenedorFacturaTipoDocCompra"
+                app:layout_constraintTop_toBottomOf="@+id/contenedorFacturaTipoDocCompra">
 
                 <TextView
-                    android:id="@+id/tvtipoingreso"
+                    android:id="@+id/tvtipoegreso"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingStart="5dp"
-                    android:text="Seleccione Tipo de Ingreso"
+                    android:text="Seleccione Tipo de Egreso"
                     android:textColor="@color/colorAccent"
                     android:textStyle="bold" />
 
                 <Spinner
-                    android:id="@+id/spinnerTipoIngreso"
+                    android:id="@+id/spinnerTipoEgreso"
                     style="@style/Widget.AppCompat.Spinner.Underlined"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -203,25 +204,52 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/contenedorFacturaVentaCliente"
+                android:id="@+id/contenedorFacturaCompraClasEgreso"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="@+id/contenedorFacturaVentaTipoIngreso"
-                app:layout_constraintStart_toStartOf="@+id/contenedorFacturaVentaTipoIngreso"
-                app:layout_constraintTop_toBottomOf="@+id/contenedorFacturaVentaTipoIngreso">
+                app:layout_constraintEnd_toEndOf="@+id/contenedorFacturaCompraTipoEgreso"
+                app:layout_constraintStart_toStartOf="@+id/contenedorFacturaCompraTipoEgreso"
+                app:layout_constraintTop_toBottomOf="@+id/contenedorFacturaCompraTipoEgreso">
 
                 <TextView
-                    android:id="@+id/tvcliente"
+                    android:id="@+id/tvclasegreso"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingStart="5dp"
-                    android:text="Seleccione Cliente"
+                    android:text="Seleccione Clasificación de Egreso"
                     android:textColor="@color/colorAccent"
                     android:textStyle="bold" />
 
                 <Spinner
-                    android:id="@+id/spinnerCliente"
+                    android:id="@+id/spinnerClasEgreso"
+                    style="@style/Widget.AppCompat.Spinner.Underlined"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:outlineAmbientShadowColor="@color/colorEditText"
+                    android:outlineSpotShadowColor="@color/colorPrimary" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/contenedorFacturaCompraProveedor"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="@+id/contenedorFacturaCompraClasEgreso"
+                app:layout_constraintStart_toStartOf="@+id/contenedorFacturaCompraClasEgreso"
+                app:layout_constraintTop_toBottomOf="@+id/contenedorFacturaCompraClasEgreso">
+
+                <TextView
+                    android:id="@+id/tvproveedor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="5dp"
+                    android:text="Seleccione Proveedor"
+                    android:textColor="@color/colorAccent"
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/spinnerProveedor"
                     style="@style/Widget.AppCompat.Spinner.Underlined"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -234,9 +262,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="@+id/contenedorFacturaVentaCliente"
-                app:layout_constraintStart_toStartOf="@+id/contenedorFacturaVentaCliente"
-                app:layout_constraintTop_toBottomOf="@+id/contenedorFacturaVentaCliente">
+                app:layout_constraintEnd_toEndOf="@+id/contenedorFacturaCompraProveedor"
+                app:layout_constraintStart_toStartOf="@+id/contenedorFacturaCompraProveedor"
+                app:layout_constraintTop_toBottomOf="@+id/contenedorFacturaCompraProveedor">
 
                 <TextView
                     android:id="@+id/tvtitulonrofactura"
@@ -255,7 +283,7 @@
 
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/InputLayoutNro1"
+                        android:id="@+id/InputLayoutNro1Compra"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -267,7 +295,7 @@
                         android:textCursorDrawable="@color/colorEditText">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/txtnro1FacturaVenta"
+                            android:id="@+id/txtnro1FacturaCompra"
                             android:layout_width="105dp"
                             android:layout_height="48dp"
                             android:imeOptions="actionNext"
@@ -285,7 +313,7 @@
                         android:textSize="18sp" />
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/InputLayoutNro2"
+                        android:id="@+id/InputLayoutNro2Compra"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -297,7 +325,7 @@
                         android:textCursorDrawable="@color/colorEditText">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/txtnro2FacturaVenta"
+                            android:id="@+id/txtnro2FacturaCompra"
                             android:layout_width="105dp"
                             android:layout_height="48dp"
                             android:imeOptions="actionNext"
@@ -315,7 +343,7 @@
                         android:textSize="18sp" />
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/InputLayoutNro3"
+                        android:id="@+id/InputLayoutNro3Compra"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -327,7 +355,7 @@
                         android:textCursorDrawable="@color/colorEditText">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/txtnro3FacturaVenta"
+                            android:id="@+id/txtnro3FacturaCompra"
                             android:layout_width="110dp"
                             android:layout_height="48dp"
                             android:imeOptions="actionNext"
@@ -357,7 +385,7 @@
                     android:paddingEnd="2dp">
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/InputLayoutImpGrav10"
+                        android:id="@+id/InputLayoutImpGrav10Compra"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -369,7 +397,7 @@
                         android:textCursorDrawable="@color/colorEditText">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/txtimpgrav10FacturaVenta"
+                            android:id="@+id/txtimpgrav10FacturaCompra"
                             android:layout_width="105dp"
                             android:layout_height="48dp"
                             android:imeOptions="actionNext"
@@ -392,7 +420,7 @@
                         android:textCursorDrawable="@color/colorEditText">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/txtimp10FacturaVenta"
+                            android:id="@+id/txtimp10FacturaCompra"
                             android:layout_width="105dp"
                             android:layout_height="48dp"
                             android:enabled="false"
@@ -415,7 +443,7 @@
                         android:textCursorDrawable="@color/colorEditText">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/txtiva10FacturaVenta"
+                            android:id="@+id/txtiva10FacturaCompra"
                             android:layout_width="105dp"
                             android:layout_height="48dp"
                             android:enabled="false"
@@ -437,7 +465,7 @@
                     android:paddingEnd="2dp">
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/InputLayoutImpGrav5"
+                        android:id="@+id/InputLayoutImpGrav5Compra"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -449,7 +477,7 @@
                         android:textCursorDrawable="@color/colorEditText">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/txtimpgrav5FacturaVenta"
+                            android:id="@+id/txtimpgrav5FacturaCompra"
                             android:layout_width="105dp"
                             android:layout_height="48dp"
                             android:imeOptions="actionNext"
@@ -473,7 +501,7 @@
                         android:textCursorDrawable="@color/colorEditText">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/txtimp5FacturaVenta"
+                            android:id="@+id/txtimp5FacturaCompra"
                             android:layout_width="105dp"
                             android:layout_height="48dp"
                             android:enabled="false"
@@ -496,7 +524,7 @@
                         android:textCursorDrawable="@color/colorEditText">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/txtiva5FacturaVenta"
+                            android:id="@+id/txtiva5FacturaCompra"
                             android:layout_width="105dp"
                             android:layout_height="48dp"
                             android:enabled="false"
@@ -518,7 +546,7 @@
                     android:paddingStart="2dp">
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/InputLayoutImpExenta"
+                        android:id="@+id/InputLayoutImpExentaCompra"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -530,7 +558,7 @@
                         android:textCursorDrawable="@color/colorEditText">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/txtimpexentaFacturaVenta"
+                            android:id="@+id/txtimpexentaFacturaCompra"
                             android:layout_width="105dp"
                             android:layout_height="48dp"
                             android:imeOptions="actionGo"
@@ -553,7 +581,7 @@
                         android:textCursorDrawable="@color/colorEditText">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/txtsubtotalFacturaVenta"
+                            android:id="@+id/txtsubtotalFacturaCompra"
                             android:layout_width="105dp"
                             android:layout_height="48dp"
                             android:enabled="false"
@@ -577,7 +605,7 @@
                         android:textCursorDrawable="@color/colorEditText">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/txtivatotalFacturaVenta"
+                            android:id="@+id/txtivatotalFacturaCompra"
                             android:layout_width="105dp"
                             android:layout_height="48dp"
                             android:enabled="false"
@@ -612,13 +640,13 @@
                     android:textCursorDrawable="@color/colorEditText">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txtnetoFacturaVenta"
+                        android:id="@+id/txtnetoFacturaCompra"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:enabled="false"
+                        android:focusable="false"
                         android:inputType="number"
                         android:maxLength="10"
-                        android:focusable="false"
                         android:text="0"
                         android:textAlignment="textEnd"
                         android:textSize="18sp"
@@ -627,5 +655,6 @@
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

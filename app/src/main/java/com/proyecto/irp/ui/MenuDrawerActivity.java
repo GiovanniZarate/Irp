@@ -19,8 +19,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.navigation.NavigationView;
 import com.proyecto.irp.Config.SessionManager;
 import com.proyecto.irp.R;
-import com.proyecto.irp.ui.compra.CompraFragment;
-import com.proyecto.irp.ui.fragments.EstadisticasFragment;
+import com.proyecto.irp.ui.compra.CompraCargaFragment;
 import com.proyecto.irp.ui.fragments.IniFragment;
 import com.proyecto.irp.ui.perfilusuario.PerfilUsuarioFragment;
 
@@ -97,8 +96,8 @@ public class MenuDrawerActivity extends AppCompatActivity implements NavigationV
             case R.id.librocompra:
                 // Intent i = new Intent(MenuDrawerActivity.this, MenuRefVentaActivity.class);
                 //startActivity(i);
-                getSupportFragmentManager().beginTransaction().replace(R.id.contenedor_drawer,
-                        new CompraFragment()).commit();
+                Intent rmc = new Intent(MenuDrawerActivity.this, MenuMovCompraActivity.class);
+                startActivity(rmc);
                 break;
             case R.id.referenciaVenta:
                 Intent rv = new Intent(MenuDrawerActivity.this, MenuRefVentaActivity.class);
