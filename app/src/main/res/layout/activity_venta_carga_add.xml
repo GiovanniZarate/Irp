@@ -618,7 +618,6 @@
                         android:enabled="false"
                         android:inputType="number"
                         android:maxLength="10"
-                        android:focusable="false"
                         android:text="0"
                         android:textAlignment="textEnd"
                         android:textSize="18sp"

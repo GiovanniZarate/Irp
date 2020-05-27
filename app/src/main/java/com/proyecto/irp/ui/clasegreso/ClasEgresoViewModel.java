@@ -26,7 +26,7 @@ public class ClasEgresoViewModel extends AndroidViewModel {
         //Al llamar a la clase viewmodel carga estos datos
         repository = new ClasificacionEgresoRepository(application);
         allDatos = repository.getAllClasificacionEgreso();
-        allDatoscombo = repository.getAllClasificacionEgresoCombo();
+        //allDatoscombo = repository.getAllClasificacionEgresoCombo();
     }
 
     //AQUI LLAMA A LOS DISTINTOS METODOS DE LA CLASE REPOSITORY COMO SER : INSERT, UPDATE, DELETE, ETC
@@ -34,8 +34,9 @@ public class ClasEgresoViewModel extends AndroidViewModel {
         return allDatos;
     }
 
-    public List<ClasificacionEgreso> getAllClasficacionEgresoCombo() {
-        return allDatoscombo;
+    public List<ClasificacionEgreso> getAllClasficacionEgresoCombo(int codtipoegreso) {
+        //return allDatoscombo;
+        return  repository.getAllClasificacionEgresoCombo(codtipoegreso);
     }
 
     public void insert(ClasificacionEgreso clasificacionEgreso){

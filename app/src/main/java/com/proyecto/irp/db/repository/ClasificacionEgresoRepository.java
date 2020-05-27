@@ -26,7 +26,7 @@ public class ClasificacionEgresoRepository {
         db = AppDatabase.getDatabase(application);
         clasificacionEgresoDao = db.clasificacionEgresoDao();
         allClasificacionEgreso = clasificacionEgresoDao.getAllClasificacionegreso();
-        allClasificacionEgresoCombo = clasificacionEgresoDao.getAllClasificacionegresoCombo();
+       // allClasificacionEgresoCombo = clasificacionEgresoDao.getAllClasificacionegresoXTipoEgresoCombo();
     }
 
 
@@ -35,8 +35,9 @@ public class ClasificacionEgresoRepository {
         return allClasificacionEgreso;
     }
 
-    public List<ClasificacionEgreso> getAllClasificacionEgresoCombo() {
-        return allClasificacionEgresoCombo;
+    public List<ClasificacionEgreso> getAllClasificacionEgresoCombo(int codtipoegreso) {
+        //return allClasificacionEgresoCombo;
+        return  clasificacionEgresoDao.getAllClasificacionegresoXTipoEgresoCombo(codtipoegreso);
     }
 
     public void insert(ClasificacionEgreso clasificacionEgreso){

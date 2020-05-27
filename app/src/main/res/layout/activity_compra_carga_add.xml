@@ -644,7 +644,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:enabled="false"
-                        android:focusable="false"
                         android:inputType="number"
                         android:maxLength="10"
                         android:text="0"

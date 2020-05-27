@@ -41,15 +41,16 @@ public interface FacturaVentaDao {
 
     //PARA TRAER EL TOTAL DE VENTA PARA MOSTRAR EN EL GRAFICO
 
-    @Query("SELECT anho,sum(total_venta) totalventa from facturaventa " +
+    @Query("SELECT anho,sum(total_venta) totalventa,1 orden from facturaventa " +
             "join ejercicio on facturaventa.id_ejercicio=ejercicio._id " +
             "where id_contribuyente=:codcontribuyente and id_ejercicio=:codejercicio " +
             "GROUP by id_ejercicio " +
             "union " +
-            "SELECT anho,sum(total_compra) totalventa from facturacompra " +
+            "SELECT anho,sum(total_compra) totalventa,2 orden from facturacompra " +
             "join ejercicio on facturacompra.id_ejercicio=ejercicio._id " +
             "where id_contribuyente=:codcontribuyente and id_ejercicio=:codejercicio " +
-            "GROUP by id_ejercicio ")
+            "GROUP by id_ejercicio " +
+            "order by orden ASC ")
     LiveData<List<EstadisticaVentas>> getTotalVenta(int codcontribuyente, int codejercicio);
 
 

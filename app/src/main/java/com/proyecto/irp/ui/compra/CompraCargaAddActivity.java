@@ -107,11 +107,6 @@ public class CompraCargaAddActivity extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_volver);
         setTitle("Egreso - "+managerUsuario.ObtenerDatos().getAnho());
 
-        cargacombocomprobante();
-        cargacombotipoegreso();
-        cargacomboclasegreso();
-        cargacomboproveedor();
-
 
         //para completar con cero el nro factura
         completacero(tvnro1,3,"1",ilnro1);
@@ -132,12 +127,17 @@ public class CompraCargaAddActivity extends AppCompatActivity {
         tvimpgrav5.addTextChangedListener(new separador_miles(tvimpgrav5));
         tvimpexenta.addTextChangedListener(new separador_miles(tvimpexenta));
 
-        //PARA SABER SI SE VA A EDITAR O AGREGAR NUEVO
-        modoAgregarEditar();
+        cargacombocomprobante();
+        cargacombotipoegreso();
+
+        cargacomboproveedor();
 
         //CAPTURAR VALOR SELECCIONADO COMOBO
         capturaCombo();
 
+
+        //PARA SABER SI SE VA A EDITAR O AGREGAR NUEVO
+        modoAgregarEditar();
 
     }
 
@@ -149,6 +149,7 @@ public class CompraCargaAddActivity extends AppCompatActivity {
         if (intent.hasExtra(EXTRA_IDFACTURACOMPRA)){
             setTitle("Editar Egreso");
             recibirValoresEditar();
+            tvdia.requestFocus();
         }else {
             setTitle("Agregar Egreso");
 
@@ -162,6 +163,7 @@ public class CompraCargaAddActivity extends AppCompatActivity {
     }
 
     private void recibirValoresEditar() {
+
         tvdia.setText(intent.getStringExtra(EXTRA_DIACOMPRA));
         tvmes.setText(intent.getStringExtra(EXTRA_MESCOMPRA));
         tvanho.setText(intent.getStringExtra(EXTRA_ANHOCOMPRA));
@@ -177,12 +179,16 @@ public class CompraCargaAddActivity extends AppCompatActivity {
                 break;
             }
         }
-        for (int i = 0; i <  spinnerClasTipoEgreso.getAdapter().getCount(); i++){
+        /*Toast.makeText(this,"valor tipo egreso "+intent.getStringExtra(EXTRA_TIPOEGRESO).toString().trim()+
+                        "VALOR CLAS EGRESO "+intent.getStringExtra(EXTRA_CLASIFICACIONEGRESOSELECTED).toString().trim(),
+                Toast.LENGTH_LONG).show();*/
+        //cargacomboclasegreso(Integer.parseInt(intent.getStringExtra(EXTRA_TIPOEGRESO).toString().trim()));
+      /*  for (int i = 0; i <  spinnerClasTipoEgreso.getAdapter().getCount(); i++){
             if (spinnerClasTipoEgreso.getAdapter().getItem(i).toString().trim().equals(intent.getStringExtra(EXTRA_CLASIFICACIONEGRESOSELECTED).toString().trim())){
                 spinnerClasTipoEgreso.setSelection(i);
                 break;
             }
-        }
+        }*/
         for (int i = 0; i <  spinnerProveedor.getAdapter().getCount(); i++){
             if (spinnerProveedor.getAdapter().getItem(i).toString().trim().equals(intent.getStringExtra(EXTRA_PROVEEDORSELECTED).toString().trim())){
                 spinnerProveedor.setSelection(i);
@@ -226,6 +232,17 @@ public class CompraCargaAddActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 TipoEgreso tipoEgreso = (TipoEgreso) spinnerTipoEgreso.getAdapter().getItem(position);
                 codtipoegreso = String.valueOf(tipoEgreso.getIdtipoegreso());
+                //Toast.makeText(view.getContext(),"TIPOEGRESO SELECTED "+codtipoegreso, Toast.LENGTH_SHORT).show();
+                cargacomboclasegreso(Integer.parseInt(codtipoegreso));
+                if (intent.getStringExtra(EXTRA_TIPOEGRESO)!=null){
+                //PARA SELECCIONAR EL VALOR QUE SE GRABO EN EL COMBO SOLO PARA MODIFICAR
+                    for (int i = 0; i <  spinnerClasTipoEgreso.getAdapter().getCount(); i++){
+                        if (spinnerClasTipoEgreso.getAdapter().getItem(i).toString().trim().equals(intent.getStringExtra(EXTRA_CLASIFICACIONEGRESOSELECTED).toString().trim())){
+                            spinnerClasTipoEgreso.setSelection(i);
+                            break;
+                        }
+                   }
+                }
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) { }
@@ -361,8 +378,8 @@ public class CompraCargaAddActivity extends AppCompatActivity {
         spinnerTipoEgreso.setAdapter(adapter_tipoegreso);
     }
 
-    private void cargacomboclasegreso() {
-        comboclastipoegreso =  clasEgresoViewModel.getAllClasficacionEgresoCombo();
+    private void cargacomboclasegreso(int codtipoegreso) {
+        comboclastipoegreso =  clasEgresoViewModel.getAllClasficacionEgresoCombo(codtipoegreso);
         adapter_clastipoegreso = new ArrayAdapter(this, android.R.layout.simple_spinner_item,
                 comboclastipoegreso);
         adapter_clastipoegreso.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

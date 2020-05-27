@@ -43,8 +43,8 @@ public class IniFragment extends Fragment {
 
     //List<EstadisticaVentas> listaVentas = new ArrayList<>();
     //List<EstadisticaVentas> listaVentas = new ArrayList<>();
-    private String[]months={"Egreso","Ingreso","Diferencia","",""};
-    private int[]colors=new int[]{Color.YELLOW,Color.RED,Color.GREEN,Color.BLUE,Color.MAGENTA};
+    private String[]months={"Ingreso","Egreso","","",""};
+    private int[]colors=new int[]{Color.GREEN,Color.RED,Color.BLUE,Color.BLUE,Color.MAGENTA};
 
     List<BarEntry> entradas = new ArrayList<>();
     private EstadisticaViewModel estadisticaViewModel;
@@ -75,12 +75,30 @@ public class IniFragment extends Fragment {
             public void onChanged(List<EstadisticaVentas> estadisticaVentas) {
 
                 entradas.clear();
-                /*for (int i = 0; i< estadisticaVentas.size(); i++){
-                    //entradas.add(new BarEntry(i,estadisticaVentas.get(i).getTotalventa()));
-                    entradas.add(new BarEntry(i,estadisticaVentas.get(i).getTotalventa()));
-                }*/
 
-                createCharts(estadisticaVentas);
+                //PARA MOSTRAR LA PARTE NEGATIVA
+                int totalingreso1=0,totalegreso1=0,diferencia1=0;
+                for (int i = 0; i< estadisticaVentas.size(); i++){
+                    if (i==0){
+                        totalingreso1 = estadisticaVentas.get(i).getTotalventa();
+                    }else if (i==1){
+                        totalegreso1 = estadisticaVentas.get(i).getTotalventa();
+                    }
+                    //entradas.add(new BarEntry(i,estadisticaVentas.get(i).getTotalventa()));
+                }
+                diferencia1 = totalingreso1 - totalegreso1;
+
+                if (diferencia1<0){
+                    diferencia1 = diferencia1;
+                }else{
+                    diferencia1 = 0;
+                }
+
+
+
+
+
+                createCharts(estadisticaVentas,diferencia1);
 
 
                /* //AGREGAR LA DIFERENCIA
@@ -112,14 +130,14 @@ public class IniFragment extends Fragment {
     }
 
 
-    private void createCharts(List<EstadisticaVentas> estadisticaVentas){
+    private void createCharts(List<EstadisticaVentas> estadisticaVentas, int minx){
         graficaBarras=(BarChart)getSameChart(graficaBarras,"Estadistica Compra - Venta",Color.CYAN,Color.LTGRAY,3000);
         graficaBarras.setDrawGridBackground(true);
         graficaBarras.setDrawBarShadow(true);
         graficaBarras.setData(getBarData(estadisticaVentas));
         graficaBarras.invalidate();
         axisX(graficaBarras.getXAxis());
-        axisLeft(graficaBarras.getAxisLeft());
+        axisLeft(graficaBarras.getAxisLeft(),minx);
         axisRight(graficaBarras.getAxisRight());
         graficaBarras.getLegend().setEnabled(false);
     }
@@ -157,9 +175,9 @@ public class IniFragment extends Fragment {
 //        axis.setEnabled(false);
     }
 
-    private void axisLeft(YAxis axis){
+    private void axisLeft(YAxis axis,int minx){
         axis.setSpaceTop(30);
-        axis.setAxisMinimum(0);
+        axis.setAxisMinimum(minx);
 
     }
 
@@ -184,11 +202,18 @@ public class IniFragment extends Fragment {
     }
 
     private List<BarEntry>getBarEntries(List<EstadisticaVentas> estadisticaVentas){
+        int totalingreso=0,totalegreso=0,diferencia=0;
+       // entradas.add(new BarEntry(-1,-10000000));
         for (int i = 0; i< estadisticaVentas.size(); i++){
-            //entradas.add(new BarEntry(i,estadisticaVentas.get(i).getTotalventa()));
+            if (i==0){
+                totalingreso = estadisticaVentas.get(i).getTotalventa();
+            }else if (i==1){
+                totalegreso = estadisticaVentas.get(i).getTotalventa();
+            }
             entradas.add(new BarEntry(i,estadisticaVentas.get(i).getTotalventa()));
         }
-        entradas.add(new BarEntry(2,2500000));
+        diferencia = totalingreso - totalegreso;
+        entradas.add(new BarEntry(2,diferencia));
         return entradas;
     }
 

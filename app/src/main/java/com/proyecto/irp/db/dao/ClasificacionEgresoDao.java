@@ -51,7 +51,8 @@ public interface ClasificacionEgresoDao {
     @Query("SELECT * FROM clasificacionegreso order by idclasificacionegreso ASC")
     List<ClasificacionEgreso> getAllClasificacionegresoCombo();
 
-
+    @Query("SELECT * FROM clasificacionegreso where id_tipoegreso=:cod order by idclasificacionegreso ASC")
+    List<ClasificacionEgreso> getAllClasificacionegresoXTipoEgresoCombo(int cod);
 
    /* @Query("SELECT idclasificacionegreso AS vidclasificacionegreso, "
             +"clasificacionegreso.idtipoegreso AS vidtipoegreso,clasificacionegreso.descripcion AS vdescripcionclasegreso, "

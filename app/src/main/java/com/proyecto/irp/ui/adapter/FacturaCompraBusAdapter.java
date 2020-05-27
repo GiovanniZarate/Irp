@@ -34,11 +34,11 @@ public class FacturaCompraBusAdapter extends RecyclerView.Adapter<FacturaCompraB
         private TextView tvNrofactura,tvFechaFactura,tvTipoFactura,tvRucClienteFactura,tvTotalFactura;
         public FacturaCompraHolder(@NonNull View itemView) {
             super(itemView);
-            tvNrofactura = itemView.findViewById(R.id.tvnrofacturaventa);
-            tvFechaFactura = itemView.findViewById(R.id.tvfechafacturaventa);
-            tvTipoFactura = itemView.findViewById(R.id.tvtipofacturaventa);
-            tvRucClienteFactura = itemView.findViewById(R.id.tvrucclientefacturaventa);
-            tvTotalFactura = itemView.findViewById(R.id.tvtotalfacturaventa);
+            tvNrofactura = itemView.findViewById(R.id.tvnrofacturacompra);
+            tvFechaFactura = itemView.findViewById(R.id.tvfechafacturacompra);
+            tvTipoFactura = itemView.findViewById(R.id.tvtipofacturacompra);
+            tvRucClienteFactura = itemView.findViewById(R.id.tvrucproveedorfacturacompra);
+            tvTotalFactura = itemView.findViewById(R.id.tvtotalfacturcompra);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

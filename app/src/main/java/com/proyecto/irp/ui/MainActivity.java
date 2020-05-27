@@ -55,22 +55,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-        //VERIFICA SI YA ESTA LOGEANDO LLEVA A LA PANTALLA PRINCIPAL
-        if (managerUsuario.isLogin()){
-            Intent intent = new Intent(MainActivity.this, MenuDrawerActivity.class);
-            startActivity(intent);
-            finish();
 
-
-            //PARA OBTENER LOS DATOS
-            //SessionManager managerUsuario = new SessionManager(getApplicationContext);
-           // managerUsuario.ObtenerDatos().getUsuario();
-        }
 
         //INSTANCIAR EL VIEW MODEL
         contribuyenteViewModel = ViewModelProviders.of(this).get(ContribuyenteViewModel.class);
         nuevoEJercicioDialogViewModel = ViewModelProviders.of(this).get(NuevoEJercicioDialogViewModel.class);
 
+        //VERIFICA SI YA ESTA LOGEANDO LLEVA A LA PANTALLA PRINCIPAL
+        if (managerUsuario.isLogin()){
+            //VERIFICA SI EXISTE EN LA TABLA CONTRIBUYENTE
+            //XQ EN EL SHARED QUEDA ENTONCES BORRA SI NO EXISTE
+            if (contribuyenteViewModel.verificaCedula(managerUsuario.ObtenerDatos().getUsuario().trim()) == 0){
+                managerUsuario.logout();
+                Toast.makeText(this,"Crear Usuario", Toast.LENGTH_SHORT).show();
+            }else{
+                Intent intent = new Intent(MainActivity.this, MenuDrawerActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        }
         creaejercicio();
 
         //DEVOLVER LA CANTIDAD DE REGISTRO QUE EXISTE EN LA TABLA

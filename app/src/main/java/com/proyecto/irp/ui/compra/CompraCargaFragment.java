@@ -88,24 +88,28 @@ public class CompraCargaFragment extends Fragment {
             @Override
             public void onItemClick(Facturacompra facturacompra) {
                 Intent intent = new Intent(getActivity(),CompraCargaAddActivity.class);
-               /* intent.putExtra(VentaCargaAddActivity.EXTRA_IDFACTURAVENTA,facturaventa.getIdfacturaventa());
-                intent.putExtra(VentaCargaAddActivity.EXTRA_DIAVENTA,String.valueOf(facturaventa.getDia_venta()));
-                intent.putExtra(VentaCargaAddActivity.EXTRA_MESVENTA,String.valueOf(facturaventa.getMes_venta()));
-                intent.putExtra(VentaCargaAddActivity.EXTRA_ANHOVENTA,facturaventa.getAnho_venta());
-                intent.putExtra(VentaCargaAddActivity.EXTRA_TIPOCOMPROBANTE,String.valueOf(facturaventa.getId_comprobante()));
-                intent.putExtra(VentaCargaAddActivity.EXTRA_CLASIFICACIONINGRESO,String.valueOf(facturaventa.getId_clasificacioningreso()));
-                intent.putExtra(VentaCargaAddActivity.EXTRA_CLIENTE,String.valueOf(facturaventa.getId_cliente()));
-                intent.putExtra(VentaCargaAddActivity.EXTRA_TIPOCOMPROBANTESELECTED,facturaventa.tipoComprobante.getDescripciontipocomprobante());
-                intent.putExtra(VentaCargaAddActivity.EXTRA_CLASIFICACIONINGRESOSELECTED,facturaventa.clasificacionIngreso.getDescripcionclasificacioningreso());
-                intent.putExtra(VentaCargaAddActivity.EXTRA_CLIENTESELECTED,facturaventa.cliente.getNombre());
-                intent.putExtra(VentaCargaAddActivity.EXTRA_NRO1VENTA,facturaventa.getNro1_venta());
-                intent.putExtra(VentaCargaAddActivity.EXTRA_NRO2VENTA,facturaventa.getNro2_venta());
-                intent.putExtra(VentaCargaAddActivity.EXTRA_NRO3VENTA,facturaventa.getNro3_venta());
-                intent.putExtra(VentaCargaAddActivity.EXTRA_GRAVADA10VENTA,String.valueOf(facturaventa.getGravada10_venta()));
-                intent.putExtra(VentaCargaAddActivity.EXTRA_GRAVADA5VENTA,String.valueOf(facturaventa.getGravada5_venta()));
-                intent.putExtra(VentaCargaAddActivity.EXTRA_EXENTAVENTA,String.valueOf(facturaventa.getExenta_venta()));
-                intent.putExtra(VentaCargaAddActivity.EXTRA_IVA10VENTA,String.valueOf(facturaventa.getIva10_venta()));
-                intent.putExtra(VentaCargaAddActivity.EXTRA_IVA5VENTA,String.valueOf(facturaventa.getIva5_venta()));*/
+                intent.putExtra(CompraCargaAddActivity.EXTRA_IDFACTURACOMPRA,facturacompra.getIdfacturacompra());
+                intent.putExtra(CompraCargaAddActivity.EXTRA_DIACOMPRA,String.valueOf(facturacompra.getDia_compra()));
+                intent.putExtra(CompraCargaAddActivity.EXTRA_MESCOMPRA,String.valueOf(facturacompra.getMes_compra()));
+                intent.putExtra(CompraCargaAddActivity.EXTRA_ANHOCOMPRA,facturacompra.getAnho_compra());
+                intent.putExtra(CompraCargaAddActivity.EXTRA_TIPOCOMPROBANTE,String.valueOf(facturacompra.getId_comprobante()));
+                intent.putExtra(CompraCargaAddActivity.EXTRA_TIPOEGRESO,String.valueOf(facturacompra.getId_tipoegresocompra()));
+                intent.putExtra(CompraCargaAddActivity.EXTRA_CLASIFICACIONEGRESO,String.valueOf(facturacompra.getId_clasificacionegreso()));
+                intent.putExtra(CompraCargaAddActivity.EXTRA_PROVEEDOR,String.valueOf(facturacompra.getId_proveedor()));
+                intent.putExtra(CompraCargaAddActivity.EXTRA_TIPOCOMPROBANTESELECTED,facturacompra.tipoComprobante.getDescripciontipocomprobante());
+
+                intent.putExtra(CompraCargaAddActivity.EXTRA_TIPOEGRESOSELECTED,facturacompra.clasificacionEgreso.tipoEgreso.getDescripciontipoegreso());
+
+                intent.putExtra(CompraCargaAddActivity.EXTRA_CLASIFICACIONEGRESOSELECTED,facturacompra.clasificacionEgreso.getDescripcion());
+                intent.putExtra(CompraCargaAddActivity.EXTRA_PROVEEDORSELECTED,facturacompra.proveedor.getNombre());
+                intent.putExtra(CompraCargaAddActivity.EXTRA_NRO1COMPRA,facturacompra.getNro1_compra());
+                intent.putExtra(CompraCargaAddActivity.EXTRA_NRO2COMPRA,facturacompra.getNro2_compra());
+                intent.putExtra(CompraCargaAddActivity.EXTRA_NRO3COMPRA,facturacompra.getNro3_compra());
+                intent.putExtra(CompraCargaAddActivity.EXTRA_GRAVADA10COMPRA,String.valueOf(facturacompra.getGravada10_compra()));
+                intent.putExtra(CompraCargaAddActivity.EXTRA_GRAVADA5COMPRA,String.valueOf(facturacompra.getGravada5_compra()));
+                intent.putExtra(CompraCargaAddActivity.EXTRA_EXENTACOMPRA,String.valueOf(facturacompra.getExenta_compra()));
+                intent.putExtra(CompraCargaAddActivity.EXTRA_IVA10COMPRA,String.valueOf(facturacompra.getIva10_compra()));
+                intent.putExtra(CompraCargaAddActivity.EXTRA_IVA5COMPRA,String.valueOf(facturacompra.getIva5_compra()));
 
                 startActivityForResult(intent, EDIT_FACTURACOMPRA_REQUEST);
             }

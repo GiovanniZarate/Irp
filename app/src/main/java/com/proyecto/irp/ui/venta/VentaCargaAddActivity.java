@@ -337,6 +337,7 @@ public class VentaCargaAddActivity extends AppCompatActivity  {
         if (intent.hasExtra(EXTRA_IDFACTURAVENTA)){
             setTitle("Editar Ingreso");
             recibirValoresEditar();
+            tvdia.requestFocus();
         }else {
             setTitle("Agregar Ingreso");
 

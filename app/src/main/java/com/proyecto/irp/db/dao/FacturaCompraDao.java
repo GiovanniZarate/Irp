@@ -32,7 +32,7 @@ public interface FacturaCompraDao {
             "FROM facturacompra " +
             "INNER JOIN tipocomprobante on facturacompra.id_comprobante=tipocomprobante.idtipocomprobante " +
             "INNER JOIN proveedor on facturacompra.id_proveedor=proveedor.idproveedor " +
-            "INNER JOIN tipoegreso on facturacompra.id_tipoegreso=tipoegreso.idtipoegreso " +
+            "INNER JOIN tipoegreso on facturacompra.id_tipoegresocompra=tipoegreso.idtipoegreso " +
             "INNER JOIN clasificacionegreso on facturacompra.id_clasificacionegreso " +
             "=clasificacionegreso.idclasificacionegreso " +
             "where facturacompra.id_contribuyente= :codcontribuyente " +
