@@ -20,8 +20,10 @@ import com.google.android.material.navigation.NavigationView;
 import com.proyecto.irp.Config.SessionManager;
 import com.proyecto.irp.R;
 import com.proyecto.irp.ui.compra.CompraCargaFragment;
+import com.proyecto.irp.ui.comprareporte.LibroCompraFragment;
 import com.proyecto.irp.ui.fragments.IniFragment;
 import com.proyecto.irp.ui.perfilusuario.PerfilUsuarioFragment;
+import com.proyecto.irp.ui.ventareporte.LibroVentaFragment;
 
 public class MenuDrawerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -98,6 +100,14 @@ public class MenuDrawerActivity extends AppCompatActivity implements NavigationV
                 //startActivity(i);
                 Intent rmc = new Intent(MenuDrawerActivity.this, MenuMovCompraActivity.class);
                 startActivity(rmc);
+                break;
+            case R.id.reportelibroventa:
+                getSupportFragmentManager().beginTransaction().replace(R.id.contenedor_drawer,
+                        new LibroVentaFragment()).commit();
+                break;
+            case R.id.reportelibrocompra:
+                getSupportFragmentManager().beginTransaction().replace(R.id.contenedor_drawer,
+                        new LibroCompraFragment()).commit();
                 break;
             case R.id.referenciaVenta:
                 Intent rv = new Intent(MenuDrawerActivity.this, MenuRefVentaActivity.class);

@@ -35,7 +35,9 @@ import com.proyecto.irp.ui.cliente.ClienteViewModel;
 import com.proyecto.irp.ui.tipocomprobante.TipoComprobanteViewModel;
 
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.List;
+import java.util.Locale;
 
 public class VentaCargaAddActivity extends AppCompatActivity  {
 
@@ -139,14 +141,25 @@ public class VentaCargaAddActivity extends AppCompatActivity  {
                     }else{
                         //CALCULAR IVA GRAVADA Y PASAR A LOS TEXTOS
                         int valor10=0;
-                        valor10 = Integer.parseInt(tvimpgrav10.getText().toString().replace(".",""));
-                        //Math.round(Integer.parseInt(v_jtgrav10) * 0.1)
-                        //iva10 = (int) Math.round(valor10/11 * 0.1);
-                        //calculaiva(valor10,0);
-                        //tvimp10.setText(""+gravada10);
-                        //tviva10.setText(""+iva10);
+                       /* String valorcargado10= tvimpgrav10.getText().toString();
+                        int longitudcarcater =  valorcargado10.trim().length();
+                        if (longitudcarcater > 3){
+                            int posicioninicial = longitudcarcater - 4;
+                            int posicionfinal = posicioninicial +1;
+                            String valorseparador = valorcargado10.substring(posicioninicial,posicionfinal);
+                                    Toast.makeText(v.getContext(),"valor del 10% "+valorcargado10+
+                                            "separador :"+valorcargado10.substring(posicioninicial,posicionfinal)
+                                    , Toast.LENGTH_SHORT).show();
+                            if (valorseparador.equals(",")){
+                                valor10 = Integer.parseInt(tvimpgrav10.getText().toString().replace(",",""));
+                            }else if (valorseparador.equals(".")){
+                                valor10 = Integer.parseInt(tvimpgrav10.getText().toString().replace(".",""));
+                            }
+                        }else {*/
+                            valor10 = Integer.parseInt(tvimpgrav10.getText().toString().replace(".",""));
+                       // }
+
                         calculatotales(valor10,0);
-                        //ilimpgrav10.setError("");
                     }
                 }else{
                     //Toast.makeText(v.getContext(),"Entra",Toast.LENGTH_SHORT).show();
@@ -434,7 +447,8 @@ public class VentaCargaAddActivity extends AppCompatActivity  {
 
 
    private void formatotextoenableseparadormiles(EditText editText,int value){
-       DecimalFormat formateador = new DecimalFormat("###,###.##");
+      // DecimalFormat formateador = new DecimalFormat("###,###.##");
+       DecimalFormat formateador = new DecimalFormat("###,###.##", new DecimalFormatSymbols(new Locale("es","PY")));
        editText.setText(formateador.format(value));
    }
 

@@ -11,6 +11,8 @@ import com.proyecto.irp.db.dao.FacturaVentaDao;
 import com.proyecto.irp.db.entity.EstadisticaVentas;
 import com.proyecto.irp.db.entity.Facturacompra;
 import com.proyecto.irp.db.entity.Facturaventa;
+import com.proyecto.irp.db.entity.ReporteLibroCompra;
+import com.proyecto.irp.db.entity.ReporteLibroVenta;
 
 import java.util.List;
 
@@ -31,6 +33,11 @@ public class FacturaCompraRepository {
     //EVENTOS A REALIZAR CON LA CLASE: INSERT, UPDATE, DELETE, LISTAR, ETC.
     public LiveData<List<Facturacompra>> getAllFacturaCompra(int codcontribu, int codejercicio) {
         return facturaCompraDao.getAllFacturacompra(codcontribu,codejercicio);
+    }
+
+    //MOSTRAR EL TOTAL DE VENTAS PARA GRAFICO
+    public List<ReporteLibroCompra> getLibroCompra(int contribu, int ejercicio, String desde, String hasta) {
+        return facturaCompraDao.getLibroCompra(contribu,ejercicio,desde,hasta);
     }
 
     //MOSTRAR EL TOTAL DE VENTAS PARA GRAFICO

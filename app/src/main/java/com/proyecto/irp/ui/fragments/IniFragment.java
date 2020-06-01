@@ -94,10 +94,6 @@ public class IniFragment extends Fragment {
                     diferencia1 = 0;
                 }
 
-
-
-
-
                 createCharts(estadisticaVentas,diferencia1);
 
 
@@ -210,7 +206,12 @@ public class IniFragment extends Fragment {
             }else if (i==1){
                 totalegreso = estadisticaVentas.get(i).getTotalventa();
             }
-            entradas.add(new BarEntry(i,estadisticaVentas.get(i).getTotalventa()));
+            if (estadisticaVentas.get(i).getOrden()==1){
+                entradas.add(new BarEntry(0,estadisticaVentas.get(i).getTotalventa()));
+            }else if (estadisticaVentas.get(i).getOrden()==2){
+                entradas.add(new BarEntry(1,estadisticaVentas.get(i).getTotalventa()));
+            }
+
         }
         diferencia = totalingreso - totalegreso;
         entradas.add(new BarEntry(2,diferencia));

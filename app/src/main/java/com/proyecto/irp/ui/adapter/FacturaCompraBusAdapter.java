@@ -16,8 +16,10 @@ import com.proyecto.irp.db.entity.Facturacompra;
 import com.proyecto.irp.db.entity.Facturaventa;
 
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class FacturaCompraBusAdapter extends RecyclerView.Adapter<FacturaCompraBusAdapter.FacturaCompraHolder> implements Filterable {
     private OnItemClickListener listener;
@@ -26,7 +28,8 @@ public class FacturaCompraBusAdapter extends RecyclerView.Adapter<FacturaCompraB
 
     private List<Facturacompra> facturacomprasAll = new ArrayList<>();
 
-    DecimalFormat formateador = new DecimalFormat("###,###.##");
+    //DecimalFormat formateador = new DecimalFormat("###,###.##");
+    DecimalFormat formateador = new DecimalFormat("###,###.##", new DecimalFormatSymbols(new Locale("es","PY")));
 
 
     public class FacturaCompraHolder extends RecyclerView.ViewHolder {
@@ -72,7 +75,7 @@ public class FacturaCompraBusAdapter extends RecyclerView.Adapter<FacturaCompraB
                 .concat("/").concat(currentItem.getMes_compra().trim()).concat("/")
                 .concat(currentItem.getAnho_compra())));
         holder.tvTipoFactura.setText("Tipo: "+currentItem.tipoComprobante.getDescripciontipocomprobante());
-        holder.tvRucClienteFactura.setText("Cliente: "+currentItem.proveedor.getNombre());
+        holder.tvRucClienteFactura.setText("Proveedor: "+currentItem.proveedor.getNombre());
         holder.tvTotalFactura.setText("Total: "+formateador.format(currentItem.getTotal_compra()));
     }
 

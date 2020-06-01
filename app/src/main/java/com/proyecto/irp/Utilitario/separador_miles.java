@@ -1,7 +1,9 @@
 package com.proyecto.irp.Utilitario;
 
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.ParseException;
+import java.util.Locale;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -17,9 +19,12 @@ public class separador_miles implements TextWatcher {
 
     public separador_miles(EditText et)
     {
-        df = new DecimalFormat("#,###.##");
+       // df = new DecimalFormat("#,###.##", DecimalFormatSymbols.getInstance(Locale.CANADA));
+        //para que tome el separador de mil . punto
+        df = new DecimalFormat("#,###.##", new DecimalFormatSymbols(new Locale("es","PY")));
+
         df.setDecimalSeparatorAlwaysShown(true);
-        dfnd = new DecimalFormat("#,###");
+        dfnd = new DecimalFormat("#,###", new DecimalFormatSymbols(new Locale("es","PY")));
         this.et = et;
         hasFractionalPart = false;
     }

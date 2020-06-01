@@ -1,0 +1,1062 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 32,
+    "identityHash": "c339c5e196ba0c1cc2a9e51f84653e98",
+    "entities": [
+      {
+        "tableName": "ejercicio",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `anho` INTEGER NOT NULL, `total_ingreso` REAL NOT NULL, `total_egreso` REAL NOT NULL, `total_impuesto` REAL NOT NULL, `total_saldo` REAL NOT NULL, `total_anticipo` INTEGER NOT NULL, `total_mora` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "idejercicio",
+            "columnName": "_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "anho",
+            "columnName": "anho",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "total_ingreso",
+            "columnName": "total_ingreso",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "total_egreso",
+            "columnName": "total_egreso",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "total_impuesto",
+            "columnName": "total_impuesto",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "total_saldo",
+            "columnName": "total_saldo",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "total_anticipo",
+            "columnName": "total_anticipo",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "total_mora",
+            "columnName": "total_mora",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "_id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_ejercicio__id",
+            "unique": false,
+            "columnNames": [
+              "_id"
+            ],
+            "createSql": "CREATE  INDEX `index_ejercicio__id` ON `${TABLE_NAME}` (`_id`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "contribuyente",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idcontribuyente` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `documento` TEXT, `ruc` TEXT, `nombres` TEXT, `contrasena` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "idcontribuyente",
+            "columnName": "idcontribuyente",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "documento",
+            "columnName": "documento",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ruc",
+            "columnName": "ruc",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "nombres",
+            "columnName": "nombres",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "contrasena",
+            "columnName": "contrasena",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "idcontribuyente"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_contribuyente_documento",
+            "unique": true,
+            "columnNames": [
+              "documento"
+            ],
+            "createSql": "CREATE UNIQUE INDEX `index_contribuyente_documento` ON `${TABLE_NAME}` (`documento`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "cliente",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idcliente` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `nombre` TEXT, `ruc` TEXT, `tipo` INTEGER NOT NULL, `rucveri` INTEGER NOT NULL, `div` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "idcliente",
+            "columnName": "idcliente",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nombre",
+            "columnName": "nombre",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ruc",
+            "columnName": "ruc",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "tipo",
+            "columnName": "tipo",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "rucveri",
+            "columnName": "rucveri",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "div",
+            "columnName": "div",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "idcliente"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_cliente_ruc",
+            "unique": true,
+            "columnNames": [
+              "ruc"
+            ],
+            "createSql": "CREATE UNIQUE INDEX `index_cliente_ruc` ON `${TABLE_NAME}` (`ruc`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "clasificacioningreso",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idclasificacioningreso` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `descripcion_clasificacioningreso` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "idclasificacioningreso",
+            "columnName": "idclasificacioningreso",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "descripcionclasificacioningreso",
+            "columnName": "descripcion_clasificacioningreso",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "idclasificacioningreso"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "tipocomprobante",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idtipocomprobante` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `descripcion_tipocomprobante` TEXT, `tipocpb` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "idtipocomprobante",
+            "columnName": "idtipocomprobante",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "descripciontipocomprobante",
+            "columnName": "descripcion_tipocomprobante",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "tipocpb",
+            "columnName": "tipocpb",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "idtipocomprobante"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "proveedor",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idproveedor` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `nombre` TEXT, `ruc` TEXT, `tipo` INTEGER NOT NULL, `rucveri` INTEGER NOT NULL, `div` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "idproveedor",
+            "columnName": "idproveedor",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nombre",
+            "columnName": "nombre",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ruc",
+            "columnName": "ruc",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "tipo",
+            "columnName": "tipo",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "rucveri",
+            "columnName": "rucveri",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "div",
+            "columnName": "div",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "idproveedor"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_proveedor_ruc",
+            "unique": true,
+            "columnNames": [
+              "ruc"
+            ],
+            "createSql": "CREATE UNIQUE INDEX `index_proveedor_ruc` ON `${TABLE_NAME}` (`ruc`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "tipoegreso",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idtipoegreso` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `descripcion_tipoegreso` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "idtipoegreso",
+            "columnName": "idtipoegreso",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "descripciontipoegreso",
+            "columnName": "descripcion_tipoegreso",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "idtipoegreso"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_tipoegreso_idtipoegreso",
+            "unique": true,
+            "columnNames": [
+              "idtipoegreso"
+            ],
+            "createSql": "CREATE UNIQUE INDEX `index_tipoegreso_idtipoegreso` ON `${TABLE_NAME}` (`idtipoegreso`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "ClasificacionEgreso",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idclasificacionegreso` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `descripcion` TEXT, `id_tipoegreso` INTEGER NOT NULL, `idtipoegreso` INTEGER, `descripcion_tipoegreso` TEXT, FOREIGN KEY(`id_tipoegreso`) REFERENCES `tipoegreso`(`idtipoegreso`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "fields": [
+          {
+            "fieldPath": "idclasificacionegreso",
+            "columnName": "idclasificacionegreso",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "descripcion",
+            "columnName": "descripcion",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "codtipoegreso",
+            "columnName": "id_tipoegreso",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "tipoEgreso.idtipoegreso",
+            "columnName": "idtipoegreso",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "tipoEgreso.descripciontipoegreso",
+            "columnName": "descripcion_tipoegreso",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "idclasificacionegreso"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_ClasificacionEgreso_id_tipoegreso",
+            "unique": false,
+            "columnNames": [
+              "id_tipoegreso"
+            ],
+            "createSql": "CREATE  INDEX `index_ClasificacionEgreso_id_tipoegreso` ON `${TABLE_NAME}` (`id_tipoegreso`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "tipoegreso",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "id_tipoegreso"
+            ],
+            "referencedColumns": [
+              "idtipoegreso"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "facturaventa",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idfacturaventa` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `fechaventa` INTEGER NOT NULL, `id_cliente` INTEGER NOT NULL, `id_clasificacioningreso` INTEGER NOT NULL, `id_contribuyente` INTEGER NOT NULL, `id_ejercicio` INTEGER NOT NULL, `id_comprobante` INTEGER NOT NULL, `nrofacturaventa` TEXT, `total_venta` INTEGER NOT NULL, `exenta_venta` INTEGER NOT NULL, `gravada10_venta` INTEGER NOT NULL, `iva10_venta` INTEGER NOT NULL, `gravada5_venta` INTEGER NOT NULL, `iva5_venta` INTEGER NOT NULL, `nro1_venta` TEXT, `nro2_venta` TEXT, `nro3_venta` TEXT, `dia_venta` TEXT, `mes_venta` TEXT, `anho_venta` TEXT, `fec_venta` TEXT, `idtipocomprobante` INTEGER, `descripcion_tipocomprobante` TEXT, `tipocpb` INTEGER, `idclasificacioningreso` INTEGER, `descripcion_clasificacioningreso` TEXT, `idcliente` INTEGER, `nombre` TEXT, `ruc` TEXT, `tipo` INTEGER, `rucveri` INTEGER, `div` INTEGER, FOREIGN KEY(`id_clasificacioningreso`) REFERENCES `clasificacioningreso`(`idclasificacioningreso`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`id_cliente`) REFERENCES `cliente`(`idcliente`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`id_contribuyente`) REFERENCES `contribuyente`(`idcontribuyente`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`id_ejercicio`) REFERENCES `ejercicio`(`_id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`id_comprobante`) REFERENCES `tipocomprobante`(`idtipocomprobante`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "fields": [
+          {
+            "fieldPath": "idfacturaventa",
+            "columnName": "idfacturaventa",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fechaventa",
+            "columnName": "fechaventa",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id_cliente",
+            "columnName": "id_cliente",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id_clasificacioningreso",
+            "columnName": "id_clasificacioningreso",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id_contribuyente",
+            "columnName": "id_contribuyente",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id_ejercicio",
+            "columnName": "id_ejercicio",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id_comprobante",
+            "columnName": "id_comprobante",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nrofacturaventa",
+            "columnName": "nrofacturaventa",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "total_venta",
+            "columnName": "total_venta",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "exenta_venta",
+            "columnName": "exenta_venta",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "gravada10_venta",
+            "columnName": "gravada10_venta",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "iva10_venta",
+            "columnName": "iva10_venta",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "gravada5_venta",
+            "columnName": "gravada5_venta",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "iva5_venta",
+            "columnName": "iva5_venta",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nro1_venta",
+            "columnName": "nro1_venta",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "nro2_venta",
+            "columnName": "nro2_venta",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "nro3_venta",
+            "columnName": "nro3_venta",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "dia_venta",
+            "columnName": "dia_venta",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "mes_venta",
+            "columnName": "mes_venta",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "anho_venta",
+            "columnName": "anho_venta",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "fec_venta",
+            "columnName": "fec_venta",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "tipoComprobante.idtipocomprobante",
+            "columnName": "idtipocomprobante",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "tipoComprobante.descripciontipocomprobante",
+            "columnName": "descripcion_tipocomprobante",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "tipoComprobante.tipocpb",
+            "columnName": "tipocpb",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "clasificacionIngreso.idclasificacioningreso",
+            "columnName": "idclasificacioningreso",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "clasificacionIngreso.descripcionclasificacioningreso",
+            "columnName": "descripcion_clasificacioningreso",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cliente.idcliente",
+            "columnName": "idcliente",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cliente.nombre",
+            "columnName": "nombre",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cliente.ruc",
+            "columnName": "ruc",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cliente.tipo",
+            "columnName": "tipo",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cliente.rucveri",
+            "columnName": "rucveri",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cliente.div",
+            "columnName": "div",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "idfacturaventa"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_facturaventa_id_cliente",
+            "unique": false,
+            "columnNames": [
+              "id_cliente"
+            ],
+            "createSql": "CREATE  INDEX `index_facturaventa_id_cliente` ON `${TABLE_NAME}` (`id_cliente`)"
+          },
+          {
+            "name": "index_facturaventa_id_clasificacioningreso",
+            "unique": false,
+            "columnNames": [
+              "id_clasificacioningreso"
+            ],
+            "createSql": "CREATE  INDEX `index_facturaventa_id_clasificacioningreso` ON `${TABLE_NAME}` (`id_clasificacioningreso`)"
+          },
+          {
+            "name": "index_facturaventa_id_contribuyente",
+            "unique": false,
+            "columnNames": [
+              "id_contribuyente"
+            ],
+            "createSql": "CREATE  INDEX `index_facturaventa_id_contribuyente` ON `${TABLE_NAME}` (`id_contribuyente`)"
+          },
+          {
+            "name": "index_facturaventa_id_ejercicio",
+            "unique": false,
+            "columnNames": [
+              "id_ejercicio"
+            ],
+            "createSql": "CREATE  INDEX `index_facturaventa_id_ejercicio` ON `${TABLE_NAME}` (`id_ejercicio`)"
+          },
+          {
+            "name": "index_facturaventa_id_comprobante",
+            "unique": false,
+            "columnNames": [
+              "id_comprobante"
+            ],
+            "createSql": "CREATE  INDEX `index_facturaventa_id_comprobante` ON `${TABLE_NAME}` (`id_comprobante`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "clasificacioningreso",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "id_clasificacioningreso"
+            ],
+            "referencedColumns": [
+              "idclasificacioningreso"
+            ]
+          },
+          {
+            "table": "cliente",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "id_cliente"
+            ],
+            "referencedColumns": [
+              "idcliente"
+            ]
+          },
+          {
+            "table": "contribuyente",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "id_contribuyente"
+            ],
+            "referencedColumns": [
+              "idcontribuyente"
+            ]
+          },
+          {
+            "table": "ejercicio",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "id_ejercicio"
+            ],
+            "referencedColumns": [
+              "_id"
+            ]
+          },
+          {
+            "table": "tipocomprobante",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "id_comprobante"
+            ],
+            "referencedColumns": [
+              "idtipocomprobante"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "facturacompra",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idfacturacompra` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `fechacompra` INTEGER NOT NULL, `id_proveedor` INTEGER NOT NULL, `id_clasificacionegreso` INTEGER NOT NULL, `id_contribuyente` INTEGER NOT NULL, `id_ejercicio` INTEGER NOT NULL, `id_comprobante` INTEGER NOT NULL, `id_tipoegresocompra` INTEGER NOT NULL, `nrofacturacompra` TEXT, `total_compra` INTEGER NOT NULL, `exenta_compra` INTEGER NOT NULL, `gravada10_compra` INTEGER NOT NULL, `iva10_compra` INTEGER NOT NULL, `gravada5_compra` INTEGER NOT NULL, `iva5_compra` INTEGER NOT NULL, `nro1_compra` TEXT, `nro2_compra` TEXT, `nro3_compra` TEXT, `dia_compra` TEXT, `mes_compra` TEXT, `anho_compra` TEXT, `fec_compra` TEXT, `idtipocomprobante` INTEGER, `descripcion_tipocomprobante` TEXT, `tipocpb` INTEGER, `idclasificacionegreso` INTEGER, `descripcion` TEXT, `id_tipoegreso` INTEGER, `idtipoegreso` INTEGER, `descripcion_tipoegreso` TEXT, `idproveedor` INTEGER, `nombre` TEXT, `ruc` TEXT, `tipo` INTEGER, `rucveri` INTEGER, `div` INTEGER, FOREIGN KEY(`id_clasificacionegreso`) REFERENCES `ClasificacionEgreso`(`idclasificacionegreso`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`id_proveedor`) REFERENCES `proveedor`(`idproveedor`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`id_contribuyente`) REFERENCES `contribuyente`(`idcontribuyente`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`id_ejercicio`) REFERENCES `ejercicio`(`_id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`id_comprobante`) REFERENCES `tipocomprobante`(`idtipocomprobante`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`id_tipoegresocompra`) REFERENCES `tipoegreso`(`idtipoegreso`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "fields": [
+          {
+            "fieldPath": "idfacturacompra",
+            "columnName": "idfacturacompra",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fechacompra",
+            "columnName": "fechacompra",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id_proveedor",
+            "columnName": "id_proveedor",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id_clasificacionegreso",
+            "columnName": "id_clasificacionegreso",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id_contribuyente",
+            "columnName": "id_contribuyente",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id_ejercicio",
+            "columnName": "id_ejercicio",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id_comprobante",
+            "columnName": "id_comprobante",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id_tipoegresocompra",
+            "columnName": "id_tipoegresocompra",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nrofacturacompra",
+            "columnName": "nrofacturacompra",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "total_compra",
+            "columnName": "total_compra",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "exenta_compra",
+            "columnName": "exenta_compra",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "gravada10_compra",
+            "columnName": "gravada10_compra",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "iva10_compra",
+            "columnName": "iva10_compra",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "gravada5_compra",
+            "columnName": "gravada5_compra",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "iva5_compra",
+            "columnName": "iva5_compra",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nro1_compra",
+            "columnName": "nro1_compra",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "nro2_compra",
+            "columnName": "nro2_compra",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "nro3_compra",
+            "columnName": "nro3_compra",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "dia_compra",
+            "columnName": "dia_compra",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "mes_compra",
+            "columnName": "mes_compra",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "anho_compra",
+            "columnName": "anho_compra",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "fec_compra",
+            "columnName": "fec_compra",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "tipoComprobante.idtipocomprobante",
+            "columnName": "idtipocomprobante",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "tipoComprobante.descripciontipocomprobante",
+            "columnName": "descripcion_tipocomprobante",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "tipoComprobante.tipocpb",
+            "columnName": "tipocpb",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "clasificacionEgreso.idclasificacionegreso",
+            "columnName": "idclasificacionegreso",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "clasificacionEgreso.descripcion",
+            "columnName": "descripcion",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "clasificacionEgreso.codtipoegreso",
+            "columnName": "id_tipoegreso",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "clasificacionEgreso.tipoEgreso.idtipoegreso",
+            "columnName": "idtipoegreso",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "clasificacionEgreso.tipoEgreso.descripciontipoegreso",
+            "columnName": "descripcion_tipoegreso",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "proveedor.idproveedor",
+            "columnName": "idproveedor",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "proveedor.nombre",
+            "columnName": "nombre",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "proveedor.ruc",
+            "columnName": "ruc",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "proveedor.tipo",
+            "columnName": "tipo",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "proveedor.rucveri",
+            "columnName": "rucveri",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "proveedor.div",
+            "columnName": "div",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "idfacturacompra"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_facturacompra_id_proveedor",
+            "unique": false,
+            "columnNames": [
+              "id_proveedor"
+            ],
+            "createSql": "CREATE  INDEX `index_facturacompra_id_proveedor` ON `${TABLE_NAME}` (`id_proveedor`)"
+          },
+          {
+            "name": "index_facturacompra_id_clasificacionegreso",
+            "unique": false,
+            "columnNames": [
+              "id_clasificacionegreso"
+            ],
+            "createSql": "CREATE  INDEX `index_facturacompra_id_clasificacionegreso` ON `${TABLE_NAME}` (`id_clasificacionegreso`)"
+          },
+          {
+            "name": "index_facturacompra_id_contribuyente",
+            "unique": false,
+            "columnNames": [
+              "id_contribuyente"
+            ],
+            "createSql": "CREATE  INDEX `index_facturacompra_id_contribuyente` ON `${TABLE_NAME}` (`id_contribuyente`)"
+          },
+          {
+            "name": "index_facturacompra_id_ejercicio",
+            "unique": false,
+            "columnNames": [
+              "id_ejercicio"
+            ],
+            "createSql": "CREATE  INDEX `index_facturacompra_id_ejercicio` ON `${TABLE_NAME}` (`id_ejercicio`)"
+          },
+          {
+            "name": "index_facturacompra_id_comprobante",
+            "unique": false,
+            "columnNames": [
+              "id_comprobante"
+            ],
+            "createSql": "CREATE  INDEX `index_facturacompra_id_comprobante` ON `${TABLE_NAME}` (`id_comprobante`)"
+          },
+          {
+            "name": "index_facturacompra_id_tipoegresocompra",
+            "unique": false,
+            "columnNames": [
+              "id_tipoegresocompra"
+            ],
+            "createSql": "CREATE  INDEX `index_facturacompra_id_tipoegresocompra` ON `${TABLE_NAME}` (`id_tipoegresocompra`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "ClasificacionEgreso",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "id_clasificacionegreso"
+            ],
+            "referencedColumns": [
+              "idclasificacionegreso"
+            ]
+          },
+          {
+            "table": "proveedor",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "id_proveedor"
+            ],
+            "referencedColumns": [
+              "idproveedor"
+            ]
+          },
+          {
+            "table": "contribuyente",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "id_contribuyente"
+            ],
+            "referencedColumns": [
+              "idcontribuyente"
+            ]
+          },
+          {
+            "table": "ejercicio",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "id_ejercicio"
+            ],
+            "referencedColumns": [
+              "_id"
+            ]
+          },
+          {
+            "table": "tipocomprobante",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "id_comprobante"
+            ],
+            "referencedColumns": [
+              "idtipocomprobante"
+            ]
+          },
+          {
+            "table": "tipoegreso",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "id_tipoegresocompra"
+            ],
+            "referencedColumns": [
+              "idtipoegreso"
+            ]
+          }
+        ]
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"c339c5e196ba0c1cc2a9e51f84653e98\")"
+    ]
+  }
+}

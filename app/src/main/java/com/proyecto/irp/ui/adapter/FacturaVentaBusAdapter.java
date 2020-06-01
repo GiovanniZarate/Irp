@@ -16,9 +16,11 @@ import com.proyecto.irp.R;
 import com.proyecto.irp.db.entity.Facturaventa;
 
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Locale;
 
 public class FacturaVentaBusAdapter extends RecyclerView.Adapter<FacturaVentaBusAdapter.FacturaVentaHolder> implements Filterable {
     private OnItemClickListener listener;
@@ -27,7 +29,8 @@ public class FacturaVentaBusAdapter extends RecyclerView.Adapter<FacturaVentaBus
 
     private List<Facturaventa> facturaventasAll = new ArrayList<>();
 
-    DecimalFormat formateador = new DecimalFormat("###,###.##");
+    //DecimalFormat formateador = new DecimalFormat("###,###.##");
+    DecimalFormat formateador = new DecimalFormat("###,###.##", new DecimalFormatSymbols(new Locale("es","PY")));
 
 
     public class FacturaVentaHolder extends RecyclerView.ViewHolder {

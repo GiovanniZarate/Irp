@@ -58,6 +58,10 @@ dependencies {
     implementation 'android.arch.persistence.room:runtime:2.1.0'
     annotationProcessor 'android.arch.persistence.room:compiler:2.1.0'
 
+
+   // implementation "androidx.room:room-runtime:2.2.5"
+   // annotationProcessor "androidx.room:room-compiler:2.2.5"
+
     //material design
     implementation 'com.google.android.material:material:1.1.0'
 
@@ -66,5 +70,11 @@ dependencies {
 
     //PARA EL GRAFICO DE TORTA TAMBIEN SE AGREGO MAVEN EN EL OTRO BULID.GRADLE
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+    //PARA GENERAR ARCHIVO PDF
+    implementation 'com.itextpdf:itextg:5.5.10'
+
+    //PARA VER EL PDF DE FORMA INTERNA EN ANDROID
+    implementation 'com.github.barteksc:android-pdf-viewer:2.8.1'
 
 }

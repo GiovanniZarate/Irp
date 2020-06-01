@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.proyecto.irp.R;
+import com.proyecto.irp.Utilitario.DateConverter;
 import com.proyecto.irp.db.entity.Facturacompra;
 import com.proyecto.irp.ui.adapter.FacturaCompraAdapter;
 
@@ -132,6 +133,7 @@ public class CompraCargaFragment extends Fragment {
             String nro3 =  data.getStringExtra(CompraCargaAddActivity.EXTRA_NRO3COMPRA);
 
             long fecha = Long.parseLong(dia+mes+anho);
+            String fechanueva = anho.trim().concat("-").concat(mes.trim()).concat("-").concat(dia.trim());
             int idproveedor = Integer.parseInt(data.getStringExtra(CompraCargaAddActivity.EXTRA_PROVEEDOR));
             int idtipoegreso = Integer.parseInt(data.getStringExtra(CompraCargaAddActivity.EXTRA_TIPOEGRESO));
             int idclasegreso = Integer.parseInt(data.getStringExtra(CompraCargaAddActivity.EXTRA_CLASIFICACIONEGRESO));
@@ -156,7 +158,7 @@ public class CompraCargaFragment extends Fragment {
             if (requestCode == ADD_FACTURACOMPRA_REQUEST && resultCode == RESULT_OK) {
                 Facturacompra facturacompra = new Facturacompra(fecha,idproveedor,idclasegreso,
                         idcontribuyente,idejercicio,idcomprobante,idtipoegreso,
-                        nrofactura,total,exen,grav10,iva10,grav5,iva5,nro1,nro2,nro3,dia,mes,anho);
+                        nrofactura,total,exen,grav10,iva10,grav5,iva5,nro1,nro2,nro3,dia,mes,anho, DateConverter.fromTimestamp(fechanueva));
                 //if (clienteViewModel.verificaCedula(String.valueOf(cliente.getRucveri())) == 0){
                 compraCargaViewModel.insert(facturacompra);
                 Toast.makeText(getActivity(),msgtoast+" Registrado con exito", Toast.LENGTH_SHORT).show();
@@ -175,7 +177,7 @@ public class CompraCargaFragment extends Fragment {
                 //Contribuyente contribuyente = new Contribuyente(cedula,ruc,nombres,contrasena);
                 Facturacompra facturacompra = new Facturacompra(fecha,idproveedor,idclasegreso,
                         idcontribuyente,idejercicio,idcomprobante,idtipoegreso,
-                        nrofactura,total,exen,grav10,iva10,grav5,iva5,nro1,nro2,nro3,dia,mes,anho);
+                        nrofactura,total,exen,grav10,iva10,grav5,iva5,nro1,nro2,nro3,dia,mes,anho, DateConverter.fromTimestamp(fechanueva));
                 facturacompra.setIdfacturacompra(id);
                 compraCargaViewModel.update(facturacompra);
                 Toast.makeText(getActivity(),msgtoast+"  modificado", Toast.LENGTH_SHORT).show();

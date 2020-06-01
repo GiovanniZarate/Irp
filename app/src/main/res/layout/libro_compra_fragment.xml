@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="@color/colorFondo"
+    tools:context=".ui.comprareporte.LibroCompraFragment">
+
+
+    <TextView
+        android:id="@+id/tvtitulolibroventa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="Libro de Compras IVA"
+        android:textColor="@color/colorAccent"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:padding="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvtitulofechadesde"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="5dp"
+                android:text="Fecha Desde"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold" />
+
+
+            <LinearLayout
+                android:id="@+id/contenedorFechaDesde"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/InputLayoutDiaDesde"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Día"
+                    android:textColor="@color/colorEditText"
+                    android:textColorHighlight="@color/colorEditText"
+                    android:textColorHint="@color/colorEditText"
+                    android:textColorLink="@color/colorEditText"
+                    android:textCursorDrawable="@color/colorEditText">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txtdiaDesde"
+                        android:layout_width="80dp"
+                        android:layout_height="48dp"
+                        android:layout_weight="1"
+                        android:imeOptions="actionNext"
+                        android:inputType="number"
+                        android:maxLength="2"
+                        android:selectAllOnFocus="true"
+                        android:textSize="14sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/txtbarra1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="/"
+                    android:textSize="18sp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/InputLayoutMesDesde"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Mes"
+                    android:textColor="@color/colorEditText"
+                    android:textColorHighlight="@color/colorEditText"
+                    android:textColorHint="@color/colorEditText"
+                    android:textColorLink="@color/colorEditText"
+                    android:textCursorDrawable="@color/colorEditText">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txtmesDesde"
+                        android:layout_width="80dp"
+                        android:layout_height="48dp"
+                        android:layout_weight="1"
+                        android:imeOptions="actionNext"
+                        android:inputType="number"
+                        android:maxLength="2"
+                        android:selectAllOnFocus="true"
+                        android:textSize="14sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/txtbarra2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="/"
+                    android:textSize="18sp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/InputLayoutAnhoDesde"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Año"
+                    android:textColor="@color/colorEditText"
+                    android:textColorHighlight="@color/colorEditText"
+                    android:textColorHint="@color/colorEditText"
+                    android:textColorLink="@color/colorEditText"
+                    android:textCursorDrawable="@color/colorEditText">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txtanhoDesde"
+                        android:layout_width="100dp"
+                        android:layout_height="48dp"
+                        android:layout_weight="1"
+                        android:imeOptions="actionNext"
+                        android:inputType="number"
+                        android:maxLength="4"
+                        android:selectAllOnFocus="true"
+                        android:textSize="14sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvtitulofechahasta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="5dp"
+                android:text="Fecha Hasta"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/contenedorFechaHasta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/InputLayoutDiaHasta"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Día"
+                    android:textColor="@color/colorEditText"
+                    android:textColorHighlight="@color/colorEditText"
+                    android:textColorHint="@color/colorEditText"
+                    android:textColorLink="@color/colorEditText"
+                    android:textCursorDrawable="@color/colorEditText">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txtdiaHasta"
+                        android:layout_width="80dp"
+                        android:layout_height="48dp"
+                        android:layout_weight="1"
+                        android:imeOptions="actionNext"
+                        android:inputType="number"
+                        android:maxLength="2"
+                        android:selectAllOnFocus="true"
+                        android:textSize="14sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/txtbarra5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="/"
+                    android:textSize="18sp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/InputLayoutMesHasta"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Mes"
+                    android:textColor="@color/colorEditText"
+                    android:textColorHighlight="@color/colorEditText"
+                    android:textColorHint="@color/colorEditText"
+                    android:textColorLink="@color/colorEditText"
+                    android:textCursorDrawable="@color/colorEditText">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txtmesHasta"
+                        android:layout_width="80dp"
+                        android:layout_height="48dp"
+                        android:layout_weight="1"
+                        android:imeOptions="actionNext"
+                        android:inputType="number"
+                        android:maxLength="2"
+                        android:selectAllOnFocus="true"
+                        android:textSize="14sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/txtbarra6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="/"
+                    android:textSize="18sp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/InputLayoutAnhoHasta"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Año"
+                    android:textColor="@color/colorEditText"
+                    android:textColorHighlight="@color/colorEditText"
+                    android:textColorHint="@color/colorEditText"
+                    android:textColorLink="@color/colorEditText"
+                    android:textCursorDrawable="@color/colorEditText">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txtanhoHasta"
+                        android:layout_width="100dp"
+                        android:layout_height="48dp"
+                        android:layout_weight="1"
+                        android:imeOptions="actionNext"
+                        android:inputType="number"
+                        android:maxLength="4"
+                        android:selectAllOnFocus="true"
+                        android:textSize="14sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/contenedorbutton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingStart="10dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="10dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnVerPdfVenta"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:insetRight="10dp"
+                    android:padding="12dp"
+                    android:text="Ver"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorButton"
+                    android:textSize="18sp"
+                    app:icon="@drawable/ic_verreporte" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnImprimirPdfVenta"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:insetLeft="10dp"
+                    android:padding="12dp"
+                    android:text="Imprimir"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorButton"
+                    android:textSize="18sp"
+                    app:icon="@drawable/ic_print" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -13,14 +13,17 @@ import com.proyecto.irp.db.entity.Facturacompra;
 import com.proyecto.irp.db.entity.Facturaventa;
 
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class FacturaCompraAdapter extends RecyclerView.Adapter<FacturaCompraAdapter.FacturaCompraHolder>  {
     private OnItemClickListener listener;
     private List<Facturacompra> facturacompras = new ArrayList<>();
 
-    DecimalFormat formateador = new DecimalFormat("###,###.##");
+   // DecimalFormat formateador = new DecimalFormat("###,###.##");
+   DecimalFormat formateador = new DecimalFormat("###,###.##", new DecimalFormatSymbols(new Locale("es","PY")));
 
 
     public class FacturaCompraHolder extends RecyclerView.ViewHolder {

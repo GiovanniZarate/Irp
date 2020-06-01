@@ -9,7 +9,9 @@ import com.proyecto.irp.db.AppDatabase;
 import com.proyecto.irp.db.dao.FacturaVentaDao;
 import com.proyecto.irp.db.entity.EstadisticaVentas;
 import com.proyecto.irp.db.entity.Facturaventa;
+import com.proyecto.irp.db.entity.ReporteLibroVenta;
 
+import java.util.Date;
 import java.util.List;
 
 public class FacturaVentaRepository {
@@ -34,6 +36,11 @@ public class FacturaVentaRepository {
     //MOSTRAR EL TOTAL DE VENTAS PARA GRAFICO
     public LiveData<List<EstadisticaVentas>> getTotalVenta(int codcontribu, int codejercicio) {
         return facturaVentaDao.getTotalVenta(codcontribu,codejercicio);
+    }
+
+    //MOSTRAR EL TOTAL DE VENTAS PARA GRAFICO
+    public List<ReporteLibroVenta> getLibroVenta(int contribu, int ejercicio, String desde, String hasta) {
+        return facturaVentaDao.getLibroVenta(contribu,ejercicio,desde,hasta);
     }
 
     public void insert(Facturaventa facturaventa){

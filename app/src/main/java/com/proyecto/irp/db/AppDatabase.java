@@ -7,10 +7,14 @@ import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.proyecto.irp.Config.Constantes;
+import com.proyecto.irp.Utilitario.Converters;
+import com.proyecto.irp.Utilitario.DateConverter;
+import com.proyecto.irp.Utilitario.TimestampConverter;
 import com.proyecto.irp.db.dao.ClasificacionEgresoDao;
 import com.proyecto.irp.db.dao.ClasificacionIngresoDao;
 import com.proyecto.irp.db.dao.ClienteDao;
@@ -36,7 +40,9 @@ import com.proyecto.irp.db.entity.TipoEgreso;
 //paso 1 - LOS PERMISOS PARA ACCEDER A LAS ENTIDADES
 @Database(entities = {Ejercicio.class, Contribuyente.class, Cliente.class,
         ClasificacionIngreso.class, TipoComprobante.class, Proveedor.class, TipoEgreso.class,
-        ClasificacionEgreso.class, Facturaventa.class, Facturacompra.class}, version = 30, exportSchema = true)
+        ClasificacionEgreso.class, Facturaventa.class, Facturacompra.class}, version = 33, exportSchema = true)
+//@TypeConverters({Converters.class})//
+@TypeConverters({DateConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
     public abstract EjercicioDao getEjercicioDao();
 
@@ -66,7 +72,7 @@ public abstract class AppDatabase extends RoomDatabase {
     /*PARA MIGRACIONES ENTRE LAS DIFERENTES VERSIONES*/
     //MIGRATION29_AL_30 : SE CREAR LA TABLA FACTURACOMPRA
     //26/05/2020
-    static final Migration MIGRATION_29_30 = new Migration(29, 30) {
+    /*static final Migration MIGRATION_29_30 = new Migration(29, 30) {
         @Override
         public void migrate(SupportSQLiteDatabase database) {
             database.execSQL("CREATE TABLE IF NOT EXISTS `facturacompra` (" +
@@ -107,12 +113,12 @@ public abstract class AppDatabase extends RoomDatabase {
                     "ON UPDATE NO ACTION ON DELETE NO ACTION )");
         }
     };
-
-   /* static final Migration MIGRATION_2_3 = new Migration(2, 3) {
+*/
+    /*static final Migration MIGRATION_30_31 = new Migration(30, 31) {
         @Override
         public void migrate(SupportSQLiteDatabase database) {
-            database.execSQL("ALTER TABLE Book "
-                    + " ADD COLUMN pub_year INTEGER");
+            database.execSQL("ALTER TABLE 'facturaventa' "
+                    + " ADD COLUMN 'fec_venta' DATE default null");
         }
     };*/
 
@@ -123,7 +129,7 @@ public abstract class AppDatabase extends RoomDatabase {
             INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                     AppDatabase.class, Constantes.BD_NAME)
                     .fallbackToDestructiveMigration()
-                    //.addMigrations(MIGRATION_29_30)
+                    //.addMigrations(MIGRATION_30_31)
                     .allowMainThreadQueries()
                     .addCallback(roomCallback)  //PARA INSERTAR LOS DATOS DE PREUBA
                     .build();
@@ -214,22 +220,22 @@ public abstract class AppDatabase extends RoomDatabase {
 
 
             //CLIENTE DE PRUEBA
-            clienteDao.insert(new Cliente("Carlos Giovanni Zarate Ruiz", "4203593-7", 0, 4203593, 7));
+            //clienteDao.insert(new Cliente("Carlos Giovanni Zarate Ruiz", "4203593-7", 0, 4203593, 7));
 
             //PROVEEDOR DE PRUEBA
-            proveedorDao.insert(new Proveedor("Carlos Giovanni Zarate Ruiz", "4203593-7", 0, 4203593, 7));
+          //  proveedorDao.insert(new Proveedor("Carlos Giovanni Zarate Ruiz", "4203593-7", 0, 4203593, 7));
 
 
             //EJERECICIO DEBE TOMAR EL AÑO ACTUAL
-            ejercicioDao.insert(new Ejercicio(1, 2020, 0, 0, 0, 0, 0, 0));
+           // ejercicioDao.insert(new Ejercicio(1, 2020, 0, 0, 0, 0, 0, 0));
 
 
             //FACTURA VENTA - INGRESO PRUEBA CARGA
-            Facturaventa facturaventa =
+            /*Facturaventa facturaventa =
                     new Facturaventa(25052020, 1, 1, 1, 1, 1,
                             "001-002-0000123", 1500000, 0, 0, 0, 0,
-                            0, "1", "2", "123", "20", "5", "2020");
-            facturaVentaDao.insert(facturaventa);
+                            0, "1", "2", "123", "20", "5", "2020",Converters.fromTimestamp((long) 25052020));
+            facturaVentaDao.insert(facturaventa);*/
 
             return null;
         }

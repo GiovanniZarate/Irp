@@ -35,6 +35,20 @@
             </item>
         </menu>
     </item>
+    <item android:title="Reportes">
+        <menu>
+            <item
+                android:id="@+id/reportelibroventa"
+                android:icon="@drawable/ic_reportes"
+                android:title="Libro Ventas IVA">
+            </item>
+            <item
+                android:id="@+id/reportelibrocompra"
+                android:icon="@drawable/ic_reportes"
+                android:title="Libro Compras IVA">
+            </item>
+        </menu>
+    </item>
 
     <item android:title="Datos Usuario">
         <menu>

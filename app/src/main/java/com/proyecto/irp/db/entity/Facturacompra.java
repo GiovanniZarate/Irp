@@ -5,6 +5,11 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
+
+import com.proyecto.irp.Utilitario.DateConverter;
+
+import java.util.Date;
 
 
 @Entity( tableName = "facturacompra",
@@ -67,8 +72,11 @@ public class Facturacompra {
     public String mes_compra;
     public String anho_compra;
 
+    @TypeConverters({DateConverter.class})
+    private Date fec_compra;
 
-    public Facturacompra(long fechacompra, int id_proveedor, int id_clasificacionegreso, int id_contribuyente, int id_ejercicio, int id_comprobante, int id_tipoegresocompra, String nrofacturacompra, int total_compra, int exenta_compra, int gravada10_compra, int iva10_compra, int gravada5_compra, int iva5_compra, String nro1_compra, String nro2_compra, String nro3_compra, String dia_compra, String mes_compra, String anho_compra) {
+
+    public Facturacompra(long fechacompra, int id_proveedor, int id_clasificacionegreso, int id_contribuyente, int id_ejercicio, int id_comprobante, int id_tipoegresocompra, String nrofacturacompra, int total_compra, int exenta_compra, int gravada10_compra, int iva10_compra, int gravada5_compra, int iva5_compra, String nro1_compra, String nro2_compra, String nro3_compra, String dia_compra, String mes_compra, String anho_compra, Date fec_compra) {
         this.fechacompra = fechacompra;
         this.id_proveedor = id_proveedor;
         this.id_clasificacionegreso = id_clasificacionegreso;
@@ -89,6 +97,7 @@ public class Facturacompra {
         this.dia_compra = dia_compra;
         this.mes_compra = mes_compra;
         this.anho_compra = anho_compra;
+        this.fec_compra = fec_compra;
     }
 
     public void setIdfacturacompra(int idfacturacompra) {
@@ -177,6 +186,10 @@ public class Facturacompra {
 
     public String getAnho_compra() {
         return anho_compra;
+    }
+
+    public Date getFec_compra() {
+        return fec_compra;
     }
 
 

@@ -33,7 +33,9 @@ import com.proyecto.irp.ui.tipocomprobante.TipoComprobanteViewModel;
 import com.proyecto.irp.ui.tipoegreso.TipoEgresoViewModel;
 
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.List;
+import java.util.Locale;
 
 public class CompraCargaAddActivity extends AppCompatActivity {
 
@@ -531,7 +533,8 @@ public class CompraCargaAddActivity extends AppCompatActivity {
     }
 
     private void formatotextoenableseparadormiles(EditText editText,int value){
-        DecimalFormat formateador = new DecimalFormat("###,###.##");
+        //DecimalFormat formateador = new DecimalFormat("###,###.##");
+        DecimalFormat formateador = new DecimalFormat("###,###.##", new DecimalFormatSymbols(new Locale("es","PY")));
         editText.setText(formateador.format(value));
     }
 

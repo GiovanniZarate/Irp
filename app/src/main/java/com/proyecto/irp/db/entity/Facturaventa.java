@@ -6,6 +6,10 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
+
+import com.proyecto.irp.Utilitario.DateConverter;
+import com.proyecto.irp.Utilitario.TimestampConverter;
 
 import java.util.Date;
 
@@ -66,12 +70,18 @@ public class Facturaventa {
     public String anho_venta;
 
 
+    @TypeConverters({DateConverter.class})
+    private Date fec_venta;
+
+
+
     public Facturaventa(long fechaventa, int id_cliente,
                         int id_clasificacioningreso, int id_contribuyente, int id_ejercicio,
                         int id_comprobante, String nrofacturaventa, int total_venta,
                         int exenta_venta, int gravada10_venta, int iva10_venta,
                         int gravada5_venta, int iva5_venta, String nro1_venta, String nro2_venta,
-                        String nro3_venta, String dia_venta, String mes_venta, String anho_venta) {
+                        String nro3_venta, String dia_venta, String mes_venta, String anho_venta,
+                        Date fec_venta) {
 
         this.fechaventa = fechaventa;
         this.id_cliente = id_cliente;
@@ -92,6 +102,7 @@ public class Facturaventa {
         this.dia_venta = dia_venta;
         this.mes_venta = mes_venta;
         this.anho_venta = anho_venta;
+        this.fec_venta = fec_venta;
     }
 
     public void setIdfacturaventa(int idfacturaventa) {
@@ -176,6 +187,10 @@ public class Facturaventa {
 
     public String getAnho_venta() {
         return anho_venta;
+    }
+
+    public Date getFec_venta() {
+        return fec_venta;
     }
 
     @Embedded()

@@ -23,6 +23,8 @@ import android.widget.Toast;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.proyecto.irp.R;
+import com.proyecto.irp.Utilitario.Converters;
+import com.proyecto.irp.Utilitario.DateConverter;
 import com.proyecto.irp.db.entity.Facturaventa;
 import com.proyecto.irp.ui.adapter.FacturaVentaAdapter;
 
@@ -130,6 +132,7 @@ public class VentaCargaFragment extends Fragment {
         String nro3 =  data.getStringExtra(VentaCargaAddActivity.EXTRA_NRO3VENTA);
 
         long fecha = Long.parseLong(dia+mes+anho);
+        String fechanueva = anho.trim().concat("-").concat(mes.trim()).concat("-").concat(dia.trim());
         int idcliente = Integer.parseInt(data.getStringExtra(VentaCargaAddActivity.EXTRA_CLIENTE));
         int idclasingreso = Integer.parseInt(data.getStringExtra(VentaCargaAddActivity.EXTRA_CLASIFICACIONINGRESO));
         int idcontribuyente = Integer.parseInt(data.getStringExtra(VentaCargaAddActivity.EXTRA_CONTRIBUYENTE));
@@ -149,11 +152,11 @@ public class VentaCargaFragment extends Fragment {
         int iva10 = Integer.parseInt(data.getStringExtra(VentaCargaAddActivity.EXTRA_IVA10VENTA));
         int iva5 = Integer.parseInt(data.getStringExtra(VentaCargaAddActivity.EXTRA_IVA5VENTA));
 
-        //Toast.makeText(getActivity(),"data "+data,Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(),"FECHA "+DateConverter.fromTimestamp("2020-05-30"),Toast.LENGTH_SHORT).show();
         if (requestCode == ADD_FACTURAVENTA_REQUEST && resultCode == RESULT_OK) {
             Facturaventa facturaventa = new Facturaventa(fecha,idcliente,idclasingreso,
                     idcontribuyente,idejercicio,idcomprobante,nrofactura,total,exen,grav10,iva10,
-                    grav5,iva5,nro1,nro2,nro3,dia,mes,anho);
+                    grav5,iva5,nro1,nro2,nro3,dia,mes,anho, DateConverter.fromTimestamp(fechanueva));
             //if (clienteViewModel.verificaCedula(String.valueOf(cliente.getRucveri())) == 0){
                 ventaCargaViewModel.insert(facturaventa);
                 Toast.makeText(getActivity(),msgtoast+" Registrado con exito", Toast.LENGTH_SHORT).show();
@@ -172,7 +175,7 @@ public class VentaCargaFragment extends Fragment {
             //Contribuyente contribuyente = new Contribuyente(cedula,ruc,nombres,contrasena);
             Facturaventa facturaventa = new Facturaventa(fecha,idcliente,idclasingreso,
                     idcontribuyente,idejercicio,idcomprobante,nrofactura,total,exen,grav10,iva10,
-                    grav5,iva5,nro1,nro2,nro3,dia,mes,anho);
+                    grav5,iva5,nro1,nro2,nro3,dia,mes,anho, DateConverter.fromTimestamp(fechanueva));
             facturaventa.setIdfacturaventa(id);
             ventaCargaViewModel.update(facturaventa);
             Toast.makeText(getActivity(),msgtoast+"  modificado", Toast.LENGTH_SHORT).show();
