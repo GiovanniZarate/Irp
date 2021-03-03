@@ -80,5 +80,9 @@ public interface ClasificacionEgresoDao {
         public String departmentName;
     }*/
 
+    //PARA VERIFICA EL CODIGO YA TIENE REFERENCIA EN OTRA TABLA
+    @Query("SELECT COUNT(*) FROM facturacompra where id_clasificacionegreso = :id" )
+    int verificaClasegreso(int id);
+
 
 }

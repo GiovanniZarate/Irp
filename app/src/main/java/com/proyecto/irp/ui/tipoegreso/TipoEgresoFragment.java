@@ -135,11 +135,18 @@ public class TipoEgresoFragment extends Fragment {
 
         @Override
         public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+
             final int position = viewHolder.getAdapterPosition();
             deteteItem = adapter.getTipoEgresoAt(position);
             adapter.removeItem(position);
 
-            eliminar(position);
+            //VALIDAR PARA QUE NO PUEDA ELIMINAR SI YA TIENE REFERENCIA CON OTRA TABLA
+            if (tipoEgresoViewModel.verificaTipoEgreso(deteteItem.getIdtipoegreso()) == 0){
+                eliminar(position);
+            }else {
+                Toast.makeText(getActivity(),"No puede ser eliminado, tiene referencia con otra tabla",Toast.LENGTH_SHORT).show();
+            }
+
         }
 
         //AGREGAR IMAGEN ELIMINAR mientras se mueve

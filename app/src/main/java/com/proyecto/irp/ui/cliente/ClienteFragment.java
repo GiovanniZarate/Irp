@@ -139,7 +139,7 @@ public class ClienteFragment extends Fragment {
             }
             //Contribuyente contribuyente = new Contribuyente(cedula,ruc,nombres,contrasena);
             Cliente cliente = new Cliente(nombres,ruc,tipocliente,rucveri,rucdiv);
-            if (clienteViewModel.verificaCedula(String.valueOf(cliente.getRucveri())) == 0){
+            if (clienteViewModel.verificaCedula(String.valueOf(cliente.getRuc())) == 0){
 
                 clienteViewModel.insert(cliente);
                 Toast.makeText(getActivity(),msgtoast+" Registrado con exito", Toast.LENGTH_SHORT).show();
@@ -193,7 +193,12 @@ public class ClienteFragment extends Fragment {
             deteteItem = adapter.getClienteAt(position);
             adapter.removeItem(position);
 
-            eliminar(position);
+            //VALIDAR PARA QUE NO PUEDA ELIMINAR SI YA TIENE REFERENCIA CON OTRA TABLA
+            if (clienteViewModel.verificaCliente(deteteItem.getIdcliente()) == 0){
+                eliminar(position);
+            }else {
+                Toast.makeText(getActivity(),"No puede ser eliminado, tiene referencia con otra tabla",Toast.LENGTH_SHORT).show();
+            }
         }
 
         //AGREGAR IMAGEN ELIMINAR mientras se mueve

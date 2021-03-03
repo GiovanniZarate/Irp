@@ -96,6 +96,12 @@ public class ClienteRepository {
         }
     }
 
+    //VERIFICA TIPO EGRESO
+    public int verificaCliente(int codigo){
+        //ContribuyenteDao contribuyenteDao;
+        return clienteDao.verificaCliente(codigo);
+    }
+
 
 
 

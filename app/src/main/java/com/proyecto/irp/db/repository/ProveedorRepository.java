@@ -97,4 +97,10 @@ public class ProveedorRepository {
             return null;
         }
     }
+
+    //VERIFICA TIPO EGRESO
+    public int verificaProveedor(int codigo){
+        //ContribuyenteDao contribuyenteDao;
+        return proveedorDao.verificaProveedor(codigo);
+    }
 }

@@ -20,6 +20,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.proyecto.irp.Config.SessionManager;
 import com.proyecto.irp.R;
 import com.proyecto.irp.ui.compra.CompraCargaFragment;
+import com.proyecto.irp.ui.comprareporte.IrpFinalFragment;
 import com.proyecto.irp.ui.comprareporte.LibroCompraFragment;
 import com.proyecto.irp.ui.fragments.IniFragment;
 import com.proyecto.irp.ui.perfilusuario.PerfilUsuarioFragment;
@@ -108,6 +109,10 @@ public class MenuDrawerActivity extends AppCompatActivity implements NavigationV
             case R.id.reportelibrocompra:
                 getSupportFragmentManager().beginTransaction().replace(R.id.contenedor_drawer,
                         new LibroCompraFragment()).commit();
+                break;
+            case R.id.reporteirpfinal:
+                getSupportFragmentManager().beginTransaction().replace(R.id.contenedor_drawer,
+                        new IrpFinalFragment()).commit();
                 break;
             case R.id.referenciaVenta:
                 Intent rv = new Intent(MenuDrawerActivity.this, MenuRefVentaActivity.class);

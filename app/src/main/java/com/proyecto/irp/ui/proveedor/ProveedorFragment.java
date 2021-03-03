@@ -117,7 +117,7 @@ public class ProveedorFragment extends Fragment {
             }
 
             Proveedor cliente = new Proveedor(nombres,ruc,tipocliente,rucveri,rucdiv);
-            if (proveedorViewModel.verificaCedula(String.valueOf(cliente.getRucveri())) == 0){
+            if (proveedorViewModel.verificaCedula(String.valueOf(cliente.getRuc())) == 0){
 
                 proveedorViewModel.insert(cliente);
                 Toast.makeText(getActivity(),msgtoast+" Registrado con exito", Toast.LENGTH_SHORT).show();
@@ -170,7 +170,13 @@ public class ProveedorFragment extends Fragment {
             deteteItem = adapter.getProveedorAt(position);
             adapter.removeItem(position);
 
-            eliminar(position);
+            //eliminar(position);
+            //VALIDAR PARA QUE NO PUEDA ELIMINAR SI YA TIENE REFERENCIA CON OTRA TABLA
+            if (proveedorViewModel.verificaProveedor(deteteItem.getIdproveedor()) == 0){
+                eliminar(position);
+            }else {
+                Toast.makeText(getActivity(),"No puede ser eliminado, tiene referencia con otra tabla",Toast.LENGTH_SHORT).show();
+            }
         }
 
         //AGREGAR IMAGEN ELIMINAR mientras se mueve

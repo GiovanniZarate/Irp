@@ -11,6 +11,7 @@ import androidx.room.Update;
 import com.proyecto.irp.db.entity.EstadisticaVentas;
 import com.proyecto.irp.db.entity.Facturacompra;
 import com.proyecto.irp.db.entity.Facturaventa;
+import com.proyecto.irp.db.entity.ReporteIrpTotal;
 import com.proyecto.irp.db.entity.ReporteLibroCompra;
 import com.proyecto.irp.db.entity.ReporteLibroVenta;
 
@@ -70,6 +71,33 @@ public interface FacturaCompraDao {
             "AND ff.fec_compra BETWEEN date(:desde) and date(:hasta) " +
             "ORDER BY orden ASC ")
     List<ReporteLibroCompra> getLibroCompra(int codcontribuyente, int codejercicio, String desde, String hasta);
+
+    //PARA EL TOTAL EL IRP - FORMULARIO 104
+    @Query("select c.descripcion,c.totalirp,c.orden,c.salariominimo,c.porcentajepasado,c.porcentajebajo from " +
+            "(select a.descripcion,a.totalirp,a.orden,(120* 2192839)salariominimo,10 porcentajepasado,8 porcentajebajo  " +
+            "from  " +
+            "(SELECT \"Ingresos: \" as descripcion,sum(fv.total_venta) AS totalirp, 0 AS orden  " +
+            "FROM facturaventa fv  " +
+            "WHERE id_contribuyente=:codcontribuyente and id_ejercicio=:codejercicio " +
+            "AND fv.fec_venta BETWEEN date(:desde) and date(:hasta) " +
+            " UNION " +
+            "SELECT \"Gastos: \" as descripcion,sum(fc.total_compra) AS totalirp, 1 AS orden  " +
+            "FROM facturacompra fc " +
+            "WHERE id_contribuyente=:codcontribuyente and id_ejercicio=:codejercicio " +
+            "AND fc.fec_compra BETWEEN date(:desde) and date(:hasta)) a " +
+            " UNION " +
+            "SELECT b.descripcion, " +
+            "case when (sum(b.venta)-sum(b.compra))  < (120* 2192839) then ((sum(b.venta)-sum(b.compra)) * 8) /100 ELSE " +
+            "((sum(b.venta)-sum(b.compra)) * 10) /100 END as totalirp," +
+            "3 orden,(120* 2192839)salariominimo,10 porcentajepasado,8 porcentajebajo  " +
+            "from (SELECT \"TOTAL PAGAR: \" as descripcion,0 compra,sum(fv.total_venta)venta from facturaventa fv " +
+            "WHERE id_contribuyente=:codcontribuyente and id_ejercicio=:codejercicio " +
+            "AND fv.fec_venta BETWEEN date(:desde) and date(:hasta) " +
+            "union "+
+            "SELECT \"TOTAL PAGAR: \" as descripcion,sum(fc.total_compra)compra,0 venta from facturacompra fc " +
+            "WHERE id_contribuyente=:codcontribuyente and id_ejercicio=:codejercicio " +
+            "AND fc.fec_compra BETWEEN date(:desde) and date(:hasta) ) b order by orden ) c ")
+    List<ReporteIrpTotal> getIrpTotal(int codcontribuyente, int codejercicio, String desde, String hasta);
 
 
 

@@ -34,4 +34,8 @@ public interface ClienteDao {
 
     @Query("SELECT * FROM cliente order by idcliente ASC")
     List<Cliente> getAllClienteCombo();
+
+    //PARA VERIFICA EL CODIGO YA TIENE REFERENCIA EN OTRA TABLA
+    @Query("SELECT COUNT(*) FROM facturaventa where id_cliente = :id" )
+    int verificaCliente(int id);
 }

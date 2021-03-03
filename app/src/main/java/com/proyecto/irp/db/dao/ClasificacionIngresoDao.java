@@ -31,5 +31,9 @@ public interface ClasificacionIngresoDao {
     @Query("SELECT * FROM clasificacioningreso order by idclasificacioningreso ASC")
     List<ClasificacionIngreso> getAllTipoIngresoCombo();
 
+    //PARA VERIFICA EL CODIGO YA TIENE REFERENCIA EN OTRA TABLA
+    @Query("SELECT COUNT(*) FROM facturaventa where id_clasificacioningreso = :id" )
+    int verificaClasingreso(int id);
+
 
 }

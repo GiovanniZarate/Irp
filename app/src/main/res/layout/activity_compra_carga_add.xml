@@ -21,7 +21,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/tvFacturaCompraContribuyente"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/tvFacturaCompraContribuyente"
@@ -248,13 +249,31 @@
                     android:textColor="@color/colorAccent"
                     android:textStyle="bold" />
 
-                <Spinner
-                    android:id="@+id/spinnerProveedor"
-                    style="@style/Widget.AppCompat.Spinner.Underlined"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:outlineAmbientShadowColor="@color/colorEditText"
-                    android:outlineSpotShadowColor="@color/colorPrimary" />
+                    android:orientation="horizontal">
+
+                    <Spinner
+                        android:id="@+id/spinnerProveedor"
+                        style="@style/Widget.AppCompat.Spinner.Underlined"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:outlineAmbientShadowColor="@color/colorEditText"
+                        android:outlineSpotShadowColor="@color/colorPrimary" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnAgregarProveedor"
+                        style="@style/ThemeOverlay.AppCompat.Light"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minWidth="0dip"
+                        android:minHeight="0dip"
+                        android:text="+"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@color/colorButton"
+                        android:textSize="8sp" />
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -642,13 +661,13 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/txtnetoFacturaCompra"
                         android:layout_width="match_parent"
-                        android:layout_height="48dp"
+                        android:layout_height="wrap_content"
                         android:enabled="false"
                         android:inputType="number"
                         android:maxLength="10"
                         android:text="0"
                         android:textAlignment="textEnd"
-                        android:textSize="18sp"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>

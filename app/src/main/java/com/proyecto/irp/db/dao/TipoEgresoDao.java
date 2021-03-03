@@ -29,4 +29,8 @@ public interface TipoEgresoDao {
 
     @Query("SELECT * FROM tipoegreso order by idtipoegreso ASC")
     List<TipoEgreso> getAllTipoEgresoCombo();
+
+    //PARA VERIFICA EL CODIGO YA TIENE REFERENCIA EN OTRA TABLA
+    @Query("SELECT COUNT(*) FROM facturacompra where id_tipoegresocompra = :id" )
+    int verificaTipoEgreso(int id);
 }

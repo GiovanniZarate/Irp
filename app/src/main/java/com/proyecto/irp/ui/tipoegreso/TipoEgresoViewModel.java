@@ -49,5 +49,11 @@ public class TipoEgresoViewModel extends AndroidViewModel {
         repository.delete(tipoEgreso);
     }
 
+    //verfica tipo egreso
+
+    public int verificaTipoEgreso(int codigo){
+        return repository.verificaTipoEgreso(codigo);
+    }
+
 
 }

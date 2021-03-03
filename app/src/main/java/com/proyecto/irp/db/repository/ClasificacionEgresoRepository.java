@@ -97,6 +97,12 @@ public class ClasificacionEgresoRepository {
         }
     }
 
+    //VERIFICA TIPO EGRESO
+    public int verificaClasegreso(int codigo){
+        //ContribuyenteDao contribuyenteDao;
+        return clasificacionEgresoDao.verificaClasegreso(codigo);
+    }
+
 
 
 

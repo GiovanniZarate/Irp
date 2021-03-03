@@ -52,4 +52,10 @@ public class ProveedorViewModel extends AndroidViewModel {
     public int verificaCedula(String cedula){
         return repository.verificaCedula(cedula);
     }
+
+    //verfica tipo egreso
+
+    public int verificaProveedor(int codigo){
+        return repository.verificaProveedor(codigo);
+    }
 }

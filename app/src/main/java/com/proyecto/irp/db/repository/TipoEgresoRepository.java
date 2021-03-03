@@ -95,6 +95,12 @@ public class TipoEgresoRepository {
         }
     }
 
+    //VERIFICA TIPO EGRESO
+    public int verificaTipoEgreso(int codigo){
+        //ContribuyenteDao contribuyenteDao;
+        return tipoEgresoDao.verificaTipoEgreso(codigo);
+    }
+
 
 
 

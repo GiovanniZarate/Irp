@@ -94,6 +94,13 @@ public class ClasificacionIngresoRepository {
         }
     }
 
+    //VERIFICA TIPO EGRESO
+    public int verificaClasingreso(int codigo){
+        //ContribuyenteDao contribuyenteDao;
+        return clasificacionIngresoDao.verificaClasingreso(codigo);
+    }
+
+
 
 
 

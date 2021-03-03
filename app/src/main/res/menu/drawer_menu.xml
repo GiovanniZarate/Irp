@@ -47,6 +47,11 @@
                 android:icon="@drawable/ic_reportes"
                 android:title="Libro Compras IVA">
             </item>
+            <item
+                android:id="@+id/reporteirpfinal"
+                android:icon="@drawable/ic_reportes"
+                android:title="Formulario 104">
+            </item>
         </menu>
     </item>
 

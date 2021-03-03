@@ -156,7 +156,12 @@ public class ClasEgresoFragment extends Fragment {
             deteteItem = adapter.getClasificacionEgresoAt(position);
             adapter.removeItem(position);
 
-            eliminar(position);
+            //VALIDAR PARA QUE NO PUEDA ELIMINAR SI YA TIENE REFERENCIA CON OTRA TABLA
+            if (clasEgresoViewModel.verificaClasegreso(deteteItem.getIdclasificacionegreso()) == 0){
+                eliminar(position);
+            }else {
+                Toast.makeText(getActivity(),"No puede ser eliminado, tiene referencia con otra tabla",Toast.LENGTH_SHORT).show();
+            }
         }
 
         //AGREGAR IMAGEN ELIMINAR mientras se mueve

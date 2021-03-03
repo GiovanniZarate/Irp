@@ -95,6 +95,12 @@ public class TipoComprobanteRepository {
         }
     }
 
+    //VERIFICA TIPO EGRESO
+    public int verificaTipocomprobante(int codigo){
+        //ContribuyenteDao contribuyenteDao;
+        return clasificacionIngresoDao.verificaTipocomprobante(codigo);
+    }
+
 
 
 

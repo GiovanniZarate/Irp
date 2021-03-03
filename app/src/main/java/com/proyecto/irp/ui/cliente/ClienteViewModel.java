@@ -61,4 +61,10 @@ public class ClienteViewModel extends AndroidViewModel {
    // public LiveData<String> getText() {
     //    return mText;
    // }
+
+    //verfica tipo egreso
+
+    public int verificaCliente(int codigo){
+        return repository.verificaCliente(codigo);
+    }
 }

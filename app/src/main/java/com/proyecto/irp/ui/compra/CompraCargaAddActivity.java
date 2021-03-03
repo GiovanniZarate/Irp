@@ -2,17 +2,22 @@ package com.proyecto.irp.ui.compra;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputFilter;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -20,6 +25,7 @@ import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.proyecto.irp.Config.SessionManager;
+import com.proyecto.irp.NuevoEJercicioDialogFragment;
 import com.proyecto.irp.R;
 import com.proyecto.irp.Utilitario.InputFilterMinMax;
 import com.proyecto.irp.Utilitario.separador_miles;
@@ -71,6 +77,8 @@ public class CompraCargaAddActivity extends AppCompatActivity {
 
     Spinner spinnerTipoDocumento,spinnerTipoEgreso,spinnerClasTipoEgreso,spinnerProveedor;
 
+    Button btaddProveedor;
+
     TextInputLayout ilnro1,ilnro2,ilnro3,ildia,ilmes,ilanho,ilimpgrav10,ilimpgrav5,ilimpexe;
 
     TextView tvcontribuyente;
@@ -103,6 +111,10 @@ public class CompraCargaAddActivity extends AppCompatActivity {
 
         inicializacion();
 
+        intent = getIntent();
+
+        eventos();
+
         inicializaViewModelCombo();
 
         //PONER EN EL TOOLBAR PARA CERRAR
@@ -132,22 +144,53 @@ public class CompraCargaAddActivity extends AppCompatActivity {
         cargacombocomprobante();
         cargacombotipoegreso();
 
-        cargacomboproveedor();
+
+
+        proveedorViewModel.getAllProveedores().observe(this, new Observer<List<Proveedor>>() {
+            @Override
+            public void onChanged(List<Proveedor> proveedors) {
+                adapter_proveedor = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item,
+                        proveedors);
+                adapter_proveedor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinnerProveedor.setAdapter(adapter_proveedor);
+
+                //PARA MODIFICAR SELECCIONA EL VALOR SELECCIONADO
+                if (intent.hasExtra(EXTRA_IDFACTURACOMPRA)){
+                    for (int i = 0; i <  spinnerProveedor.getAdapter().getCount(); i++){
+                        if (spinnerProveedor.getAdapter().getItem(i).toString().trim().equals(intent.getStringExtra(EXTRA_PROVEEDORSELECTED).toString().trim())){
+                            spinnerProveedor.setSelection(i);
+                            break;
+                        }
+                    }
+                }
+
+            }
+        });
 
         //CAPTURAR VALOR SELECCIONADO COMOBO
         capturaCombo();
 
-
         //PARA SABER SI SE VA A EDITAR O AGREGAR NUEVO
         modoAgregarEditar();
+    }
 
+    private void eventos() {
+        btaddProveedor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //INSTANCIAR EL FRAGMENTO CON EL GESTOR DE FRAGMENTO
+                FragmentManager fm =getSupportFragmentManager();
+                AddProveedorDialogFragment dialogNuevoProveedor = new AddProveedorDialogFragment();
+                dialogNuevoProveedor.show(fm,"AddProveedorDialogFragment");
+            }
+        });
     }
 
     private void modoAgregarEditar() {
         ejercicioactual = String.valueOf(managerUsuario.ObtenerDatos().getAnho());
         tvcontribuyente.setText(managerUsuario.ObtenerDatos().getRuc().trim()+" - "+managerUsuario.ObtenerDatos().getNombrecontribuyente().trim());
         //para poner titulo si es agregar o modificar
-        intent = getIntent();
+
         if (intent.hasExtra(EXTRA_IDFACTURACOMPRA)){
             setTitle("Editar Egreso");
             recibirValoresEditar();
@@ -165,7 +208,7 @@ public class CompraCargaAddActivity extends AppCompatActivity {
     }
 
     private void recibirValoresEditar() {
-
+       //  cargacomboproveedor();
         tvdia.setText(intent.getStringExtra(EXTRA_DIACOMPRA));
         tvmes.setText(intent.getStringExtra(EXTRA_MESCOMPRA));
         tvanho.setText(intent.getStringExtra(EXTRA_ANHOCOMPRA));
@@ -191,12 +234,12 @@ public class CompraCargaAddActivity extends AppCompatActivity {
                 break;
             }
         }*/
-        for (int i = 0; i <  spinnerProveedor.getAdapter().getCount(); i++){
+       /* for (int i = 0; i <  spinnerProveedor.getAdapter().getCount(); i++){
             if (spinnerProveedor.getAdapter().getItem(i).toString().trim().equals(intent.getStringExtra(EXTRA_PROVEEDORSELECTED).toString().trim())){
                 spinnerProveedor.setSelection(i);
                 break;
             }
-        }
+        }*/
         tvnro1.setText(intent.getStringExtra(EXTRA_NRO1COMPRA));
         tvnro2.setText(intent.getStringExtra(EXTRA_NRO2COMPRA));
         tvnro3.setText(intent.getStringExtra(EXTRA_NRO3COMPRA));
@@ -216,18 +259,25 @@ public class CompraCargaAddActivity extends AppCompatActivity {
     }
 
 
-    private void capturaCombo() {
-
+    private void capturaComboProveedor() {
         //COMBO TIPO DOCUMENTO
         spinnerTipoDocumento.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                //cargacomboproveedor();
+                //Toast.makeText(view.getContext(),"entra en clic combo", Toast.LENGTH_SHORT).show();
                 TipoComprobante tipoComprobante = (TipoComprobante) spinnerTipoDocumento.getAdapter().getItem(position);
                 codtipodocumento = String.valueOf(tipoComprobante.getIdtipocomprobante());
             }
             @Override
-            public void onNothingSelected(AdapterView<?> parent) { }
+            public void onNothingSelected(AdapterView<?> parent) {Toast.makeText(parent.getContext(),"entra en clic", Toast.LENGTH_SHORT).show(); }
         });
+    }
+
+    private void capturaCombo() {
+
+        capturaComboProveedor();
+
         //COMBO TIPO EGRESO
         spinnerTipoEgreso.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -259,7 +309,7 @@ public class CompraCargaAddActivity extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parent) { }
         });
-        //COMBO CLIENTE
+        //COMBO PROVEEDOR
         spinnerProveedor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -450,6 +500,8 @@ public class CompraCargaAddActivity extends AppCompatActivity {
         tvcontribuyente = findViewById(R.id.tvFacturaCompraContribuyente);
 
         managerUsuario = new SessionManager(getApplicationContext());
+
+        btaddProveedor = findViewById(R.id.btnAgregarProveedor);
     }
 
     private void completacero(final EditText edtnrofactura, final int cantidad, final String msg,

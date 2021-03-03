@@ -28,4 +28,9 @@ public interface TipoComprobanteDao {
 
     @Query("SELECT * FROM tipocomprobante order by idtipocomprobante ASC")
     List<TipoComprobante> getAllTipoComprobanteCombo();
+
+
+    //PARA VERIFICA EL CODIGO YA TIENE REFERENCIA EN OTRA TABLA
+    @Query("SELECT COUNT(*) FROM facturaventa where id_comprobante = :id" )
+    int verificaTipocomprobante(int id);
 }

@@ -43,4 +43,10 @@ public class TipoComprobanteViewModel extends AndroidViewModel {
     public void delete(TipoComprobante datos){
         repository.delete(datos);
     }
+
+    //verfica tipo egreso
+
+    public int verificaTipocomprobante(int codigo){
+        return repository.verificaTipocomprobante(codigo);
+    }
 }

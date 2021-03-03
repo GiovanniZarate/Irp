@@ -50,4 +50,10 @@ public class ClasEgresoViewModel extends AndroidViewModel {
     public void delete(ClasificacionEgreso clasificacionEgreso){
         repository.delete(clasificacionEgreso);
     }
+
+    //verfica tipo egreso
+
+    public int verificaClasegreso(int codigo){
+        return repository.verificaClasegreso(codigo);
+    }
 }

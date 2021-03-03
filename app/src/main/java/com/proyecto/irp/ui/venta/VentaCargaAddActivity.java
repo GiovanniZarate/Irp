@@ -2,6 +2,8 @@ package com.proyecto.irp.ui.venta;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
@@ -15,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -23,6 +26,7 @@ import android.widget.Toast;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.proyecto.irp.Config.SessionManager;
+import com.proyecto.irp.NuevoEJercicioDialogFragment;
 import com.proyecto.irp.R;
 import com.proyecto.irp.Utilitario.InputFilterMinMax;
 import com.proyecto.irp.Utilitario.TextValidator;
@@ -76,6 +80,8 @@ public class VentaCargaAddActivity extends AppCompatActivity  {
 
     TextView tvcontribuyente;
 
+    Button btnAddCliente;
+
     String codtipodocumento,codtipoingreso,codcliente,ejercicioactual;
 
     private TipoComprobanteViewModel tipoComprobanteViewModel;
@@ -99,6 +105,7 @@ public class VentaCargaAddActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_venta_carga_add);
 
         inicializacion();
+        intent = getIntent();
         eventos();
 
         tipoComprobanteViewModel = ViewModelProviders.of(this).get(TipoComprobanteViewModel.class);
@@ -111,7 +118,28 @@ public class VentaCargaAddActivity extends AppCompatActivity  {
 
         cargacombocomprobante();
         cargacombotipoingreso();
-        cargacombocliente();
+       // cargacombocliente();
+
+        clienteViewModel.getAllClientes().observe(this, new Observer<List<Cliente>>() {
+            @Override
+            public void onChanged(List<Cliente> clientes) {
+                adapter_cliente = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item,
+                        clientes);
+                adapter_cliente.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinnerCliente.setAdapter(adapter_cliente);
+
+                //PARA MODIFICAR SELECCIONA EL VALOR SELECCIONADO
+                if (intent.hasExtra(EXTRA_IDFACTURAVENTA)){
+                    for (int i = 0; i <  spinnerCliente.getAdapter().getCount(); i++){
+                        if (spinnerCliente.getAdapter().getItem(i).toString().trim().equals(intent.getStringExtra(EXTRA_CLIENTESELECTED).toString().trim())){
+                            spinnerCliente.setSelection(i);
+                            break;
+                        }
+                }
+                }
+            }
+        });
+
 
         //para completar con cero el nro factura
         completacero(tvnro1,3,"1",ilnro1);
@@ -340,13 +368,15 @@ public class VentaCargaAddActivity extends AppCompatActivity  {
         tvcontribuyente = findViewById(R.id.tvFacturaVentaContribuyente);
 
         managerUsuario = new SessionManager(getApplicationContext());
+
+        btnAddCliente = findViewById(R.id.btnAgregarCliente);
     }
 
     private void modoAgregarEditar() {
         ejercicioactual = String.valueOf(managerUsuario.ObtenerDatos().getAnho());
         tvcontribuyente.setText(managerUsuario.ObtenerDatos().getRuc().trim()+" - "+managerUsuario.ObtenerDatos().getNombrecontribuyente().trim());
         //para poner titulo si es agregar o modificar
-         intent = getIntent();
+         //intent = getIntent();
         if (intent.hasExtra(EXTRA_IDFACTURAVENTA)){
             setTitle("Editar Ingreso");
             recibirValoresEditar();
@@ -379,12 +409,12 @@ public class VentaCargaAddActivity extends AppCompatActivity  {
                 break;
             }
         }
-        for (int i = 0; i <  spinnerCliente.getAdapter().getCount(); i++){
+        /*for (int i = 0; i <  spinnerCliente.getAdapter().getCount(); i++){
             if (spinnerCliente.getAdapter().getItem(i).toString().trim().equals(intent.getStringExtra(EXTRA_CLIENTESELECTED).toString().trim())){
                 spinnerCliente.setSelection(i);
                 break;
             }
-        }
+        }*/
         tvnro1.setText(intent.getStringExtra(EXTRA_NRO1VENTA));
         tvnro2.setText(intent.getStringExtra(EXTRA_NRO2VENTA));
         tvnro3.setText(intent.getStringExtra(EXTRA_NRO3VENTA));
@@ -523,6 +553,17 @@ public class VentaCargaAddActivity extends AppCompatActivity  {
        //tvdia.addTextChangedListener(this);
        //tvmes.addTextChangedListener(this);
        //tvanho.addTextChangedListener(this);
+
+        //btnAddCliente.setOnClickListener(this);
+        btnAddCliente.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //INSTANCIAR EL FRAGMENTO CON EL GESTOR DE FRAGMENTO
+                FragmentManager fm =getSupportFragmentManager();
+                AddClienteDialogFragment dialogNuevoEjercicio = new AddClienteDialogFragment();
+                dialogNuevoEjercicio.show(fm,"AddClienteDialogFragment");
+            }
+        });
     }
 
 

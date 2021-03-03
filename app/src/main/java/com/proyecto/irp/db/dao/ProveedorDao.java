@@ -36,4 +36,9 @@ public interface ProveedorDao {
 
     @Query("SELECT * FROM proveedor order by idproveedor ASC")
     List<Proveedor> getAllProveedorCombo();
+
+
+    //PARA VERIFICA EL CODIGO YA TIENE REFERENCIA EN OTRA TABLA
+    @Query("SELECT COUNT(*) FROM facturacompra where id_proveedor = :id" )
+    int verificaProveedor(int id);
 }

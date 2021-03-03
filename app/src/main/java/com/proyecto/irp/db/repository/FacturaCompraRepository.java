@@ -11,6 +11,7 @@ import com.proyecto.irp.db.dao.FacturaVentaDao;
 import com.proyecto.irp.db.entity.EstadisticaVentas;
 import com.proyecto.irp.db.entity.Facturacompra;
 import com.proyecto.irp.db.entity.Facturaventa;
+import com.proyecto.irp.db.entity.ReporteIrpTotal;
 import com.proyecto.irp.db.entity.ReporteLibroCompra;
 import com.proyecto.irp.db.entity.ReporteLibroVenta;
 
@@ -38,6 +39,12 @@ public class FacturaCompraRepository {
     //MOSTRAR EL TOTAL DE VENTAS PARA GRAFICO
     public List<ReporteLibroCompra> getLibroCompra(int contribu, int ejercicio, String desde, String hasta) {
         return facturaCompraDao.getLibroCompra(contribu,ejercicio,desde,hasta);
+    }
+
+
+    //PARA EL TOTAL DEL IRP
+    public List<ReporteIrpTotal> getIrpTotal(int contribu, int ejercicio, String desde, String hasta) {
+        return facturaCompraDao.getIrpTotal(contribu,ejercicio,desde,hasta);
     }
 
     //MOSTRAR EL TOTAL DE VENTAS PARA GRAFICO

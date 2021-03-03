@@ -47,4 +47,10 @@ public class ClasIngresoViewModel extends AndroidViewModel {
     public void delete(ClasificacionIngreso datos){
         repository.delete(datos);
     }
+
+    //verfica tipo egreso
+
+    public int verificaClasingreso(int codigo){
+        return repository.verificaClasingreso(codigo);
+    }
 }
