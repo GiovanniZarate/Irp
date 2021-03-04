@@ -142,7 +142,7 @@ public class IrpFinalFragment extends Fragment {
             String fhastamuestra = tvdiahasta.getText().toString().trim().concat("/").concat(tvmeshasta.getText().toString().trim()
                     .concat("/").concat(tvanhohasta.getText().toString().trim()));
 
-            templatePDF = new TemplatePDF(getContext());
+            templatePDF = new TemplatePDF(getContext(),getActivity());
             templatePDF.openDocument();
             templatePDF.addMetaData("Formulario 104","IVA","Carlos Giovanni Zarate Ruiz");
             templatePDF.addTitles("Formulario 104","Formulario 104","Fecha: "+fdesdemuestra+ " al "+ fhastamuestra);
@@ -198,7 +198,7 @@ public class IrpFinalFragment extends Fragment {
             String fhastamuestra = tvdiahasta.getText().toString().trim().concat("/").concat(tvmeshasta.getText().toString().trim()
                     .concat("/").concat(tvanhohasta.getText().toString().trim()));
 
-            templatePDF = new TemplatePDF(getContext());
+            templatePDF = new TemplatePDF(getContext(),getActivity());
             templatePDF.openDocument();
             templatePDF.addMetaData("Formulario 104","IVA","Carlos Giovanni Zarate Ruiz");
             templatePDF.addTitles("Formulario 104","Formulario 104","Fecha: "+fdesdemuestra+ " al "+ fhastamuestra);

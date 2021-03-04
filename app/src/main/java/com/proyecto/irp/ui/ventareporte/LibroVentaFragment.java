@@ -147,7 +147,7 @@ public class LibroVentaFragment extends Fragment {
             String fhastamuestra = tvdiahasta.getText().toString().trim().concat("/").concat(tvmeshasta.getText().toString().trim()
                     .concat("/").concat(tvanhohasta.getText().toString().trim()));
 
-            templatePDF = new TemplatePDF(getContext());
+            templatePDF = new TemplatePDF(getContext(),getActivity());
             templatePDF.openDocument();
             templatePDF.addMetaData("Libro Venta IVA","IVA","Carlos Giovanni Zarate Ruiz");
             templatePDF.addTitles("Libro Venta IVA","Ingresos","Fecha: "+fdesdemuestra+ " al "+ fhastamuestra);
@@ -199,8 +199,8 @@ public class LibroVentaFragment extends Fragment {
 
             String fhastamuestra = tvdiahasta.getText().toString().trim().concat("/").concat(tvmeshasta.getText().toString().trim()
                     .concat("/").concat(tvanhohasta.getText().toString().trim()));
-
-            templatePDF = new TemplatePDF(getContext());
+            //permisos();
+            templatePDF = new TemplatePDF(getContext(),getActivity());
             templatePDF.openDocument();
             templatePDF.addMetaData("Libro Venta IVA","IVA","Carlos Giovanni Zarate Ruiz");
             templatePDF.addTitles("Libro Venta IVA","Ingresos","Fecha: "+fdesdemuestra+ " al "+ fhastamuestra);

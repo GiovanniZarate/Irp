@@ -1,15 +1,20 @@
 package com.proyecto.irp.Utilitario;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.LiveData;
 
 import com.itextpdf.text.BaseColor;
@@ -33,6 +38,7 @@ import java.util.List;
 
 public class TemplatePDF {
     private Context context;
+    private Activity activity;
     private File pdfFile;
     private Document document;
     private PdfWriter pdfWriter;
@@ -43,8 +49,9 @@ public class TemplatePDF {
     private Font fHighText = new Font(Font.FontFamily.TIMES_ROMAN,15,Font.BOLD, BaseColor.RED);
 
     //METODO CONTRUCTOR QUE RECIBE EL CONTEXTO DE LA APLICACION
-    public  TemplatePDF(Context context) {
+    public  TemplatePDF(Context context, Activity activity) {
         this.context = context;
+        this.activity = activity;
     }
     //ABRIR DOCUMENTO
     public void openDocument(){
@@ -69,7 +76,7 @@ public class TemplatePDF {
         Toast.makeText(context,"archivo que se crea "+pdfFile,Toast.LENGTH_LONG).show();
     }*/
 
-   /* private void createFile() {
+    /*private void createFile() {
         File folder = new File(Environment.getExternalStorageDirectory().toString(), "PDF");
         if (!folder.exists()){
             //Crea directorio
@@ -84,16 +91,40 @@ public class TemplatePDF {
         }
     }*/
 
+   /* private void permisos() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            //Verifica permisos para Android 6.0+
+            int permissionCheck = ContextCompat.checkSelfPermission(
+                    context, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
+                Log.i("Mensaje", "No se tiene permiso para leer.");
+                ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 225);
+                //ActivityCompat.requestPermissions(getClass(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 225);
+            } else {
+                Log.i("Mensaje", "Se tiene permiso para leer!");
+            }
+        }
+
+        /*if(ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
+            //-- Tiene permisos hace la lectura de tu pdf
+        }else{
+            ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.CAMERA),REQUEST_PERMISSION_CODE);
+        }*/
+   /* }*/
 
 
     private void createFile(){
-        File folder=new File(Environment.getExternalStorageDirectory().toString(),"PDF");
+        //permisos();
+        //File folder=new File(Environment.getExternalStorageDirectory().toString(),"PDF");
+        File folder=new File(context.getExternalFilesDir("PDF"),"PDF");
         if (folder.exists()){
             folder.mkdirs();
             pdfFile=new File(folder,"templatePDF.pdf");
         }else if (!folder.exists()){
             folder.mkdirs();
             pdfFile=new File(folder,"templatePDF.pdf");
+        }else{
+            Log.i("Mensaje", "NO TIENE PERMISO PARA CREAR ARCHIVO!");
         }
     }
 
@@ -207,19 +238,35 @@ public class TemplatePDF {
 
     //para abrir con pdf
     public void appViewPDF(Activity activity){
-        if (pdfFile.exists()){
+
+        //File file = new File(context.getExternalFilesDir());
+        File file=new File(context.getExternalFilesDir("PDF"),"PDF"+"/templatePDF.pdf");
+
+        Intent target = new Intent(Intent.ACTION_VIEW);
+        target.setDataAndType(Uri.fromFile(file),"application/pdf");
+        target.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+
+        Intent intent = Intent.createChooser(target, "Open File");
+        try {
+            activity.startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(activity.getApplicationContext(),"No cuentas con una aplicación par abrir el archivo PDF",Toast.LENGTH_LONG).show();
+        }
+
+
+        /*if (pdfFile.exists()){
             Uri uri = Uri.fromFile(pdfFile);
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setDataAndType(uri,"application/pdf");
             try {
                 activity.startActivity(intent);
             }catch (ActivityNotFoundException e){
-                activity.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("market://details?id=com.google.android.apps.pdfviewer&hl=es")));
+                //activity.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("market://details?id=com.google.android.apps.pdfviewer&hl=es")));
                 Toast.makeText(activity.getApplicationContext(),"No cuentas con una aplicación par abrir el archivo PDF",Toast.LENGTH_LONG).show();
             }
         }else {
             Toast.makeText(activity.getApplicationContext(),"Archivo No encontrado",Toast.LENGTH_LONG).show();
-        }
+        }*/
     }
 
 }
