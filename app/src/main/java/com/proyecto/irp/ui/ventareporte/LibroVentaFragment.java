@@ -209,7 +209,7 @@ public class LibroVentaFragment extends Fragment {
 
             //templatePDF.addParagraph(longText);
             templatePDF.closeDocument();
-        templatePDF.appViewPDF(getActivity());
+            templatePDF.appViewPDF(getContext());
     }
     }
 
@@ -236,7 +236,7 @@ public class LibroVentaFragment extends Fragment {
 
     private void inicialization(View view) {
         btnverpdf = view.findViewById(R.id.btnVerPdfVenta);
-        btnabrirpdf = view.findViewById(R.id.btnImprimirPdfVenta);
+        btnabrirpdf = view.findViewById(R.id.btnImprimirPdfVenta1);
 
         tvdiadesde = view.findViewById(R.id.txtdiaDesde);
         tvmesdesde = view.findViewById(R.id.txtmesDesde);

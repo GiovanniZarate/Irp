@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 import androidx.lifecycle.LiveData;
 
 import com.itextpdf.text.BaseColor;
@@ -237,17 +238,30 @@ public class TemplatePDF {
     }
 
     //para abrir con pdf
-    public void appViewPDF(Activity activity){
+    public void appViewPDF(Context activity){
 
         //File file = new File(context.getExternalFilesDir());
-        File file=new File(context.getExternalFilesDir("PDF"),"PDF"+"/templatePDF.pdf");
+        File file=new File(context.getExternalFilesDir("PDF"),"PDF/templatePDF.pdf");
+
+        Log.d("JC", "appViewPDF: " + file.getAbsoluteFile());
+
 
         Intent target = new Intent(Intent.ACTION_VIEW);
-        target.setDataAndType(Uri.fromFile(file),"application/pdf");
-        target.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+
+        //target.setDataAndType(Uri.fromFile(file), "application/pdf");
+
+        /*J.C 04.03.21 Tambien agregue en el manifest un provider y creo un xml provider_paths para la compatibilidad*/
+        /*J.C 04.03.21 Agregue esta linea para que sea compatible con android 7 o superior*/
+        target.setDataAndType(FileProvider.getUriForFile(activity, activity.getPackageName() + ".provider", file), "application/pdf");
+
+        /*J.C 04.03.21 Agregue estas lineas para que sea compatible con android 7 o superior*/
+        target.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        target.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        target.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
         Intent intent = Intent.createChooser(target, "Open File");
         try {
+
             activity.startActivity(intent);
         } catch (ActivityNotFoundException e) {
             Toast.makeText(activity.getApplicationContext(),"No cuentas con una aplicación par abrir el archivo PDF",Toast.LENGTH_LONG).show();

@@ -267,7 +267,7 @@
                     app:icon="@drawable/ic_verreporte" />
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnImprimirPdfVenta"
+                    android:id="@+id/btnImprimirPdfVenta1"
                     style="?attr/materialButtonOutlinedStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
