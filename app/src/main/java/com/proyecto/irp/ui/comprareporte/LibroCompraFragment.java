@@ -197,8 +197,8 @@ public class LibroCompraFragment extends Fragment {
 
             templatePDF = new TemplatePDF(getContext(),getActivity());
             templatePDF.openDocument();
-            templatePDF.addMetaData("Libro Venta IVA","IVA","Carlos Giovanni Zarate Ruiz");
-            templatePDF.addTitles("Libro Venta IVA","Ingresos","Fecha: "+fdesdemuestra+ " al "+ fhastamuestra);
+            templatePDF.addMetaData("Libro Compra IVA","IVA","Carlos Giovanni Zarate Ruiz");
+            templatePDF.addTitles("Libro Compra IVA","Ingresos","Fecha: "+fdesdemuestra+ " al "+ fhastamuestra);
             templatePDF.addParagraph("Contribuyente: "+contribuyenteActual);
             templatePDF.createTable(header,getFacturaCompra(vfdesde,vfhasta));
 
